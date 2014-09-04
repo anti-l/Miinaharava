@@ -21,4 +21,15 @@ public class Ruutu {
         }
     }
     
+    public int getViereiset() {
+        return viereisia;
+    }
+    
+    public boolean osuikoMiinaan() {
+        if (miina) {
+            return true;
+        }
+        return false;
+    }
+    
 }

@@ -13,4 +13,18 @@ public class Ruudukko {
         this.miinoja = 10;
     }
     
+    public int getLeveys() {
+        return this.leveys;
+    }
+    
+    public int getKorkeus() {
+        return this.korkeus;
+    }
+    
+    public int getMiinoja() {
+        return this.miinoja;
+    }
+    
+    
+    
 }
