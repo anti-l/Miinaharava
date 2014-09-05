@@ -1,6 +1,10 @@
 
 package miinaharava.domain;
 
+/**
+ *
+ * @author Antti Lundén
+ */
 public class Ruutu {
     
     private boolean miina;
@@ -25,11 +29,18 @@ public class Ruutu {
         return viereisia;
     }
     
-    public boolean osuikoMiinaan() {
+    public boolean onkoMiinaa() {
         if (miina) {
             return true;
         }
         return false;
+    }
+    
+    public String toString() {
+        if (miina) {
+            return "X";
+        }
+        return ".";
     }
     
 }
