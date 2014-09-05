@@ -8,16 +8,42 @@ package miinaharava.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
+import javax.swing.JButton;
+import miinaharava.domain.*;
 
 /**
  *
  * @author Antti
  */
 public class NapinKuuntelija implements ActionListener {
+    
+    private JButton nappi;
+//    private Random rand;
+    private Ruutu ruutu;
+    
+    public NapinKuuntelija(JButton nappi) {
+        this.nappi = nappi;
+//        rand = new Random();
+    }
+
+    public NapinKuuntelija(JButton nappi, Ruutu ruutu) {
+        this.nappi = nappi;
+        this.ruutu = ruutu;
+//        rand = new Random();
+    }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//        System.out.println("Painoit nappia ");
+        if (ruutu.onkoMiinaa()) {
+            nappi.setText("#");
+        } else {
+            nappi.setText("");
+        }
+//        nappi.setText("" + rand.nextInt(5));
+        nappi.setEnabled(false);
+        
     }
     
 }

@@ -3,6 +3,7 @@ package miinaharava;
 import javax.swing.SwingUtilities;
 import miinaharava.domain.*;
 import miinaharava.gui.*;
+import miinaharava.sovelluslogiikka.*;
 
 /**
  * Javalabra2014
@@ -13,11 +14,11 @@ public class Main {
     
     public static void main(String[] args) {
         
-        Ruudukko pelilauta = new Ruudukko();
-        System.out.println(pelilauta);
+        Sovelluslogiikka peli = new Sovelluslogiikka();
+        System.out.println(peli.getRuudukko());
         
         
-        Kayttoliittyma kayttoliittyma = new Kayttoliittyma();
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(peli);
         SwingUtilities.invokeLater(kayttoliittyma);
     }
     

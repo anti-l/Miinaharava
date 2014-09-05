@@ -20,6 +20,23 @@ public class Sovelluslogiikka {
         ruudukko = new Ruudukko();
     }
     
+    public void painaNappia(int x, int y) {
+        testaaRuutu(x, y);
+        testaaViereisetRuudut(x, y);
+    }
+    
+    public void testaaRuutu(int x, int y) {
+        if (ruudukko.getRuutu(x, y).onkoMiinaa()) {
+            System.out.println("Osuit miinaan!");
+        }
+
+    }
+    public void testaaViereisetRuudut(int x, int y) {
+        
+    }
     
     
+    public Ruudukko getRuudukko() {
+        return this.ruudukko;
+    }
 }

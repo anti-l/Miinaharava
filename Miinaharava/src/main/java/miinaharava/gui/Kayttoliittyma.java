@@ -17,6 +17,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+import miinaharava.domain.*;
+import miinaharava.sovelluslogiikka.*;
 
 /**
  *
@@ -25,9 +27,12 @@ import javax.swing.WindowConstants;
 public class Kayttoliittyma implements Runnable {
     
     private JFrame frame;
+    private Ruudukko ruudukko;
+    private Sovelluslogiikka sovelluslogiikka;
     
-    public Kayttoliittyma() {
-        
+    public Kayttoliittyma(Sovelluslogiikka sovelluslogiikka) {
+        this.sovelluslogiikka = new Sovelluslogiikka();
+        ruudukko = sovelluslogiikka.getRuudukko();
     }
     
     @Override
@@ -44,36 +49,29 @@ public class Kayttoliittyma implements Runnable {
     }
     
     public void luoKomponentit(Container container) {
-        /*        
-        JButton uusiPeli = new JButton("Uusi peli");
-        container.add(uusiPeli);
-        */
         BorderLayout leiska = new BorderLayout();
         container.setLayout(leiska);
         container.add(new JLabel("Miinaharava #JavaLabra2014"), BorderLayout.NORTH);
-        container.add(luoNapit(10, 10));
-        
+        container.add(luoNapit(ruudukko.getLeveys(), ruudukko.getKorkeus()));
     }
     
     public JPanel luoNapit(int x, int y) {
         JPanel miinanapit = new JPanel(new GridLayout(x, y));
-        
         ArrayList<JButton> nappiruudukko = new ArrayList<JButton>();
-        for (int i = 0; i < (x * y); i++) {
-            JButton nappi = new JButton("");
-            nappi.setMargin(new Insets(0,0,0,0));
-            nappiruudukko.add(nappi);
+        for (int i = 0; i < x; i++) {
+            for (int j = 0; j < y; j++) {
+                JButton nappi = new JButton("");
+                nappi.setMargin(new Insets(0, 0, 0, 0));
+//                NapinKuuntelija kuuntelija = new NapinKuuntelija(nappi);
+                NapinKuuntelija kuuntelija;
+                kuuntelija = new NapinKuuntelija(nappi, ruudukko.getRuutu(i, j));
+                nappi.addActionListener(kuuntelija);
+                nappiruudukko.add(nappi);
+            }
         }
         for (JButton jb : nappiruudukko) {
             miinanapit.add(jb);
         }
-
-        // testi, miten poistaa kerran painettu nappi käytöstä
-        nappiruudukko.get(45).setEnabled(false);
-        nappiruudukko.get(34).setEnabled(false);
-        nappiruudukko.get(23).setEnabled(false);
-        nappiruudukko.get(23).setText("1");
-        nappiruudukko.get(24).setText("1");
         return miinanapit;
     }
     

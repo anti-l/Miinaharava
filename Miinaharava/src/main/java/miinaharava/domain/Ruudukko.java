@@ -22,9 +22,13 @@ public class Ruudukko {
      * luokan olioita.
      */
     public Ruudukko() {
-        this.leveys = 10;
-        this.korkeus = 10;
-        this.miinoja = 10;
+        this(10, 10, 10);
+    }
+    
+    public Ruudukko(int leveys, int korkeus, int miinoja) {
+        this.leveys = leveys;
+        this.korkeus = korkeus;
+        this.miinoja = miinoja;
         ruudukko = new Ruutu[leveys][korkeus];
         
         for (int i = 0; i < leveys; i++) {
@@ -32,8 +36,12 @@ public class Ruudukko {
                 ruudukko[i][j] = new Ruutu();
             }
         }
+        asetaMiinat(miinoja);
+    }
+    
+    public void asetaMiinat(int maara) {
         int miinojaAsetettu = 0;
-        while (miinojaAsetettu < miinoja) {
+        while (miinojaAsetettu < maara) {
             int x = rand.nextInt(leveys);
             int y = rand.nextInt(korkeus);
             if (!(ruudukko[x][y].onkoMiinaa())) {
@@ -83,6 +91,10 @@ public class Ruudukko {
             kentta += "\n";
         }
         return kentta;
+    }
+    
+    public Ruutu getRuutu(int x, int y) {
+        return ruudukko[x][y];
     }
     
 }
