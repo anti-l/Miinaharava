@@ -64,12 +64,14 @@ public class RuutuTest {
         ruutu.setViereisia(9);
         assertEquals(0, ruutu.getViereiset());
     }
-    
+
+    @Test
     public void setViereisiaKahdeksan() {
         ruutu.setViereisia(8);
         assertEquals(8, ruutu.getViereiset());
     }
     
+    @Test
     public void setViereisiaNolla() {
         ruutu.setViereisia(0);
         assertEquals(0, ruutu.getViereiset());

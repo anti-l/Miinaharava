@@ -19,18 +19,15 @@ import miinaharava.domain.*;
 public class NapinKuuntelija implements ActionListener {
     
     private JButton nappi;
-//    private Random rand;
     private Ruutu ruutu;
     
     public NapinKuuntelija(JButton nappi) {
         this.nappi = nappi;
-//        rand = new Random();
     }
 
     public NapinKuuntelija(JButton nappi, Ruutu ruutu) {
         this.nappi = nappi;
         this.ruutu = ruutu;
-//        rand = new Random();
     }
 
     @Override
@@ -39,9 +36,12 @@ public class NapinKuuntelija implements ActionListener {
         if (ruutu.onkoMiinaa()) {
             nappi.setText("#");
         } else {
-            nappi.setText("");
+            String napinTeksti = "";
+            if (ruutu.getViereiset() > 0) {
+                napinTeksti += ruutu.getViereiset();
+            }
+            nappi.setText(napinTeksti);
         }
-//        nappi.setText("" + rand.nextInt(5));
         nappi.setEnabled(false);
         
     }

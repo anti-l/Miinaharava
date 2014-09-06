@@ -43,6 +43,7 @@ public class Ruudukko {
             }
         }
         asetaMiinat(miinoja);
+        asetaViereistenMiinojenMaarat();
     }
 
     public void asetaMiinat(int maara) {
@@ -55,6 +56,53 @@ public class Ruudukko {
                 miinojaAsetettu++;
             }
         }
+    }
+    
+    public void asetaViereistenMiinojenMaarat() {
+        for (int i = 0; i < this.leveys; i++) {
+            for (int j = 0; j < this.korkeus; j++) {
+                int viereisiaMiinoja = laskeRuutuaYmparoivatMiinat(i, j);
+//                System.out.println("I:" + i + " J:" + j);
+                this.getRuutu(i, j).setViereisia(viereisiaMiinoja);
+            }
+        }
+        
+    }
+    
+    public int laskeRuutuaYmparoivatMiinat(int x, int y) {
+        int viereisiaMiinoja = 0;
+        int alaX, alaY, ylaX, ylaY;
+        
+        if (x == 0) {
+            alaX = 0;
+            ylaX = 1;
+        } else if (x == leveys) {
+            alaX = leveys - 1;
+            ylaX = leveys;
+        } else {
+            alaX = x - 1;
+            ylaX = x + 1;
+        }
+        
+        if (y == 0) {
+            alaY = 0;
+            ylaY = 1;
+        } else if (y == korkeus) {
+            alaY = korkeus - 1;
+            ylaY = korkeus;
+        } else {
+            alaY = y - 1;
+            ylaY = y + 1;
+        }
+        
+        for (int i = alaX; i < ylaX; i++) {
+            for (int j = alaY; j < ylaY; j++) {
+                if (this.getRuutu(i, j).onkoMiinaa()) {
+                    viereisiaMiinoja++;
+                }
+            }
+        }
+        return viereisiaMiinoja;
     }
 
     /**
