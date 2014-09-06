@@ -20,7 +20,7 @@ public class Ruutu {
     }
     
     public void setViereisia(int maara) {
-        if (maara <= 8 || maara >= 0) {
+        if (maara <= 8 && maara >= 0) {
             this.viereisia = maara;
         }
     }

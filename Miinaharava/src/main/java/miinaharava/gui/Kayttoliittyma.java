@@ -62,7 +62,6 @@ public class Kayttoliittyma implements Runnable {
             for (int j = 0; j < y; j++) {
                 JButton nappi = new JButton("");
                 nappi.setMargin(new Insets(0, 0, 0, 0));
-//                NapinKuuntelija kuuntelija = new NapinKuuntelija(nappi);
                 NapinKuuntelija kuuntelija;
                 kuuntelija = new NapinKuuntelija(nappi, ruudukko.getRuutu(i, j));
                 nappi.addActionListener(kuuntelija);
