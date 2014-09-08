@@ -1,4 +1,3 @@
-
 package miinaharava;
 import javax.swing.SwingUtilities;
 import miinaharava.domain.*;

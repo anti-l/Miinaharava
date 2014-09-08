@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package miinaharava.sovelluslogiikka;
 
 import miinaharava.domain.*;
@@ -24,7 +18,6 @@ public class Sovelluslogiikka {
         if (ruudukko.getRuutu(x, y).onkoMiinaa()) {
             System.out.println("Osuit miinaan!");
         }
-
     }
     
     public Ruudukko getRuudukko() {

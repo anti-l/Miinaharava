@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package miinaharava.gui;
 
 import java.awt.event.ActionEvent;
@@ -32,7 +26,6 @@ public class NapinKuuntelija implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-//        System.out.println("Painoit nappia ");
         if (ruutu.onkoMiinaa()) {
             nappi.setText("#");
         } else {
@@ -42,8 +35,8 @@ public class NapinKuuntelija implements ActionListener {
             }
             nappi.setText(napinTeksti);
         }
+        this.ruutu.katsoRuutu();
         nappi.setEnabled(false);
-        
     }
     
 }

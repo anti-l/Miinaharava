@@ -70,34 +70,15 @@ public class Ruudukko {
     
     public int laskeRuutuaYmparoivatMiinat(int x, int y) {
         int viereisiaMiinoja = 0;
-        int alaX, alaY, ylaX, ylaY;
-        
-        if (x == 0) {
-            alaX = 0;
-            ylaX = 1;
-        } else if (x == leveys) {
-            alaX = leveys - 1;
-            ylaX = leveys;
-        } else {
-            alaX = x - 1;
-            ylaX = x + 1;
-        }
-        
-        if (y == 0) {
-            alaY = 0;
-            ylaY = 1;
-        } else if (y == korkeus) {
-            alaY = korkeus - 1;
-            ylaY = korkeus;
-        } else {
-            alaY = y - 1;
-            ylaY = y + 1;
-        }
-        
-        for (int i = alaX; i < ylaX; i++) {
-            for (int j = alaY; j < ylaY; j++) {
-                System.out.println("TestX:" + x + " Y:" + y + " aX:" + alaX + " yX:" + ylaX + " aY:" + alaY + " yY:" + ylaY);
-                if (this.getRuutu(i, j).onkoMiinaa()) {
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                if (i == x && j == y) {
+                    continue;
+                } else if (x + i < 0 || x + i >= this.leveys) {
+                    continue;
+                } else if (y + j < 0 || y + j >= this.korkeus) {
+                    continue;
+                } else if (this.getRuutu((x+i), (y+j)).onkoMiinaa()) {
                     viereisiaMiinoja++;
                 }
             }

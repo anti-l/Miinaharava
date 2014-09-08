@@ -1,4 +1,3 @@
-
 package miinaharava.domain;
 
 /**
@@ -8,10 +7,12 @@ package miinaharava.domain;
 public class Ruutu {
     
     private boolean miina;
+    private boolean katsottu;
     private int viereisia;
     
     public Ruutu() {
         this.miina = false;
+        this.katsottu = false;
         this.viereisia = 0;
     }
     
@@ -35,6 +36,15 @@ public class Ruutu {
         }
         return false;
     }
+    
+    public boolean getKatsottu() {
+        return this.katsottu;
+    }
+    
+    public void katsoRuutu() {
+        this.katsottu = true;
+    }
+     
     
     public String toString() {
         if (miina) {
