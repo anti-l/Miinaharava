@@ -62,7 +62,6 @@ public class Ruudukko {
         for (int i = 0; i < this.leveys; i++) {
             for (int j = 0; j < this.korkeus; j++) {
                 int viereisiaMiinoja = laskeRuutuaYmparoivatMiinat(i, j);
-//                System.out.println("I:" + i + " J:" + j);
                 this.getRuutu(i, j).setViereisia(viereisiaMiinoja);
             }
         }
@@ -97,6 +96,7 @@ public class Ruudukko {
         
         for (int i = alaX; i < ylaX; i++) {
             for (int j = alaY; j < ylaY; j++) {
+                System.out.println("TestX:" + x + " Y:" + y + " aX:" + alaX + " yX:" + ylaX + " aY:" + alaY + " yY:" + ylaY);
                 if (this.getRuutu(i, j).onkoMiinaa()) {
                     viereisiaMiinoja++;
                 }

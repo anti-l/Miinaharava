@@ -40,8 +40,10 @@
                 <configuration>
                     <instrumentation>
                         <includes>
-                            <include>miinaharava.logiikka/*.class</include>
-                            <include>miinaharava.tekoaly/*.class</include>
+                            <include>miinaharava/*.class</include>
+                            <include>miinaharava.domain/*.class</include>
+                            <include>miinaharava.gui/*.class</include>
+                            <include>miinaharava.sovelluslogiikka/*.class</include>
                         </includes>
                     </instrumentation>
                 </configuration>
@@ -54,12 +56,16 @@
                 <version>0.30</version>
                 <configuration>
                     <targetClasses>
-                        <param>miinaharava.logiikka.*</param>
-                        <param>miinaharava.tekoaly.*</param>
+                        <param>miinaharava.*</param>
+                        <param>miinaharava.domain.*</param>
+                        <param>miinaharava.gui.*</param>
+                        <param>miinaharava.sovelluslogiikka.*</param>
                     </targetClasses>
                     <targetTests>
-                        <param>miinaharava.logiikka.*</param>
-                        <param>miinaharava.tekoaly.*</param>
+                        <param>miinaharava.*</param>
+                        <param>miinaharava.domain.*</param>
+                        <param>miinaharava.gui.*</param>
+                        <param>miinaharava.sovelluslogiikka.*</param>
                     </targetTests>
                 </configuration>
             </plugin>
