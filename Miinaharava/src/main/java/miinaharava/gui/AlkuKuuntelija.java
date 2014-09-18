@@ -47,7 +47,6 @@ public class AlkuKuuntelija implements ActionListener {
                 this.aloitaPeli();
             }
         }
-//        sovelluslogiikka.luoRuudukko(15, 15, 35);
         kayttoliittyma = new Kayttoliittyma(sovelluslogiikka);
         kayttoliittyma.run();
 
