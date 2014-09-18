@@ -34,21 +34,16 @@ public class AlkuKuuntelija implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        //
-        if (ae.getSource() == aloita) {
-            if (medium.isSelected()) {
-                this.sovelluslogiikka.luoRuudukko(15, 15, 35);
-                this.aloitaPeli();
-            } else if (vaikea.isSelected()) {
-                this.sovelluslogiikka.luoRuudukko(20, 20, 80);
-                this.aloitaPeli();
-            } else {
-                this.sovelluslogiikka.luoRuudukko();
-                this.aloitaPeli();
-            }
+        if (medium.isSelected()) {
+            this.sovelluslogiikka.luoRuudukko(15, 15, 35);
+            this.aloitaPeli();
+        } else if (vaikea.isSelected()) {
+            this.sovelluslogiikka.luoRuudukko(20, 20, 80);
+            this.aloitaPeli();
+        } else {
+            this.sovelluslogiikka.luoRuudukko();
+            this.aloitaPeli();
         }
-        kayttoliittyma = new Kayttoliittyma(sovelluslogiikka);
-        kayttoliittyma.run();
 
     }
 

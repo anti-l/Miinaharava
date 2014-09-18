@@ -4,6 +4,7 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import miinaharava.domain.*;
 import miinaharava.gui.RuutuNappi;
+import miinaharava.gui.Kayttoliittyma;
 
 /**
  *
@@ -11,7 +12,8 @@ import miinaharava.gui.RuutuNappi;
  */
 public class Sovelluslogiikka {
 
-    Ruudukko ruudukko;
+    private Ruudukko ruudukko;
+    private Kayttoliittyma kayttoliittyma;
 
     public Sovelluslogiikka() {
         this.luoRuudukko();
@@ -61,11 +63,16 @@ public class Sovelluslogiikka {
                         continue;
                     } else if (ruudukko.getRuutu((x + i), (y + j)).onkoTyhja() && ruudukko.getRuutu((x + i), (y + j)).getKatsottu()) {
                         ruudukko.getRuutu((x + i), (y + j)).katsoRuutu();
+                        //kayttoliittyma.asetaNahdyksi(asdasdas, asdasd)
                         paljastaTyhjat(x + i, y + j);
                     }
                 }
             }
         }
+    }
+    
+    public void setKayttoliittyma(Kayttoliittyma kayttis) {
+        this.kayttoliittyma = kayttis;
     }
     
     

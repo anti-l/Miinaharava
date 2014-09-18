@@ -15,11 +15,12 @@ public class Main {
         
         Sovelluslogiikka peli = new Sovelluslogiikka();
         AlkuIkkuna aloitus = new AlkuIkkuna(peli);
-        System.out.println(peli.getRuudukko());
-        
         Kayttoliittyma kayttoliittyma = new Kayttoliittyma(peli);
+        peli.setKayttoliittyma(kayttoliittyma);
+        
 //        SwingUtilities.invokeLater(kayttoliittyma);
         SwingUtilities.invokeLater(aloitus);
+        System.out.println(peli.getRuudukko());
     }
     
 }

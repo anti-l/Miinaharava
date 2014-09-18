@@ -29,16 +29,6 @@ public class AlkuIkkuna implements Runnable {
     
     public AlkuIkkuna(Sovelluslogiikka sovlog) {
         this.sovelluslogiikka = sovlog;
-        /*
-        frame = new JFrame("Miinaharava");
-        frame.setPreferredSize(new Dimension(300, 350));
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        
-        luoKomponentit(frame.getContentPane());
-        
-        frame.pack();
-        frame.setVisible(true);
-        /**/
     }
     
     public void luoKomponentit(Container container) {
@@ -60,21 +50,13 @@ public class AlkuIkkuna implements Runnable {
         JButton aloita = new JButton("Aloita");
 
         // ActionListener napeille
-//        AlkuKuuntelija alkuKuuntelija = new AlkuKuuntelija();
         AlkuKuuntelija alkuKuuntelija = new AlkuKuuntelija(sovelluslogiikka, helppoPeli, mediumPeli, vaikeaPeli, aloita);
-        helppoPeli.addActionListener(alkuKuuntelija);
-        mediumPeli.addActionListener(alkuKuuntelija);
-        vaikeaPeli.addActionListener(alkuKuuntelija);
         aloita.addActionListener(alkuKuuntelija);
         
         container.add(helppoPeli);
         container.add(mediumPeli);
         container.add(vaikeaPeli);
         container.add(aloita);
-        
-        
-        
-        
     }
 
     @Override
@@ -87,6 +69,5 @@ public class AlkuIkkuna implements Runnable {
         
         frame.pack();
         frame.setVisible(true);
-        //
     }
 }
