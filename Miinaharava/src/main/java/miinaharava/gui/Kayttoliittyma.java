@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.Insets;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -25,7 +24,7 @@ public class Kayttoliittyma implements Runnable {
     private Sovelluslogiikka sovelluslogiikka;
     
     public Kayttoliittyma(Sovelluslogiikka sovelluslogiikka) {
-        this.sovelluslogiikka = new Sovelluslogiikka();
+        this.sovelluslogiikka = sovelluslogiikka;
         ruudukko = sovelluslogiikka.getRuudukko();
     }
     
@@ -46,24 +45,19 @@ public class Kayttoliittyma implements Runnable {
         BorderLayout leiska = new BorderLayout();
         container.setLayout(leiska);
         container.add(new JLabel("Miinaharava #JavaLabra2014"), BorderLayout.NORTH);
-        container.add(luoNapit(ruudukko.getLeveys(), ruudukko.getKorkeus()));
+        JPanel nappiruudukko = luoNapit(ruudukko.getLeveys(), ruudukko.getKorkeus());
+        container.add(nappiruudukko);
     }
     
     public JPanel luoNapit(int x, int y) {
         JPanel miinanapit = new JPanel(new GridLayout(x, y));
-        ArrayList<JButton> nappiruudukko = new ArrayList<JButton>();
+        RuutuNappi[][] napisto = new RuutuNappi[x][y];
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
-                JButton nappi = new JButton("");
-                nappi.setMargin(new Insets(0, 0, 0, 0));
-                NapinKuuntelija kuuntelija;
-                kuuntelija = new NapinKuuntelija(nappi, ruudukko.getRuutu(i, j));
-                nappi.addActionListener(kuuntelija);
-                nappiruudukko.add(nappi);
+                napisto[i][j] = new RuutuNappi(ruudukko, i, j);
+                napisto[i][j].addActionListener(new NapinKuuntelija(sovelluslogiikka, napisto[i][j], i, j));
+                miinanapit.add(napisto[i][j]);
             }
-        }
-        for (JButton jb : nappiruudukko) {
-            miinanapit.add(jb);
         }
         return miinanapit;
     }
@@ -71,4 +65,5 @@ public class Kayttoliittyma implements Runnable {
     public JFrame getFrame() {
         return frame;
     }
+    
 }

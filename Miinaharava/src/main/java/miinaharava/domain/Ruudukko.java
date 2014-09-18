@@ -45,6 +45,12 @@ public class Ruudukko {
         asetaMiinat(miinoja);
         asetaViereistenMiinojenMaarat();
     }
+    
+    /**
+     * Asettaa arpoo ruudukkoon miinat paikoilleen. Miinaa ei aseteta, jos 
+     * ruudussa on jo miina. 
+     * @param maara Ruudukkoon asetettavien miinojen määrä.
+     */
 
     public void asetaMiinat(int maara) {
         int miinojaAsetettu = 0;
@@ -58,6 +64,9 @@ public class Ruudukko {
         }
     }
     
+    /**
+     * Asettaa ruutuun sen viereisten ruutujen miinojen yhteenlasketun määrän.
+     */
     public void asetaViereistenMiinojenMaarat() {
         for (int i = 0; i < this.leveys; i++) {
             for (int j = 0; j < this.korkeus; j++) {
@@ -68,6 +77,12 @@ public class Ruudukko {
         
     }
     
+    /**
+     * Metodi laskee yhtä ruutua ympäröivät miinat ja palauttaa laskemansa arvon.
+     * @param x Testattavan ruudun x-koordinaatti
+     * @param y Testattavan ruudun y-koordinaatti
+     * @return ruudun viereisten ruutujen mahdollisten miinojen yhteenlaskettu määrä
+     */
     public int laskeRuutuaYmparoivatMiinat(int x, int y) {
         int viereisiaMiinoja = 0;
         for (int i = -1; i <= 1; i++) {
@@ -84,6 +99,23 @@ public class Ruudukko {
             }
         }
         return viereisiaMiinoja;
+    }
+    
+    /**
+     * Metodi kertoo, onko koordinaatit ruudukon sisällä vai sen ulkopuolella.
+     * @param x testattava y-koordinaatti
+     * @param y testattava y-koordinaatti
+     * @return true, jos ollaan ruudukon sisällä (10x10-ruudukossa arvot 0-9);
+     *         false, jos ollaan ruudukon ulkopuolella.
+     */
+    
+    public boolean onRuudukossa(int x, int y) {
+        if (x < 0 || x >= this.leveys) {
+            if (y < 0 || y >= this.korkeus) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -130,9 +162,15 @@ public class Ruudukko {
         }
         return kentta;
     }
-
+    
+    /**
+     * Palauttaa yksittäisen ruudun annetuista koordinaateista.
+     * @param x Halutun ruudun x-koordinaatti.
+     * @param y Halutun ruudun y-koordinaatti.
+     * @return Ruutu koordinaateista (x, y).
+     */
     public Ruutu getRuutu(int x, int y) {
         return ruudukko[x][y];
     }
-
+    
 }

@@ -44,7 +44,13 @@ public class Ruutu {
     public void katsoRuutu() {
         this.katsottu = true;
     }
-     
+    
+    public boolean onkoTyhja() {
+        if (miina == false && viereisia == 0) {
+            return true;
+        }
+        return false;
+    }
     
     public String toString() {
         if (miina) {

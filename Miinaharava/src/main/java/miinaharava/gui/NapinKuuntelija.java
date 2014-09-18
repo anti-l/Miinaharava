@@ -2,9 +2,7 @@ package miinaharava.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
-import javax.swing.JButton;
-import miinaharava.domain.*;
+import miinaharava.sovelluslogiikka.Sovelluslogiikka;
 
 /**
  *
@@ -12,31 +10,21 @@ import miinaharava.domain.*;
  */
 public class NapinKuuntelija implements ActionListener {
     
-    private JButton nappi;
-    private Ruutu ruutu;
+    private RuutuNappi nappi;
+    private Sovelluslogiikka sovelluslogiikka;
+    private int x;
+    private int y;
     
-    public NapinKuuntelija(JButton nappi) {
+    public NapinKuuntelija(Sovelluslogiikka sovelluslogiikka, RuutuNappi nappi, int x, int y) {
+        this.sovelluslogiikka = sovelluslogiikka;
         this.nappi = nappi;
-    }
-
-    public NapinKuuntelija(JButton nappi, Ruutu ruutu) {
-        this.nappi = nappi;
-        this.ruutu = ruutu;
+        this.x = x;
+        this.y = y;
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if (ruutu.onkoMiinaa()) {
-            nappi.setText("#");
-        } else {
-            String napinTeksti = "";
-            if (ruutu.getViereiset() > 0) {
-                napinTeksti += ruutu.getViereiset();
-            }
-            nappi.setText(napinTeksti);
-        }
-        this.ruutu.katsoRuutu();
-        nappi.setEnabled(false);
+        sovelluslogiikka.tarkistaRuutu(x, y, nappi);
     }
     
 }
