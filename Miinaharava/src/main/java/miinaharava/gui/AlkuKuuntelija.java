@@ -36,20 +36,15 @@ public class AlkuKuuntelija implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         if (medium.isSelected()) {
             this.sovelluslogiikka.luoRuudukko(15, 15, 35);
-            this.aloitaPeli();
         } else if (vaikea.isSelected()) {
             this.sovelluslogiikka.luoRuudukko(20, 20, 80);
-            this.aloitaPeli();
         } else {
             this.sovelluslogiikka.luoRuudukko();
-            this.aloitaPeli();
         }
-
-    }
-
-    public void aloitaPeli() {
         kayttoliittyma = new Kayttoliittyma(sovelluslogiikka);
+        System.out.println(sovelluslogiikka.getRuudukko());
         kayttoliittyma.run();
+
     }
 
 }

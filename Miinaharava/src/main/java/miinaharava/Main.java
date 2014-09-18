@@ -1,6 +1,5 @@
 package miinaharava;
 import javax.swing.SwingUtilities;
-import miinaharava.domain.*;
 import miinaharava.gui.*;
 import miinaharava.sovelluslogiikka.*;
 
@@ -17,10 +16,7 @@ public class Main {
         AlkuIkkuna aloitus = new AlkuIkkuna(peli);
         Kayttoliittyma kayttoliittyma = new Kayttoliittyma(peli);
         peli.setKayttoliittyma(kayttoliittyma);
-        
-//        SwingUtilities.invokeLater(kayttoliittyma);
         SwingUtilities.invokeLater(aloitus);
-        System.out.println(peli.getRuudukko());
     }
     
 }

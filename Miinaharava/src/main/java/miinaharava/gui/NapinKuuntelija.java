@@ -5,7 +5,8 @@ import java.awt.event.ActionListener;
 import miinaharava.sovelluslogiikka.Sovelluslogiikka;
 
 /**
- *
+ * Tämä ehkä pitää muuttaa myöhemmin MouseListeneriksi, jotta saadaan molempien
+ * hiirennappien käyttö peliin mukaan.
  * @author Antti
  */
 public class NapinKuuntelija implements ActionListener {

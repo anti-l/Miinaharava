@@ -32,8 +32,9 @@ public class Sovelluslogiikka {
         ruutu.katsoRuutu();
         if (ruutu.onkoMiinaa()) {
             nappi.setBackground(Color.RED);
-            nappi.setText("@");
-            //nappi.setIcon(new ImageIcon("minesweeper.png"));
+//            nappi.setText("@");
+            nappi.setIcon(new ImageIcon("minesweeper.gif"));
+            //kayttoliittyma.gameOver();
         } else if (ruutu.onkoTyhja()) {
             paljastaTyhjat(x, y);
         } else {
@@ -63,7 +64,7 @@ public class Sovelluslogiikka {
                         continue;
                     } else if (ruudukko.getRuutu((x + i), (y + j)).onkoTyhja() && ruudukko.getRuutu((x + i), (y + j)).getKatsottu()) {
                         ruudukko.getRuutu((x + i), (y + j)).katsoRuutu();
-                        //kayttoliittyma.asetaNahdyksi(asdasdas, asdasd)
+//                        kayttoliittyma.painaNappiAlas(x, y);
                         paljastaTyhjat(x + i, y + j);
                     }
                 }
@@ -74,7 +75,4 @@ public class Sovelluslogiikka {
     public void setKayttoliittyma(Kayttoliittyma kayttis) {
         this.kayttoliittyma = kayttis;
     }
-    
-    
-
 }
