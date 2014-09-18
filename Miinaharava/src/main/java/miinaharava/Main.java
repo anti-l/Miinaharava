@@ -14,12 +14,12 @@ public class Main {
     public static void main(String[] args) {
         
         Sovelluslogiikka peli = new Sovelluslogiikka();
-        AlkuIkkuna aloitus = new AlkuIkkuna();
+        AlkuIkkuna aloitus = new AlkuIkkuna(peli);
         System.out.println(peli.getRuudukko());
         
         Kayttoliittyma kayttoliittyma = new Kayttoliittyma(peli);
-        SwingUtilities.invokeLater(aloitus);
 //        SwingUtilities.invokeLater(kayttoliittyma);
+        SwingUtilities.invokeLater(aloitus);
     }
     
 }

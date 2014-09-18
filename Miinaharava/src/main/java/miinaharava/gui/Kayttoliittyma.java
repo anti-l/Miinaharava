@@ -31,8 +31,8 @@ public class Kayttoliittyma implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Miinaharava");
-        frame.setPreferredSize(new Dimension(300, 350));
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setPreferredSize(new Dimension(400, 450));
+//        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         luoKomponentit(frame.getContentPane());
         
@@ -44,7 +44,17 @@ public class Kayttoliittyma implements Runnable {
     public void luoKomponentit(Container container) {
         BorderLayout leiska = new BorderLayout();
         container.setLayout(leiska);
-        container.add(new JLabel("Miinaharava #JavaLabra2014"), BorderLayout.NORTH);
+        
+        String vaikeustaso = "";
+        if (ruudukko.getLeveys() == 10) {
+            vaikeustaso = "(helppo)";
+        } else if (ruudukko.getLeveys() == 15) {
+            vaikeustaso = "(keskivaikea)";
+        } else if (ruudukko.getLeveys() == 20) {
+            vaikeustaso = "(vaikea)";
+        }
+        
+        container.add(new JLabel("Miinaharava #JavaLabra2014 " + vaikeustaso), BorderLayout.NORTH);
         JPanel nappiruudukko = luoNapit(ruudukko.getLeveys(), ruudukko.getKorkeus());
         container.add(nappiruudukko);
     }

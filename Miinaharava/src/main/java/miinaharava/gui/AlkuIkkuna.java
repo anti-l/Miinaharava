@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 import javax.swing.WindowConstants;
+import miinaharava.sovelluslogiikka.Sovelluslogiikka;
 
 /**
  *
@@ -24,8 +25,10 @@ import javax.swing.WindowConstants;
 public class AlkuIkkuna implements Runnable {
 
     private JFrame frame;
+    private Sovelluslogiikka sovelluslogiikka;
     
-    public AlkuIkkuna() {
+    public AlkuIkkuna(Sovelluslogiikka sovlog) {
+        this.sovelluslogiikka = sovlog;
         /*
         frame = new JFrame("Miinaharava");
         frame.setPreferredSize(new Dimension(300, 350));
@@ -53,19 +56,22 @@ public class AlkuIkkuna implements Runnable {
         peliValinta.add(vaikeaPeli);
         helppoPeli.setSelected(true);
         
+        // Pelin aloitusnappi
+        JButton aloita = new JButton("Aloita");
+
         // ActionListener napeille
-        AlkuKuuntelija alkuKuuntelija = new AlkuKuuntelija();
+//        AlkuKuuntelija alkuKuuntelija = new AlkuKuuntelija();
+        AlkuKuuntelija alkuKuuntelija = new AlkuKuuntelija(sovelluslogiikka, helppoPeli, mediumPeli, vaikeaPeli, aloita);
         helppoPeli.addActionListener(alkuKuuntelija);
         mediumPeli.addActionListener(alkuKuuntelija);
         vaikeaPeli.addActionListener(alkuKuuntelija);
+        aloita.addActionListener(alkuKuuntelija);
         
         container.add(helppoPeli);
         container.add(mediumPeli);
         container.add(vaikeaPeli);
-        
-        JButton aloita = new JButton("Aloita");
-        aloita.addActionListener(alkuKuuntelija);
         container.add(aloita);
+        
         
         
         

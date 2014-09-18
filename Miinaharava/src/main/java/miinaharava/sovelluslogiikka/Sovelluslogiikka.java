@@ -14,7 +14,15 @@ public class Sovelluslogiikka {
     Ruudukko ruudukko;
 
     public Sovelluslogiikka() {
+        this.luoRuudukko();
+    }
+    
+    public void luoRuudukko() {
         this.ruudukko = new Ruudukko();
+    }
+    
+    public void luoRuudukko(int leveys, int korkeus, int miinoja) {
+        this.ruudukko = new Ruudukko(leveys, korkeus, miinoja);
     }
 
     public void tarkistaRuutu(int x, int y, RuutuNappi nappi) {
