@@ -22,7 +22,7 @@ public class AlkuKuuntelija implements ActionListener {
     private JRadioButton medium;
     private JRadioButton vaikea;
     private JButton aloita;
-    private Kayttoliittyma kayttoliittyma;
+    private PeliIkkuna peliIkkuna;
 
     public AlkuKuuntelija(Sovelluslogiikka sovlog, JRadioButton helppo, JRadioButton medium, JRadioButton vaikea, JButton Aloita) {
         this.sovelluslogiikka = sovlog;
@@ -41,9 +41,10 @@ public class AlkuKuuntelija implements ActionListener {
         } else {
             this.sovelluslogiikka.luoRuudukko();
         }
-        kayttoliittyma = new Kayttoliittyma(sovelluslogiikka);
+        peliIkkuna = new PeliIkkuna(sovelluslogiikka);
+        sovelluslogiikka.setPeliIkkuna(peliIkkuna);
         System.out.println(sovelluslogiikka.getRuudukko());
-        kayttoliittyma.run();
+        peliIkkuna.run();
 
     }
 

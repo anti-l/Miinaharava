@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import miinaharava.domain.*;
@@ -15,14 +16,14 @@ import miinaharava.sovelluslogiikka.*;
  *
  * @author Antti
  */
-public class Kayttoliittyma implements Runnable {
+public class PeliIkkuna implements Runnable {
     
     private JFrame frame;
     private Ruudukko ruudukko;
     private Sovelluslogiikka sovelluslogiikka;
     private RuutuNappi[][] napisto;
     
-    public Kayttoliittyma(Sovelluslogiikka sovelluslogiikka) {
+    public PeliIkkuna(Sovelluslogiikka sovelluslogiikka) {
         this.sovelluslogiikka = sovelluslogiikka;
         this.ruudukko = sovelluslogiikka.getRuudukko();
     }
@@ -30,14 +31,11 @@ public class Kayttoliittyma implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Miinaharava");
-        // Näin voidaan muuttaa ikkunan koko siten, että yksittäisen napin koko on aina sama
-         frame.setPreferredSize(new Dimension(ruudukko.getLeveys()*40, ruudukko.getLeveys()*40+50));
-        //frame.setPreferredSize(new Dimension(400, 450));
+        frame.setPreferredSize(new Dimension(ruudukko.getLeveys()*40, ruudukko.getLeveys()*40+50));
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         luoKomponentit(frame.getContentPane());
         frame.pack();
         frame.setVisible(true);
-        //frame.setResizable(false);
     }
     
     public void luoKomponentit(Container container) {
@@ -68,29 +66,18 @@ public class Kayttoliittyma implements Runnable {
                 miinanapit.add(this.napisto[i][j]);
             }
         }
-        //System.out.println("Napisto valmis");
-        //System.out.println("napisto: " + napisto.length + " napisto[0]:" + napisto[0].length);
         return miinanapit;
     }
     
     public void gameOver() {
-        // Tämä ei vielä tee mitään
-        JFrame lasi = new JFrame("lasi");
-        frame.setGlassPane(lasi);
+        JOptionPane.showMessageDialog(null, "Osuit miinaan!\nPeli on ohi.");
+
+//        JFrame lasi = new JFrame("lasi");
+//        frame.setGlassPane(lasi);
     }
     
     public void painaNappiAlas(int x, int y) {
-//        System.out.println("napisto:" + this.napisto);
-//        System.out.println("napisto:" + this.napisto.length);
-        //napisto.length aiheuttaa NullPointerExceptionin
-        /*
-            if (!(x < 0 || x > napisto.length)) {
-                System.out.println("B");
-                if (!(y < 0 || y > napisto[0].length)) {
-                    napisto[x][y].setEnabled(false);
-                }
-            }
-        /**/
+        napisto[x][y].setEnabled(false);
     }
     
 }

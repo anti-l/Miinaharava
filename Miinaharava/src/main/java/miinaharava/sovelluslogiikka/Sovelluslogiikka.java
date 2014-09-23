@@ -4,7 +4,7 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import miinaharava.domain.*;
 import miinaharava.gui.RuutuNappi;
-import miinaharava.gui.Kayttoliittyma;
+import miinaharava.gui.PeliIkkuna;
 
 /**
  *
@@ -13,7 +13,7 @@ import miinaharava.gui.Kayttoliittyma;
 public class Sovelluslogiikka {
 
     private Ruudukko ruudukko;
-    private Kayttoliittyma kayttoliittyma;
+    private PeliIkkuna peliIkkuna;
 
     public Sovelluslogiikka() {
         this.luoRuudukko();
@@ -27,22 +27,20 @@ public class Sovelluslogiikka {
         this.ruudukko = new Ruudukko(leveys, korkeus, miinoja);
     }
 
-    public void setKayttoliittyma(Kayttoliittyma kayttis) {
-        this.kayttoliittyma = kayttis;
-    }
-
     public Ruudukko getRuudukko() {
         return this.ruudukko;
     }
 
+    public void setPeliIkkuna(PeliIkkuna kayttis) {
+        this.peliIkkuna = kayttis;
+    }
+    
     public void tarkistaRuutu(int x, int y, RuutuNappi nappi) {
         Ruutu ruutu = this.ruudukko.getRuutu(x, y);
-//        ruutu.katsoRuutu();
         if (ruutu.onkoMiinaa()) {
             nappi.setBackground(Color.RED);
-//            nappi.setText("@");
             nappi.setIcon(new ImageIcon("minesweeper.gif"));
-            //kayttoliittyma.gameOver();
+            peliIkkuna.gameOver();
         } else if (ruutu.onkoTyhja()) {
             paljastaTyhjat(x, y);
         } else {
@@ -53,7 +51,7 @@ public class Sovelluslogiikka {
             nappi.setText(napinTeksti);
         }
         this.ruudukko.getRuutu(x, y).katsoRuutu();
-        nappi.setEnabled(false);
+        peliIkkuna.painaNappiAlas(x, y);
     }
 
     public void paljastaTyhjat(int x, int y) {
@@ -70,7 +68,7 @@ public class Sovelluslogiikka {
                     // Jos ruutu on tyhjä eikä sitä ole tarkistettu vielä
                     } else if (ruudukko.getRuutu((x + i), (y + j)).onkoTyhja() && ruudukko.getRuutu((x + i), (y + j)).getKatsottu() == false) {
                         ruudukko.getRuutu((x + i), (y + j)).katsoRuutu();               // Määritetään Ruutu katsotuksi
-                        kayttoliittyma.painaNappiAlas(x, y);                            // Painetaan käyttöliittymän nappi alas
+                        peliIkkuna.painaNappiAlas(x+i, y+j);                            // Painetaan käyttöliittymän nappi alas
                         paljastaTyhjat(x + i, y + j);                                   // Kutsutaan rekursiivisesti viereisiä ruutuja
                     }
                 }

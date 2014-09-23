@@ -14,8 +14,8 @@ public class Main {
         
         Sovelluslogiikka peli = new Sovelluslogiikka();
         AlkuIkkuna aloitus = new AlkuIkkuna(peli);
-        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(peli);
-        peli.setKayttoliittyma(kayttoliittyma);
+        PeliIkkuna peliIkkuna = new PeliIkkuna(peli);
+        peli.setPeliIkkuna(peliIkkuna);
         SwingUtilities.invokeLater(aloitus);
     }
     
