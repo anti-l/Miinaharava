@@ -8,11 +8,13 @@ public class Ruutu {
     
     private boolean miina;
     private boolean katsottu;
+    private boolean liputettu;
     private int viereisia;
     
     public Ruutu() {
         this.miina = false;
         this.katsottu = false;
+        this.liputettu = false;
         this.viereisia = 0;
     }
     
@@ -51,6 +53,19 @@ public class Ruutu {
         }
         return false;
     }
+    
+    public void setLiputettu() {
+        this.liputettu = true;
+    }
+    
+    public void removeLiputettu() {
+        this.liputettu = false;
+    }
+    
+    public boolean getLiputettu() {
+        return this.liputettu;
+    }
+    
     
     public String toString() {
         if (miina) {

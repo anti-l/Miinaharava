@@ -1,9 +1,11 @@
 package miinaharava.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -62,7 +64,7 @@ public class PeliIkkuna implements Runnable {
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 this.napisto[i][j] = new RuutuNappi(ruudukko, i, j);
-                this.napisto[i][j].addActionListener(new NapinKuuntelija(sovelluslogiikka, napisto[i][j], i, j));
+                this.napisto[i][j].addMouseListener(new NapinKuuntelija(sovelluslogiikka, napisto[i][j], i, j));
                 miinanapit.add(this.napisto[i][j]);
             }
         }
@@ -71,13 +73,26 @@ public class PeliIkkuna implements Runnable {
     
     public void gameOver() {
         JOptionPane.showMessageDialog(null, "Osuit miinaan!\nPeli on ohi.");
-
-//        JFrame lasi = new JFrame("lasi");
-//        frame.setGlassPane(lasi);
     }
     
     public void painaNappiAlas(int x, int y) {
         napisto[x][y].setEnabled(false);
     }
     
+    public void liputa(int x, int y) {
+        if (ruudukko.getRuutu(x, y).getLiputettu() == false) {
+            napisto[x][y].setIcon(new ImageIcon("flag.gif"));
+        } else {
+            napisto[x][y].setIcon(new ImageIcon(""));
+        }
+    }
+    
+    public void miinoita(int x, int y) {
+        napisto[x][y].setBackground(Color.RED);
+        napisto[x][y].setIcon(new ImageIcon("minesweeper.gif"));
+    }
+    
+    public void peliVoitettu() {
+        JOptionPane.showMessageDialog(null, "Onneksi olkoon!\nVoitit pelin!");
+    }
 }

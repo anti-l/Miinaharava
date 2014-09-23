@@ -1,21 +1,22 @@
 package miinaharava.gui;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import miinaharava.sovelluslogiikka.Sovelluslogiikka;
 
 /**
  * Tämä ehkä pitää muuttaa myöhemmin MouseListeneriksi, jotta saadaan molempien
  * hiirennappien käyttö peliin mukaan.
+ *
  * @author Antti
  */
-public class NapinKuuntelija implements ActionListener {
-    
+public class NapinKuuntelija implements MouseListener {
+
     private RuutuNappi nappi;
     private Sovelluslogiikka sovelluslogiikka;
     private int x;
     private int y;
-    
+
     public NapinKuuntelija(Sovelluslogiikka sovelluslogiikka, RuutuNappi nappi, int x, int y) {
         this.sovelluslogiikka = sovelluslogiikka;
         this.nappi = nappi;
@@ -24,8 +25,30 @@ public class NapinKuuntelija implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent ae) {
-        sovelluslogiikka.tarkistaRuutu(x, y, nappi);
+    public void mouseReleased(MouseEvent me) {
+        if (me.getButton() == MouseEvent.BUTTON1) {
+            if (sovelluslogiikka.getRuudukko().getRuutu(x, y).getLiputettu() == false) {
+                sovelluslogiikka.tarkistaRuutu(x, y, nappi);
+            }
+        } else if (me.getButton() == MouseEvent.BUTTON3) {
+            sovelluslogiikka.liputaRuutu(x, y);
+        }
     }
-    
+
+    @Override
+    public void mousePressed(MouseEvent me) {
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent me) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent me) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent me) {
+    }
+
 }

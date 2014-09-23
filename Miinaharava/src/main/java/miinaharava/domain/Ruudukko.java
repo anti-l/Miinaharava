@@ -173,4 +173,22 @@ public class Ruudukko {
         return ruudukko[x][y];
     }
     
+    public boolean onkoMiinatLiputettu() {
+        boolean tasmaakoMiinojenJaLippujenPaikat = false;
+        boolean onnistuukoSilmukka = true;
+        for (int i = 0; i < this.leveys; i++) {
+            for (int j = 0; j < this.korkeus; j++) {
+                if (ruudukko[i][j].getLiputettu()) {
+                    if (ruudukko[i][j].onkoMiinaa() == false) {
+                       onnistuukoSilmukka = false;
+                    }
+                }
+            }
+        }
+        if (onnistuukoSilmukka) {
+            tasmaakoMiinojenJaLippujenPaikat = true;
+        }
+        return tasmaakoMiinojenJaLippujenPaikat;
+    }
+    
 }
