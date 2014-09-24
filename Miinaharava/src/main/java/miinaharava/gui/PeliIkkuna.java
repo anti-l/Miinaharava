@@ -72,7 +72,7 @@ public class PeliIkkuna implements Runnable {
     }
     
     public void gameOver() {
-        JOptionPane.showMessageDialog(null, "Osuit miinaan!\nPeli on ohi.");
+        JOptionPane.showMessageDialog(null, "Osuit miinaan ja hävisit!\nPeli on ohi.");
     }
     
     public void painaNappiAlas(int x, int y) {
@@ -92,7 +92,7 @@ public class PeliIkkuna implements Runnable {
         napisto[x][y].setIcon(new ImageIcon("minesweeper.gif"));
     }
     
-    public void peliVoitettu() {
-        JOptionPane.showMessageDialog(null, "Onneksi olkoon!\nVoitit pelin!");
+    public void peliVoitettu(long aika) {
+        JOptionPane.showMessageDialog(null, "Onneksi olkoon, voitit pelin!\nAika: " + aika + " sekuntia.");
     }
 }

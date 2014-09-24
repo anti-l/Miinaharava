@@ -16,9 +16,12 @@ public class Sovelluslogiikka {
     private PeliIkkuna peliIkkuna;
     private int miinoja;
     private int lippuja;
+    private long alkuAika;
+    private long loppuAika;
 
     public Sovelluslogiikka() {
         this.luoRuudukko();
+        alkuAika = System.currentTimeMillis();
     }
 
     public void luoRuudukko() {
@@ -45,6 +48,8 @@ public class Sovelluslogiikka {
         Ruutu ruutu = this.ruudukko.getRuutu(x, y);
         if (ruutu.onkoMiinaa()) {
             peliIkkuna.miinoita(x, y);
+            //Tarviiko epäonnistumisen nopeudesta edes pitää kirjaa?
+            //long kulunutAikaSekunneissa = (System.currentTimeMillis() - alkuAika) / 1000;
             peliIkkuna.gameOver();
         } else if (ruutu.onkoTyhja()) {
             paljastaTyhjat(x, y);
@@ -75,6 +80,9 @@ public class Sovelluslogiikka {
                     ruudukko.getRuutu((x + i), (y + j)).katsoRuutu();               // Määritetään Ruutu katsotuksi
                     peliIkkuna.painaNappiAlas(x + i, y + j);                            // Painetaan käyttöliittymän nappi alas
                     paljastaTyhjat(x + i, y + j);                                   // Kutsutaan rekursiivisesti viereisiä ruutuja
+//                } else if (ruudukko.getRuutu((x + i), (y + j)).getKatsottu() == false) {
+//                    peliIkkuna.painaNappiAlas(x + i, y + j);
+//                    ruudukko.getRuutu((x + i), (y + j)).katsoRuutu();
                 }
             }
         }
@@ -98,7 +106,9 @@ public class Sovelluslogiikka {
         if (miinoja == lippuja) {
             boolean onkoMiinatLiputettu = ruudukko.onkoMiinatLiputettu();
             if (ruudukko.onkoMiinatLiputettu()) {
-                peliIkkuna.peliVoitettu();
+                loppuAika = System.currentTimeMillis();
+                long kulunutAikaSekunneissa = (loppuAika - alkuAika) / 1000;
+                peliIkkuna.peliVoitettu(kulunutAikaSekunneissa);
             }
         }
     }
