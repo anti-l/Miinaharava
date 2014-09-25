@@ -94,7 +94,6 @@ public class PeliIkkuna implements Runnable {
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 this.napisto[i][j] = new RuutuNappi();
-//                this.napisto[i][j].addMouseListener(new NapinKuuntelija(sovelluslogiikka, this, napisto[i][j], i, j));
                 this.napisto[i][j].addMouseListener(new NapinKuuntelija(sovelluslogiikka, this, i, j));
                 miinanapit.add(this.napisto[i][j]);
             }
@@ -106,7 +105,6 @@ public class PeliIkkuna implements Runnable {
      * Metodi, joka ilmoittaa pelaajalle häviöstä tämän osuttua miinaan.
      */
     public void gameOver() {
-//        JOptionPane.showMessageDialog(null, "Osuit miinaan ja hävisit!\nPeli on ohi.");
         JOptionPane.showMessageDialog(null, "Osuit miinaan ja hävisit!\nPeli on ohi.", "Miinaharava", JOptionPane.INFORMATION_MESSAGE, miinaKuva);
 }
     
@@ -157,7 +155,6 @@ public class PeliIkkuna implements Runnable {
      * @param aika Pelin voittamiseen kulunut aika sekunneissa.
      */
     public void peliVoitettu(long aika) {
-//        JOptionPane.showMessageDialog(null, "Onneksi olkoon, voitit pelin!\nAika: " + aika + " sekuntia.");
         JOptionPane.showMessageDialog(null, "Onneksi olkoon, voitit pelin!\nAika: " + aika + " sekuntia.", "Miinaharava", JOptionPane.INFORMATION_MESSAGE, lippuKuva);
     }
     
