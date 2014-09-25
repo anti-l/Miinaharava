@@ -22,10 +22,10 @@ public class Sovelluslogiikka {
     private long loppuAika;
 
     /**
-     * Konstruktori, joka luo käynnistyessään uuden Ruudukon.
+     * Konstruktori, muu toiminnallisuus viety muihin metodeihin.
+     * Tätä tuskin enää edes tarvitaan.
      */
     public Sovelluslogiikka() {
-        this.luoRuudukko();
     }
 
     /**
@@ -86,7 +86,7 @@ public class Sovelluslogiikka {
      * ja lopuksi otetaan nappi pois käytöstä.
      * 
      * @param x Ruudun x-koordinaatti
-     * @param yRuudun y-koordinaatti
+     * @param y Ruudun y-koordinaatti
      * @param nappi PeliIkkunan nappi, jota painettiin
      */
     public void tarkistaRuutu(int x, int y, RuutuNappi nappi) {

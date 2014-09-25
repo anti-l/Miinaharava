@@ -55,18 +55,34 @@ public class NapinKuuntelija implements MouseListener {
         }
     }
 
+    /**
+     * Ei käytössä.
+     * @param me 
+     */
     @Override
     public void mousePressed(MouseEvent me) {
     }
 
+    /**
+     * Ei käytössä.
+     * @param me 
+     */
     @Override
     public void mouseClicked(MouseEvent me) {
     }
 
+    /**
+     * Ei käytössä.
+     * @param me 
+     */
     @Override
     public void mouseEntered(MouseEvent me) {
     }
 
+    /**
+     * Ei käytössä.
+     * @param me 
+     */
     @Override
     public void mouseExited(MouseEvent me) {
     }

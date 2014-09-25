@@ -18,7 +18,7 @@ import org.junit.Test;
 public class SovellusLogiikkaTest {
 
     Sovelluslogiikka sovlog;
-    PeliIkkuna kayttis;
+    PeliIkkuna peliIkkuna;
     
     @Before
     public void setUp() {
@@ -27,17 +27,25 @@ public class SovellusLogiikkaTest {
     }
     
     @Test
-    public void tarkastaRuutuTest() {
-        
+    public void luoPerusRuudukko() {
+        sovlog.luoRuudukko();
+        Ruudukko r = sovlog.getRuudukko();
+        assertEquals(10, r.getMiinoja());
     }
     
     @Test
-    public void testKayttoliittymanAsetus() {
-        
+    public void luoIsoRuudukko() {
+        sovlog.luoRuudukko(15, 15, 15);
+        Ruudukko r = sovlog.getRuudukko();
+        assertEquals(15, r.getMiinoja());
     }
     
     @Test
-    public void onkoRuudukkoa() {
-        assertEquals(true, true);
+    public void tarkistaRuutuTest() {
+        sovlog.luoRuudukko();
+        Ruudukko r = sovlog.getRuudukko();
+        RuutuNappi nappi = new RuutuNappi(r, 0, 0);
+        sovlog.tarkistaRuutu(0, 0, nappi);
     }
+    
 }

@@ -77,6 +77,30 @@ public class RuudukkoTest {
         assertEquals(10, virheRuudukko.getMiinoja());
     }
     
+    @Test
+    public void luoVirheellinenRuudukko() {
+        Ruudukko virheRuudukko = new Ruudukko(0, 0, 0);
+        assertEquals(10, virheRuudukko.getLeveys());
+        assertEquals(10, virheRuudukko.getKorkeus());
+        assertEquals(10, virheRuudukko.getMiinoja());
+    }
     
+    @Test
+    public void testaaAsetaMiinat() {
+        Ruudukko ruudukko = new Ruudukko();
+        ruudukko.asetaMiinat(10);
+    }
+    
+    @Test
+    public void testaaYmparoivienMiinojenLaskua() {
+        Ruudukko ruudukko = new Ruudukko();
+        ruudukko.laskeRuutuaYmparoivatMiinat(1, 1);
+    }
+    
+    @Test
+    public void testaaMiinojenLiputus() {
+        Ruudukko ruudukko = new Ruudukko();
+        boolean onkoLiputettu = ruudukko.onkoMiinatLiputettu();
+    }
     
 }

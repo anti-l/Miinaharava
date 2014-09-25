@@ -68,6 +68,9 @@ public class Ruudukko {
      */
 
     public void asetaMiinat(int maara) {
+        if (maara < 1) {
+            maara = 1;
+        }
         int miinojaAsetettu = 0;
         while (miinojaAsetettu < maara) {
             int x = rand.nextInt(leveys);

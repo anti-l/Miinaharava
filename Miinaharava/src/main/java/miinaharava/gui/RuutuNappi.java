@@ -16,6 +16,13 @@ public class RuutuNappi extends JButton {
     private int x;
     private int y;
     
+    /**
+     * Konstruktori, joka luo uuden RuutuNapin. Samalla napille kerrotaan sen
+     * koordinaatit ja ruudukko, jossa se sijaitsee.
+     * @param ruudukko Napin alustana oleva Ruudukko.
+     * @param x Napin x-koordinaatti.
+     * @param y Napin y-koordinaatti. 
+     */
     public RuutuNappi(Ruudukko ruudukko, int x, int y) {
         this.x = x;
         this.y = y;
