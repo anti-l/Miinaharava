@@ -38,7 +38,7 @@ public class Ruutu {
      * @param maara Viereisten ruutujen sisältämien miinojen määrä.
      */
     public void setViereisia(int maara) {
-        if (maara <= 8 && maara >= 0) {
+        if (maara < 9 && maara >= 0) {
             this.viereisia = maara;
         }
     }

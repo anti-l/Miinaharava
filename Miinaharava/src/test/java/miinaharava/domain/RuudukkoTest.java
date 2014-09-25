@@ -92,6 +92,12 @@ public class RuudukkoTest {
     }
     
     @Test
+    public void testaaAsetaMiinatLiianVahanMiinoja() {
+        Ruudukko ruudukko = new Ruudukko();
+        ruudukko.asetaMiinat(0);
+    }
+    
+    @Test
     public void testaaYmparoivienMiinojenLaskua() {
         Ruudukko ruudukko = new Ruudukko();
         ruudukko.laskeRuutuaYmparoivatMiinat(1, 1);
@@ -101,6 +107,40 @@ public class RuudukkoTest {
     public void testaaMiinojenLiputus() {
         Ruudukko ruudukko = new Ruudukko();
         boolean onkoLiputettu = ruudukko.onkoMiinatLiputettu();
+        assertEquals(true, onkoLiputettu);
+    }
+    
+    @Test
+    public void testaaMiinojenLiputusLisatyillaLipuilla() {
+        Ruudukko ruudukko = new Ruudukko();
+        for (int i = 0; i < ruudukko.getLeveys(); i++) {
+            for (int j = 0; j < ruudukko.getKorkeus(); j++) {
+                if (ruudukko.getRuutu(i, j).onkoMiinaa()) {
+                    ruudukko.getRuutu(i, j).setLiputettu();
+                }
+            }
+        }
+        boolean onkoLiputettu = ruudukko.onkoMiinatLiputettu();
+        assertEquals(true, onkoLiputettu);
+    }
+    
+    @Test
+    public void onkoRuudukossaTestKunEiPitaisiOlla() {
+        Ruudukko ruudukko = new Ruudukko();
+        assertEquals(false, ruudukko.onRuudukossa(-1, -1));
+    }
+    
+    @Test
+    public void onkoRuudukossaTestKunPitaisiOlla() {
+        Ruudukko ruudukko = new Ruudukko();
+        assertEquals(true, ruudukko.onRuudukossa(1, 1));
+    }
+    
+    @Test
+    public void merkkijononTestaus() {
+        Ruudukko ruudukko = new Ruudukko();
+        String ruudukonMerkkijono = ruudukko.toString();
+        assertEquals(110, ruudukonMerkkijono.length());
     }
     
 }

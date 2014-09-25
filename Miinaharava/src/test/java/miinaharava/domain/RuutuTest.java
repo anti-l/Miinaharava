@@ -77,4 +77,31 @@ public class RuutuTest {
         assertEquals(0, ruutu.getViereiset());
     }
     
+    @Test
+    public void getKatsottuTest() {
+        ruutu.katsoRuutu();
+        assertEquals(true, ruutu.getKatsottu());
+    }
+    
+    @Test
+    public void setLiputettuTest() {
+        ruutu.setLiputettu();
+        assertEquals(true, ruutu.getLiputettu());
+        
+    }
+    
+    @Test
+    public void removeLiputettuTest() {
+        ruutu.setLiputettu();
+        ruutu.removeLiputettu();
+        assertEquals(false, ruutu.getLiputettu());
+        
+    }
+    
+    @Test
+    public void onkoTyhjaTest() {
+        Ruutu tyhjaRuutu = new Ruutu();
+        assertEquals(true, tyhjaRuutu.onkoTyhja());
+    }
+    
 }
