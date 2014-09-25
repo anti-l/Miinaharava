@@ -13,6 +13,6 @@ Kaikkien käyttäjien toiminnot:
   * pelin aloitus
   * ruudun valinta
    * toistuu kunnes peli on voitettu tai osutaan miinaan
-   * myöhemmin pelaaja voi merkitä miinojen paikat
+   * myöhemmin pelaaja voi merkitä miinojen paikat lipulla, tätä ruutua ei enää ole mahdollista valita
   
 
