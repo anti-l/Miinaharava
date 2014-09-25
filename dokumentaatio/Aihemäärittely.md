@@ -12,7 +12,7 @@ Kaikkien käyttäjien toiminnot:
   * pelimoodin valinta 
   * pelin aloitus
   * ruudun valinta
-  ** toistuu kunnes peli on voitettu tai osutaan miinaan
-  ** myöhemmin pelaaja voi merkitä miinojen paikat
+   * toistuu kunnes peli on voitettu tai osutaan miinaan
+   * myöhemmin pelaaja voi merkitä miinojen paikat
   
 
