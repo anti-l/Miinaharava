@@ -79,28 +79,41 @@ public class RuudukkoTest {
     
     @Test
     public void luoVirheellinenRuudukko() {
-        Ruudukko virheRuudukko = new Ruudukko(0, 0, 0);
+        Ruudukko virheRuudukko = new Ruudukko(0,0,0);
         assertEquals(10, virheRuudukko.getLeveys());
         assertEquals(10, virheRuudukko.getKorkeus());
         assertEquals(10, virheRuudukko.getMiinoja());
     }
     
     @Test
-    public void testaaAsetaMiinat() {
+    public void testaaAsetaMiinatUudelleen() {
         Ruudukko ruudukko = new Ruudukko();
         ruudukko.asetaMiinat(10);
+        int miinojenMaara = 0;
+        String ruudukonKuvaus = ruudukko.toString();
+        for (int i = 0; i < ruudukonKuvaus.length()-1; i++) {
+            if (ruudukonKuvaus.charAt(i) == 'X') {
+                miinojenMaara++;
+            }
+        }
+        assertEquals(20, miinojenMaara);
     }
     
     @Test
     public void testaaAsetaMiinatLiianVahanMiinoja() {
         Ruudukko ruudukko = new Ruudukko();
         ruudukko.asetaMiinat(0);
+        assertEquals(true, ruudukko.toString().contains("X"));
     }
     
     @Test
     public void testaaYmparoivienMiinojenLaskua() {
         Ruudukko ruudukko = new Ruudukko();
-        ruudukko.laskeRuutuaYmparoivatMiinat(1, 1);
+        ruudukko.getRuutu(0, 1).setMiina();
+        ruudukko.getRuutu(1, 0).setMiina();
+        ruudukko.getRuutu(1, 1).setMiina();
+        int miinojenMaara = ruudukko.laskeRuutuaYmparoivatMiinat(0, 0);
+        assertEquals(3, miinojenMaara);
     }
     
     @Test

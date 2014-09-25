@@ -26,6 +26,8 @@ public class PeliIkkuna implements Runnable {
     private Ruudukko ruudukko;
     private Sovelluslogiikka sovelluslogiikka;
     private RuutuNappi[][] napisto;
+    private ImageIcon lippuKuva = new ImageIcon("flag.gif");
+    private ImageIcon miinaKuva = new ImageIcon("minesweeper.gif");
     
     /**
      * Konstruktori, joka luo uuden pelilaudan. Konstruktori saa parametrinään
@@ -91,8 +93,9 @@ public class PeliIkkuna implements Runnable {
         this.napisto = new RuutuNappi[x][y];
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
-                this.napisto[i][j] = new RuutuNappi(ruudukko, i, j);
-                this.napisto[i][j].addMouseListener(new NapinKuuntelija(sovelluslogiikka, napisto[i][j], i, j));
+                this.napisto[i][j] = new RuutuNappi();
+//                this.napisto[i][j].addMouseListener(new NapinKuuntelija(sovelluslogiikka, this, napisto[i][j], i, j));
+                this.napisto[i][j].addMouseListener(new NapinKuuntelija(sovelluslogiikka, this, i, j));
                 miinanapit.add(this.napisto[i][j]);
             }
         }
@@ -116,6 +119,10 @@ public class PeliIkkuna implements Runnable {
         napisto[x][y].setEnabled(false);
     }
     
+    public void asetaNapinTeksti(int x, int y, String teksti) {
+        napisto[x][y].setText(teksti);
+    }
+    
     /**
      * Metodi asettaa pelilaudan nappiruudukkoon haluttuihin koordinaatteihin
      * lipun, ja kertoo sovelluslogiikalle, että kyseinen ruutu on liputettu.
@@ -123,10 +130,10 @@ public class PeliIkkuna implements Runnable {
      * @param y Liputettavan ruudun y-koordinaatti
      */
     public void liputa(int x, int y) {
-        if (ruudukko.getRuutu(x, y).getLiputettu() == false) {
-            napisto[x][y].setIcon(new ImageIcon("flag.gif"));
+        if (ruudukko.getRuutu(x, y).getLiputettu() == false && ruudukko.getRuutu(x, y).getKatsottu() == false) {
+            napisto[x][y].setIcon(lippuKuva);
         } else {
-            napisto[x][y].setIcon(new ImageIcon(""));
+            napisto[x][y].setIcon(null);
         }
     }
     
@@ -139,7 +146,7 @@ public class PeliIkkuna implements Runnable {
      */
     public void miinoita(int x, int y) {
         napisto[x][y].setBackground(Color.RED);
-        napisto[x][y].setIcon(new ImageIcon("minesweeper.gif"));
+        napisto[x][y].setIcon(miinaKuva);
     }
     
     /**
@@ -151,4 +158,24 @@ public class PeliIkkuna implements Runnable {
     public void peliVoitettu(long aika) {
         JOptionPane.showMessageDialog(null, "Onneksi olkoon, voitit pelin!\nAika: " + aika + " sekuntia.");
     }
+    
+    /**
+     * Tämä metodi käy läpi koko pelilaudan ja tarkastaa sen ruudut. Jos metodi
+     * löytää ruudun, joka on jo katsottu, se painaa sitä vastaavan napin alas.
+     * Tätä metodia kutsutaan NapinKuuntelijasta, kun nappia painetaan hiirellä.
+     * 
+     */
+    public void paivitaNapit() {
+        Ruutu ruutu;
+        for (int i = 0; i < ruudukko.getLeveys(); i++) {
+            for (int j = 0; j < ruudukko.getKorkeus(); j++) {
+                ruutu = ruudukko.getRuutu(i, j);
+                if (ruutu.getKatsottu()) {
+                    this.painaNappiAlas(i, j);
+                    this.asetaNapinTeksti(i, j, sovelluslogiikka.ruudunTeksti(i, j));
+                }
+            }
+        }
+    }
+    
 }

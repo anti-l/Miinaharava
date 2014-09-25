@@ -15,10 +15,9 @@ import miinaharava.gui.PeliIkkuna;
 public class Sovelluslogiikka {
 
     private Ruudukko ruudukko;
-    private PeliIkkuna peliIkkuna;
     private int miinoja;
     private int lippuja;
-    private long alkuAika;
+    private long alkuAika = 0;
     private long loppuAika;
 
     /**
@@ -32,8 +31,7 @@ public class Sovelluslogiikka {
      * Metodi, jota kutsutaan Sovelluslogiikan käynnistyessä tai uutta peliä
      * aloittaessa. 
      * 
-     * Metodi luo uuden ruudukon pelille standardimitoissa (LxK:10x10, 10 miinaa),
-     * ja laittaa pelikellon käyntiin.
+     * Metodi luo uuden ruudukon pelille standardimitoissa (LxK:10x10, 10 miinaa).
      */
     public void luoRuudukko() {
         this.ruudukko = new Ruudukko();
@@ -46,8 +44,7 @@ public class Sovelluslogiikka {
      * Metodi, jota kutsutaan Sovelluslogiikan käynnistyessä tai uutta peliä
      * aloittaessa. 
      * 
-     * Metodi luo uuden ruudukon parametreinä annettujen arvojen mukaisesti,
-     * ja laittaa pelikellon käyntiin.
+     * Metodi luo uuden ruudukon parametreinä annettujen arvojen mukaisesti.
      * 
      * @param leveys Uuden ruudukon leveys
      * @param korkeus Uuden ruudukon korkeus
@@ -57,7 +54,6 @@ public class Sovelluslogiikka {
         this.ruudukko = new Ruudukko(leveys, korkeus, miinoja);
         this.lippuja = 0;
         this.miinoja = ruudukko.getMiinoja();
-        this.alkuAika = System.currentTimeMillis();
     }
 
     /** 
@@ -69,44 +65,51 @@ public class Sovelluslogiikka {
     }
 
     /**
-     * Metodi kertoo sovelluslogiikalle käytössä olevan PeliIkkunan.
-     * @param peliIkkuna käytössä oleva PeliIkkuna 
-     */
-    public void setPeliIkkuna(PeliIkkuna peliIkkuna) {
-        this.peliIkkuna = peliIkkuna;
-    }
-
-    /**
      * Tätä metodia kutsutaan, kun pelaaja valitsee pelikentän ruudun.
      * Metodi tarkastaa ruudun sisällön, onko siinä miinaa, sekä montako miinaa 
-     * löytyy viereisistä ruuduista.
+     * löytyy viereisistä ruuduista. Pelin ensimmäisellä ruudun tarkistuskerralla
+     * laitetaan pelikello käyntiin.
      * 
      * Jos osutaan miinaan, peli loppuu. Jos osutaan tyhjään ruutuun, 
-     * paljastetaan sen ympäriltä muutkin tyhjät ruudut paljastaTyhjat()-metodilla,
-     * ja lopuksi otetaan nappi pois käytöstä.
+     * paljastetaan sen ympäriltä muutkin tyhjät ruudut paljastaTyhjat()-metodilla.
      * 
      * @param x Ruudun x-koordinaatti
      * @param y Ruudun y-koordinaatti
-     * @param nappi PeliIkkunan nappi, jota painettiin
      */
-    public void tarkistaRuutu(int x, int y, RuutuNappi nappi) {
+    public void tarkistaRuutu(int x, int y) {
+        if (alkuAika == 0) {
+            this.alkuAika = System.currentTimeMillis();
+        }
         Ruutu ruutu = this.ruudukko.getRuutu(x, y);
         if (ruutu.onkoMiinaa()) {
-            peliIkkuna.miinoita(x, y);
-            peliIkkuna.gameOver();
+            System.out.println("Osuit miinaan!");
         } else if (ruutu.onkoTyhja()) {
             paljastaTyhjat(x, y);
-        } else {
-            String napinTeksti = "";
-            if (ruutu.getViereiset() > 0) {
-                napinTeksti += ruutu.getViereiset();
-            }
-            nappi.setText(napinTeksti);
         }
         this.ruudukko.getRuutu(x, y).katsoRuutu();
         loppuukoPeli();
     }
     
+    /**
+     * Tätä metodia kutsutaan, kun UI:ssa painetaan nappia ja katsotaan, mitä
+     * napin alta löytyy. Jos kyseessä ei ole miina, tämä metodi palauttaa
+     * joko tyhjän merkkijonon tyhjille ruuduille tai viereisten miinojen määrän
+     * miinojen vieressä oleville ruuduille.
+     * 
+     * @param x Ruudun x-koordinaatti
+     * @param y Ruudun y-koordinaatti
+     * @return Ruutuun asetettava teksti
+     */
+    public String ruudunTeksti(int x, int y) {
+        String ruudunTeksti = "";
+        Ruutu tamaRuutu = ruudukko.getRuutu(x, y);
+        if (tamaRuutu.onkoTyhja()) {
+            return ruudunTeksti;
+        } else if (tamaRuutu.getViereiset() > 0) {
+            ruudunTeksti = "" + tamaRuutu.getViereiset();
+        }
+        return ruudunTeksti;
+    }
     
     /**
      * Kun pelaaja on valinnut ruudun tarkastettavaksi ja siitä ei ole löytynyt
@@ -134,11 +137,9 @@ public class Sovelluslogiikka {
                     // Jos ruutu on tyhjä eikä sitä ole tarkistettu vielä
                 } else if (ruudukko.getRuutu((x + i), (y + j)).onkoTyhja() && ruudukko.getRuutu((x + i), (y + j)).getKatsottu() == false) {
                     ruudukko.getRuutu((x + i), (y + j)).katsoRuutu();               // Määritetään Ruutu katsotuksi
-                    peliIkkuna.painaNappiAlas(x + i, y + j);                            // Painetaan käyttöliittymän nappi alas
                     paljastaTyhjat(x + i, y + j);                                   // Kutsutaan rekursiivisesti viereisiä ruutuja
-//                } else if (ruudukko.getRuutu((x + i), (y + j)).getKatsottu() == false) {
-//                    peliIkkuna.painaNappiAlas(x + i, y + j);
-//                    ruudukko.getRuutu((x + i), (y + j)).katsoRuutu();
+                } else if (ruudukko.getRuutu((x + i), (y + j)).getKatsottu() == false) {
+                    ruudukko.getRuutu((x + i), (y + j)).katsoRuutu();
                 }
             }
         }
@@ -155,8 +156,6 @@ public class Sovelluslogiikka {
      */
     public void liputaRuutu(int x, int y) {
         Ruutu tamaRuutu = ruudukko.getRuutu(x, y);
-        
-        peliIkkuna.liputa(x, y);
         if (tamaRuutu.getLiputettu() == false) {
             tamaRuutu.setLiputettu();
             lippuja++;
@@ -175,15 +174,20 @@ public class Sovelluslogiikka {
      * Jos näin käy, pysäytetään pelikello ja ilmoitetaan pelaajalle pelin
      * voittamisesta.
      */
-    public void loppuukoPeli() {
+    public boolean loppuukoPeli() {
         if (miinoja == lippuja) {
             boolean onkoMiinatLiputettu = ruudukko.onkoMiinatLiputettu();
             if (ruudukko.onkoMiinatLiputettu()) {
                 loppuAika = System.currentTimeMillis();
-                long kulunutAikaSekunneissa = (loppuAika - alkuAika) / 1000;
-                peliIkkuna.peliVoitettu(kulunutAikaSekunneissa);
+                return true;
             }
         }
+        return false;
+    }
+    
+    public long getPelinKesto() {
+        long kulunutAikaSekunneissa = (loppuAika - alkuAika) / 1000;
+        return kulunutAikaSekunneissa;
     }
 
 }

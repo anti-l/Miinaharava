@@ -15,6 +15,7 @@ import miinaharava.sovelluslogiikka.Sovelluslogiikka;
 public class NapinKuuntelija implements MouseListener {
 
     private RuutuNappi nappi;
+    private PeliIkkuna peliIkkuna;
     private Sovelluslogiikka sovelluslogiikka;
     private int x;
     private int y;
@@ -26,9 +27,11 @@ public class NapinKuuntelija implements MouseListener {
      * @param x Pelilaudan napin x-koordinaatti
      * @param y Pelilaudan napin y-koordinaatti
      */
-    public NapinKuuntelija(Sovelluslogiikka sovelluslogiikka, RuutuNappi nappi, int x, int y) {
+//    public NapinKuuntelija(Sovelluslogiikka sovelluslogiikka, PeliIkkuna peliIkkuna, RuutuNappi nappi, int x, int y) {
+    public NapinKuuntelija(Sovelluslogiikka sovelluslogiikka, PeliIkkuna peliIkkuna, int x, int y) {
         this.sovelluslogiikka = sovelluslogiikka;
-        this.nappi = nappi;
+        this.peliIkkuna = peliIkkuna;
+//        this.nappi = nappi;
         this.x = x;
         this.y = y;
     }
@@ -47,11 +50,21 @@ public class NapinKuuntelija implements MouseListener {
     public void mouseReleased(MouseEvent me) {
         if (me.getButton() == MouseEvent.BUTTON1) {
             if (sovelluslogiikka.getRuudukko().getRuutu(x, y).getLiputettu() == false) {
-                sovelluslogiikka.tarkistaRuutu(x, y, nappi);
-                nappi.setEnabled(false);
+                sovelluslogiikka.tarkistaRuutu(x, y);
+                if (sovelluslogiikka.getRuudukko().getRuutu(x, y).onkoMiinaa()) {
+                    peliIkkuna.miinoita(x,y);
+                    peliIkkuna.gameOver();
+                } else {
+                    peliIkkuna.asetaNapinTeksti(x, y, sovelluslogiikka.ruudunTeksti(x, y));
+                }
             }
         } else if (me.getButton() == MouseEvent.BUTTON3) {
+            peliIkkuna.liputa(x, y);
             sovelluslogiikka.liputaRuutu(x, y);
+        }
+        peliIkkuna.paivitaNapit();
+        if (sovelluslogiikka.loppuukoPeli()) {
+            peliIkkuna.peliVoitettu(sovelluslogiikka.getPelinKesto());
         }
     }
 

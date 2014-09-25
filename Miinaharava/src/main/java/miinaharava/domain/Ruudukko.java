@@ -41,14 +41,15 @@ public class Ruudukko {
      * @param miinoja Miinojen määrä kokonaislukuna.
      */
     public Ruudukko(int leveys, int korkeus, int miinoja) {
-        if (leveys < 1 || korkeus < 1 || miinoja < 1 || miinoja > leveys * korkeus) {
+        this.leveys = leveys;
+        this.korkeus = korkeus;
+        this.miinoja = miinoja;
+        if (leveys <= 1) {
             this.leveys = 10;
+        } if (korkeus <= 1) {
             this.korkeus = 10;
+        } if (miinoja <= 1) {
             this.miinoja = 10;
-        } else {
-            this.leveys = leveys;
-            this.korkeus = korkeus;
-            this.miinoja = miinoja;
         }
         ruudukko = new Ruutu[this.leveys][this.korkeus];
 
@@ -128,12 +129,16 @@ public class Ruudukko {
      *         false, jos ollaan ruudukon ulkopuolella.
      */
     public boolean onRuudukossa(int x, int y) {
-        if (x < 0 || x >= this.leveys) {
-            if (y < 0 || y >= this.korkeus) {
-                return false;
+        if (x >= 0) {
+            if (x < this.leveys){
+                if (y >= 0) {
+                    if (y < this.korkeus) {
+                        return true;
+                    }
+                }
             }
         }
-        return true;
+        return false;
     }
 
     /**

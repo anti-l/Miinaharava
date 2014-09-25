@@ -53,7 +53,6 @@ public class AlkuKuuntelija implements ActionListener {
             this.sovelluslogiikka.luoRuudukko();
         }
         peliIkkuna = new PeliIkkuna(sovelluslogiikka);
-        sovelluslogiikka.setPeliIkkuna(peliIkkuna);
         System.out.println(sovelluslogiikka.getRuudukko());
         peliIkkuna.run();
 

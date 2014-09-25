@@ -21,8 +21,8 @@ public class Main {
         Sovelluslogiikka peli = new Sovelluslogiikka();
         AlkuIkkuna aloitus = new AlkuIkkuna(peli);
         HuippuTulokset huipputulokset = new HuippuTulokset();
-        PeliIkkuna peliIkkuna = new PeliIkkuna(peli);
-        peli.setPeliIkkuna(peliIkkuna);
+//        PeliIkkuna peliIkkuna = new PeliIkkuna(peli);
+//        peli.setPeliIkkuna(peliIkkuna);
         SwingUtilities.invokeLater(aloitus);
     }
     

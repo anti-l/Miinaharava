@@ -48,7 +48,6 @@ public class SovellusLogiikkaTest {
     public void peliIkkunanTest() {
         Sovelluslogiikka sovlog = new Sovelluslogiikka();
         PeliIkkuna peliIkkuna = new PeliIkkuna(sovlog);
-        sovlog.setPeliIkkuna(peliIkkuna);
     }
     
     @Test
