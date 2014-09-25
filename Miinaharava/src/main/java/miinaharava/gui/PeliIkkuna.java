@@ -106,8 +106,9 @@ public class PeliIkkuna implements Runnable {
      * Metodi, joka ilmoittaa pelaajalle häviöstä tämän osuttua miinaan.
      */
     public void gameOver() {
-        JOptionPane.showMessageDialog(null, "Osuit miinaan ja hävisit!\nPeli on ohi.");
-    }
+//        JOptionPane.showMessageDialog(null, "Osuit miinaan ja hävisit!\nPeli on ohi.");
+        JOptionPane.showMessageDialog(null, "Osuit miinaan ja hävisit!\nPeli on ohi.", "Miinaharava", JOptionPane.INFORMATION_MESSAGE, miinaKuva);
+}
     
     /**
      * Metodi, joka pelilaudan ruudun tarkastettua poistaa sen käytöstä, jotta
@@ -156,7 +157,8 @@ public class PeliIkkuna implements Runnable {
      * @param aika Pelin voittamiseen kulunut aika sekunneissa.
      */
     public void peliVoitettu(long aika) {
-        JOptionPane.showMessageDialog(null, "Onneksi olkoon, voitit pelin!\nAika: " + aika + " sekuntia.");
+//        JOptionPane.showMessageDialog(null, "Onneksi olkoon, voitit pelin!\nAika: " + aika + " sekuntia.");
+        JOptionPane.showMessageDialog(null, "Onneksi olkoon, voitit pelin!\nAika: " + aika + " sekuntia.", "Miinaharava", JOptionPane.INFORMATION_MESSAGE, lippuKuva);
     }
     
     /**
