@@ -19,21 +19,24 @@ public class SovellusLogiikkaTest {
 
     Sovelluslogiikka sovlog;
     PeliIkkuna peliIkkuna;
+    Ruudukko ruudukko;
+    Ruutu ruutu;
     
-    /*
     @Before
     public void setUp() {
+        /*
         Sovelluslogiikka sovlog = new Sovelluslogiikka();
-        PeliIkkuna kayttis = new PeliIkkuna(sovlog);
+        sovlog.luoRuudukko();
+        Ruudukko ruudukko = sovlog.getRuudukko();
+        */
     }
-    */
     
     @Test
     public void luoPerusRuudukko() {
         Sovelluslogiikka sovlog = new Sovelluslogiikka();
         sovlog.luoRuudukko();
-        Ruudukko r = sovlog.getRuudukko();
-        assertEquals(10, r.getMiinoja());
+        Ruudukko ruudukko = sovlog.getRuudukko();
+        assertEquals(10, ruudukko.getMiinoja());
     }
     
     @Test
@@ -45,51 +48,32 @@ public class SovellusLogiikkaTest {
     }
     
     @Test
-    public void peliIkkunanTest() {
+    public void tarkistaRuutuTest() {
         Sovelluslogiikka sovlog = new Sovelluslogiikka();
-        PeliIkkuna peliIkkuna = new PeliIkkuna(sovlog);
+        sovlog.luoRuudukko();
+        Ruudukko ruudukko = sovlog.getRuudukko();
+        sovlog.tarkistaRuutu(0, 0);
+    }
+    
+    @Test
+    public void tarkistaRuutuOnMiinaTest() {
+        Sovelluslogiikka sovlog = new Sovelluslogiikka();
+        sovlog.luoRuudukko();
+        Ruudukko ruudukko = sovlog.getRuudukko();
+        Ruutu ruutu = ruudukko.getRuutu(0, 0);
+        ruutu.setMiina();
+        sovlog.tarkistaRuutu(0, 0);
     }
     
     @Test
     public void liputaRuutuTest() {
         /*
         Sovelluslogiikka sovlog = new Sovelluslogiikka();
-        PeliIkkuna peliIkkuna = new PeliIkkuna(sovlog);
 //        Ruudukko ruudukko = sovlog.getRuudukko();
 //        Ruutu ruutu = ruudukko.getRuutu(0, 0);
-        Ruutu ruutu = sovlog.getRuudukko().getRuutu(0,0);
+//        Ruutu ruutu = sovlog.getRuudukko().getRuutu(0,0);
         sovlog.liputaRuutu(0, 0);
-        
-        assertEquals(true, ruutu.getLiputettu());
-        */
-    }
-    
-    @Test
-    public void tarkistaRuutuTest() {
-        /*
-        Sovelluslogiikka sovlog = new Sovelluslogiikka();
-        PeliIkkuna peliIkkuna = new PeliIkkuna(sovlog);
-        sovlog.luoRuudukko();
-        sovlog.setPeliIkkuna(peliIkkuna);
-        peliIkkuna.run();
-        Ruudukko r = sovlog.getRuudukko();
-        RuutuNappi nappi = new RuutuNappi(r, 0, 0);
-        sovlog.tarkistaRuutu(0, 0, nappi);
-        */
-    }
-    
-    @Test
-    public void tarkistaRuutuOnMiinaTest() {
-        /*
-        Sovelluslogiikka sovlog = new Sovelluslogiikka();
-        PeliIkkuna peliIkkuna = new PeliIkkuna(sovlog);
-        sovlog.setPeliIkkuna(peliIkkuna);
-        sovlog.luoRuudukko();
-        Ruudukko ruudukko = sovlog.getRuudukko();
-        Ruutu ruutu = ruudukko.getRuutu(0, 0);
-        ruutu.setMiina();
-        RuutuNappi nappi = new RuutuNappi(ruudukko, 0, 0);
-        sovlog.tarkistaRuutu(0, 0, nappi);
+        assertEquals(true, sovlog.getRuudukko().getRuutu(0, 0).getLiputettu());
         */
     }
     

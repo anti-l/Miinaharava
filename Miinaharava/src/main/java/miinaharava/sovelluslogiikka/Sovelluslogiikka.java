@@ -155,7 +155,7 @@ public class Sovelluslogiikka {
      * @param y Ruudun y-koordinaatti
      */
     public void liputaRuutu(int x, int y) {
-        Ruutu tamaRuutu = ruudukko.getRuutu(x, y);
+        Ruutu tamaRuutu = this.ruudukko.getRuutu(x, y);
         if (tamaRuutu.getLiputettu() == false) {
             tamaRuutu.setLiputettu();
             lippuja++;

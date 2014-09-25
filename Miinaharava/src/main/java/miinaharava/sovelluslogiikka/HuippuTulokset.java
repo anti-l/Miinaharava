@@ -27,6 +27,7 @@ public class HuippuTulokset {
      * ole, käskee luoUusiTiedosto()-metodia luomaan sellaisen.
      * IO-poikkeukset ja -virheet käsitellään tässä luokassa myös.
      */
+    
     public HuippuTulokset() {
         tiedosto = new File("miinaharavatulokset.txt");
         try {
@@ -43,12 +44,14 @@ public class HuippuTulokset {
             //
         }
     }
+    /**/
     
     /**
      * Jos peli käynnistetään ensimmäistä kertaa, tämä metodi luo uuden tiedoston
      * parhaiden pisteiden säilyttämistä ja lukemista varten. Uudessa tiedostossa
      * parhaat pelaajat ovat nimettömiä ja ratkaisuun on kulunut 999 sekuntia.
      */
+    
     public void luoUusiTiedosto() {
         String helppo = "";
         String medium = "";
@@ -75,4 +78,6 @@ public class HuippuTulokset {
             System.out.println("Tiedostoon kirjoittaminen epäonnistui.");
         }
     }
+    /**/
+    
 }
