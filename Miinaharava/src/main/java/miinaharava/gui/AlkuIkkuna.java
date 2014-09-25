@@ -30,7 +30,7 @@ public class AlkuIkkuna implements Runnable {
     }
     
     /**
-     * metodi, joka luo aloitusikkunan komponentit - tekstikentät, napit ja radionapit.
+     * Metodi, joka luo aloitusikkunan komponentit - tekstikentät, napit ja radionapit.
      * @param container 
      */
     public void luoKomponentit(Container container) {
