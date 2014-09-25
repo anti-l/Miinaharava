@@ -16,3 +16,8 @@ Alla summittainen lista ajankäytöstä Miinaharavan kanssa.
 
 2014.09.18 - Uusi aloitusnäkymä, sille kuuntelija ja pelimuotojen valinta valmiimmaksi. - 4h
 
+2014.09.19 - Työtä käyttöliittymän ja tyhjien ruutujen paljastusmetodien kanssa - 3h
+
+2014.09.23 - Tyhjien ruutujen paljastusmetodi toimintaan! Nyt peli toimii oikein, sitä voi pelatakin. - 3h
+
+2014.09.24 - Säätämistä, fiksaamista. Idea pelikellon toteuttamisesta, sen toteutus ja alkuaskeleet high-score-listan kanssa. - 5h
