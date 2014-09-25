@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package miinaharava.gui;
 
 import java.awt.Container;
@@ -16,7 +11,8 @@ import javax.swing.WindowConstants;
 import miinaharava.sovelluslogiikka.Sovelluslogiikka;
 
 /**
- *
+ * Alkuikkuna on pelin ensimmäinen ikkuna, josta ohjelman käyttäjä eli pelaaja
+ * voi valita eri kokoisia pelilautoja ja käynnistää pelin.
  * @author Antti
  */
 public class AlkuIkkuna implements Runnable {
@@ -24,10 +20,19 @@ public class AlkuIkkuna implements Runnable {
     private JFrame frame;
     private Sovelluslogiikka sovelluslogiikka;
     
+    /**
+     * Konstruktori joka luo pelin alkuikkunan, josta pelaaja voi aloittaa eri
+     * vaikeustasolla pelattavia pelejä.
+     * @param sovlog Pelin sovelluslogiikka.
+     */
     public AlkuIkkuna(Sovelluslogiikka sovlog) {
         this.sovelluslogiikka = sovlog;
     }
     
+    /**
+     * metodi, joka luo aloitusikkunan komponentit - tekstikentät, napit ja radionapit.
+     * @param container 
+     */
     public void luoKomponentit(Container container) {
         // Luodaan radiobuttonit
         GridLayout leiska = new GridLayout(4,1);
@@ -56,6 +61,11 @@ public class AlkuIkkuna implements Runnable {
         container.add(aloita);
     }
 
+    /**
+     * Metodi, joka käynnistää ikkunan. Ensin luodaan JFrame, jolle annetaan
+     * sopiva koko. JFrameen luodaan sisältö luoKomponentit()-metodilla, ja
+     * kun ne ovat valmiita, ikkunasta tehdään näkyvä.
+     */
     @Override
     public void run() {
         frame = new JFrame("Miinaharava");

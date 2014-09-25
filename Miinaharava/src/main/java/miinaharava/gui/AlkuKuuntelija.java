@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package miinaharava.gui;
 
 import java.awt.event.ActionEvent;
@@ -12,7 +7,8 @@ import javax.swing.JRadioButton;
 import miinaharava.sovelluslogiikka.Sovelluslogiikka;
 
 /**
- *
+ * Alkukuuntelija on luokka, joka tarkastelee käyttäjän toimia AlkuIkkunassa.
+ * Luokka käynnistää erikokoisia pelilautoja pelaajan toiveiden mukaisesti.
  * @author Antti
  */
 public class AlkuKuuntelija implements ActionListener {
@@ -24,6 +20,15 @@ public class AlkuKuuntelija implements ActionListener {
     private JButton aloita;
     private PeliIkkuna peliIkkuna;
 
+    
+    /**
+     * Konstruktori, joka saa parametreinään AlkuIkkunan komponenttien sisällön.
+     * @param sovlog Pelin sovelluslogiikka.
+     * @param helppo JRadioButton helpolle vaikeustasolle.
+     * @param medium JRadioButton keskivaikealle vaikeustasolle.
+     * @param vaikea JRadioButton vaikealle vaikeustasolle.
+     * @param Aloita AlkuIkkunan Aloita-nappi.
+     */
     public AlkuKuuntelija(Sovelluslogiikka sovlog, JRadioButton helppo, JRadioButton medium, JRadioButton vaikea, JButton Aloita) {
         this.sovelluslogiikka = sovlog;
         this.helppo = helppo;
@@ -32,6 +37,12 @@ public class AlkuKuuntelija implements ActionListener {
         this.aloita = aloita;
     }
 
+    /**
+     * Kun Aloita-nappia painetaan, kutsutaan tätä metodia. Metodi tarkastaa,
+     * mikä vaikeustaso on valittu, ja sen perusteella käskee sovelluslogiikkaa
+     * luomaan valitun vaikeustason mukaisen pelilaudan.
+     * @param ae ActionEvent, mikä pitää sisällään tiedon napin painamisesta.
+     */
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (medium.isSelected()) {

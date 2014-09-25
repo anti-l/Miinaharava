@@ -5,7 +5,9 @@ import javax.swing.JButton;
 import miinaharava.domain.*;
 
 /**
- *
+ * RuutuNappi on JButton-luokasta peritty nappi, jolla on myös tieto omasta
+ * sijainnistaan peliruudukossa. JButtonia on myös muokattu hieman, poistettu
+ * marginaalit että pelilaudan tekstit ja kuvakkeet näkyvät siinä paremmin.
  * @author Antti
  */
 public class RuutuNappi extends JButton {

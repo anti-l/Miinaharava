@@ -3,7 +3,10 @@ package miinaharava.domain;
 import java.util.Random;
 
 /**
- *
+ * Ruudukko on luokka, joka pitää huolta pelilaudasta. Ruudukko koostuu 
+ * kaksiulotteisesta taulukosta Ruutuja, jotka tietävät itse sisältönsä.
+ * Ruudukon vastuuna on pelilaudan luominen, miinojen asettaminen, viereisten
+ * miinojen määrien kertominen Ruuduilleen sekä pelin loppuehtojen tarkastaminen.
  * @author Antti Lundén
  */
 public class Ruudukko {
@@ -25,8 +28,20 @@ public class Ruudukko {
         this(10, 10, 10);
     }
 
+    /**
+     * Tällä konstruktorilla voidaan luoda myös muun kokoisia pelilautoja. 
+     * Konstruktori tarkastaa, että parametrit ovat validit, ja jos ei ole, se 
+     * luo standardikokoisen ruudukon.
+     * 
+     * Ruudukon luomisen jälkeen konstruktori asettaa miinat paikoilleen ja 
+     * kertoo ruudukon Ruuduille niiden viereisten miinojen määrät.
+     * 
+     * @param leveys Ruudukon leveys kokonaislukuna.
+     * @param korkeus Ruudukon korkeus kokonaislukuna.
+     * @param miinoja Miinojen määrä kokonaislukuna.
+     */
     public Ruudukko(int leveys, int korkeus, int miinoja) {
-        if (leveys < 1 || korkeus < 1 || miinoja < 1) {
+        if (leveys < 1 || korkeus < 1 || miinoja < 1 || miinoja > leveys * korkeus) {
             this.leveys = 10;
             this.korkeus = 10;
             this.miinoja = 10;
@@ -65,7 +80,8 @@ public class Ruudukko {
     }
     
     /**
-     * Asettaa ruutuun sen viereisten ruutujen miinojen yhteenlasketun määrän.
+     * Kertoo pelilaudan Ruuduille niiden viereisten Ruutujen miinojen 
+     * yhteenlasketun määrän.
      */
     public void asetaViereistenMiinojenMaarat() {
         for (int i = 0; i < this.leveys; i++) {
@@ -108,7 +124,6 @@ public class Ruudukko {
      * @return true, jos ollaan ruudukon sisällä (10x10-ruudukossa arvot 0-9);
      *         false, jos ollaan ruudukon ulkopuolella.
      */
-    
     public boolean onRuudukossa(int x, int y) {
         if (x < 0 || x >= this.leveys) {
             if (y < 0 || y >= this.korkeus) {
@@ -173,6 +188,12 @@ public class Ruudukko {
         return ruudukko[x][y];
     }
     
+    
+    /**
+     * Metodi tarkastaa, onko pelaaja asettanut miinoja merkkaavat liput oikein
+     * paikoilleen. 
+     * @return true, jos miinojen ja lippujen paikat täsmäävät, false, jos ei.
+     */
     public boolean onkoMiinatLiputettu() {
         boolean tasmaakoMiinojenJaLippujenPaikat = false;
         boolean onnistuukoSilmukka = true;

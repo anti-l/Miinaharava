@@ -4,7 +4,9 @@ import miinaharava.gui.*;
 import miinaharava.sovelluslogiikka.*;
 
 /**
- * Javalabra2014
+ * Tämä on projektin pääluokka, joka käynnistää sen eri osat.
+ * Projekti on harjoitustyö kurssille Ohjelmoinnin harjoitustyö, I/2014.
+ * #Javalabra2014
  * 
  * @author Antti Lundén
  */

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package miinaharava.sovelluslogiikka;
 
 import java.io.File;
@@ -12,7 +7,10 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- *
+ * HuippuTulokset on luokka, joka pitää huolta pelin pistetilastosta.
+ * Luokka lukee ja kirjoittaa tekstitiedostoa, joka sisältää pelin parhaat
+ * ratkaisuajat.
+ * 
  * @author Antti
  */
 public class HuippuTulokset {
@@ -24,6 +22,11 @@ public class HuippuTulokset {
     private FileWriter kirjoittaja;
     private Scanner lukija;
     
+    /**
+     * Konstruktori, joka lukee huipputulosten tiedoston, ja jos sellaista ei
+     * ole, käskee luoUusiTiedosto()-metodia luomaan sellaisen.
+     * IO-poikkeukset ja -virheet käsitellään tässä luokassa myös.
+     */
     public HuippuTulokset() {
         tiedosto = new File("miinaharavatulokset.txt");
         try {
@@ -41,6 +44,11 @@ public class HuippuTulokset {
         }
     }
     
+    /**
+     * Jos peli käynnistetään ensimmäistä kertaa, tämä metodi luo uuden tiedoston
+     * parhaiden pisteiden säilyttämistä ja lukemista varten. Uudessa tiedostossa
+     * parhaat pelaajat ovat nimettömiä ja ratkaisuun on kulunut 999 sekuntia.
+     */
     public void luoUusiTiedosto() {
         String helppo = "";
         String medium = "";
