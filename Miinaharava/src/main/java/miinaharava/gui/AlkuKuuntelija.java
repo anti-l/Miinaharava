@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 import miinaharava.sovelluslogiikka.Sovelluslogiikka;
 
 /**
@@ -17,6 +18,8 @@ public class AlkuKuuntelija implements ActionListener {
     private JRadioButton helppo;
     private JRadioButton medium;
     private JRadioButton vaikea;
+    private JRadioButton custom;
+    private JTextField leveys, korkeus, miinoja;
     private JButton aloita;
     private PeliIkkuna peliIkkuna;
 
@@ -27,14 +30,22 @@ public class AlkuKuuntelija implements ActionListener {
      * @param helppo JRadioButton helpolle vaikeustasolle.
      * @param medium JRadioButton keskivaikealle vaikeustasolle.
      * @param vaikea JRadioButton vaikealle vaikeustasolle.
-     * @param Aloita AlkuIkkunan Aloita-nappi.
+     * @param custom JRadioButton vapaavalintaiselle pelille.
+     * @param leveys AlkuIkkunan tekstikenttä vapaavalintaisen peliruudukon leveydelle.
+     * @param korkeus AlkuIkkunan tekstikenttä vapaavalintaisen peliruudukon korkeudelle.
+     * @param miinoja AlkuIkkunan tekstikenttä vapaavalintaisen peliruudukon miinojen määrälle.
+     * @param aloita AlkuIkkunan Aloita-nappi.
      */
-    public AlkuKuuntelija(Sovelluslogiikka sovlog, JRadioButton helppo, JRadioButton medium, JRadioButton vaikea, JButton Aloita) {
+    public AlkuKuuntelija(Sovelluslogiikka sovlog, JRadioButton helppo, JRadioButton medium, JRadioButton vaikea, JRadioButton custom, JTextField leveys, JTextField korkeus, JTextField miinoja, JButton aloita) {
         this.sovelluslogiikka = sovlog;
         this.helppo = helppo;
         this.medium = medium;
         this.vaikea = vaikea;
         this.aloita = aloita;
+        this.custom = custom;
+        this.leveys = leveys;
+        this.korkeus = korkeus;
+        this.miinoja = miinoja;
     }
 
     /**
@@ -45,10 +56,12 @@ public class AlkuKuuntelija implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if (medium.isSelected()) {
-            this.sovelluslogiikka.luoRuudukko(15, 15, 35);
-        } else if (vaikea.isSelected()) {
+        if (vaikea.isSelected()) {
             this.sovelluslogiikka.luoRuudukko(20, 20, 80);
+        } else if (medium.isSelected()) {
+            this.sovelluslogiikka.luoRuudukko(15, 15, 35);
+        } else if (custom.isSelected()) {
+            this.sovelluslogiikka.luoRuudukko(Integer.parseInt(leveys.getText()), Integer.parseInt(korkeus.getText()), Integer.parseInt(miinoja.getText()));
         } else {
             this.sovelluslogiikka.luoRuudukko();
         }

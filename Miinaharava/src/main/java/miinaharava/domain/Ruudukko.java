@@ -212,6 +212,11 @@ public class Ruudukko {
                        onnistuukoSilmukka = false;
                     }
                 }
+                if (ruudukko[i][j].onkoMiinaa() == true) {
+                    if (ruudukko[i][j].getLiputettu() == false) {
+                        onnistuukoSilmukka = false;
+                    }
+                }
             }
         }
         if (onnistuukoSilmukka) {

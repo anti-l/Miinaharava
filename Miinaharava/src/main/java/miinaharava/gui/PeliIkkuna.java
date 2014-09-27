@@ -47,7 +47,7 @@ public class PeliIkkuna implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Miinaharava");
-        frame.setPreferredSize(new Dimension(ruudukko.getLeveys()*40, ruudukko.getLeveys()*40+50));
+        frame.setPreferredSize(new Dimension(ruudukko.getKorkeus()*40, ruudukko.getLeveys()*40+50));
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         luoKomponentit(frame.getContentPane());
         frame.pack();
@@ -170,8 +170,29 @@ public class PeliIkkuna implements Runnable {
             for (int j = 0; j < ruudukko.getKorkeus(); j++) {
                 ruutu = ruudukko.getRuutu(i, j);
                 if (ruutu.getKatsottu()) {
-                    this.painaNappiAlas(i, j);
-                    this.asetaNapinTeksti(i, j, sovelluslogiikka.ruudunTeksti(i, j));
+                    if (ruutu.onkoMiinaa() == false) {
+                        this.painaNappiAlas(i, j);
+                        this.asetaNapinTeksti(i, j, sovelluslogiikka.ruudunTeksti(i, j));
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Metodi, joka pelin loppuessa häviöön paljastaa ruudukossa olevien
+     * liputtamattomien miinojen paikat.
+     */
+    public void naytaMiinat() {
+        Ruutu ruutu;
+        for (int i = 0; i < ruudukko.getLeveys(); i++) {
+            for (int j = 0; j < ruudukko.getKorkeus(); j++) {
+                ruutu = ruudukko.getRuutu(i, j);
+                if (ruutu.onkoMiinaa() && ruutu.getLiputettu() == false) {
+                    napisto[i][j].setIcon(miinaKuva);
+                }
+                if (ruutu.getLiputettu() && ruutu.onkoMiinaa() == false) {
+                    napisto[i][j].setBackground(Color.GRAY);
                 }
             }
         }

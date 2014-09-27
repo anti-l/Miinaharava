@@ -2,6 +2,7 @@ package miinaharava.gui;
 
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 import miinaharava.sovelluslogiikka.Sovelluslogiikka;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +17,8 @@ public class AlkuKuuntelijaTest {
     PeliIkkuna peli;
     AlkuKuuntelija alku;
     JButton aloita;
-    JRadioButton helppo, medium, vaikea;
+    JRadioButton helppo, medium, vaikea, custom;
+    JTextField leveys, korkeus, miinoja;
 
     @Before
     public void setUp() {
@@ -26,7 +28,8 @@ public class AlkuKuuntelijaTest {
         helppo = new JRadioButton();
         medium = new JRadioButton();
         vaikea = new JRadioButton();
-        alku = new AlkuKuuntelija(sovlog, helppo, medium, vaikea, aloita);
+        custom = new JRadioButton();
+        alku = new AlkuKuuntelija(sovlog, helppo, medium, vaikea, custom, leveys, korkeus, miinoja, aloita);
     }
 
     @Test
