@@ -16,7 +16,7 @@ public class AlkuKuuntelijaTest {
     Sovelluslogiikka sovlog;
     PeliIkkuna peli;
     AlkuKuuntelija alku;
-    JButton aloita;
+    JButton aloita, ohjeet, tulokset;
     JRadioButton helppo, medium, vaikea, custom;
     JTextField leveys, korkeus, miinoja;
 
@@ -29,7 +29,9 @@ public class AlkuKuuntelijaTest {
         medium = new JRadioButton();
         vaikea = new JRadioButton();
         custom = new JRadioButton();
-        alku = new AlkuKuuntelija(sovlog, helppo, medium, vaikea, custom, leveys, korkeus, miinoja, aloita);
+        ohjeet = new JButton("Ohjeet");
+        tulokset = new JButton("Tulokset");
+        alku = new AlkuKuuntelija(sovlog, helppo, medium, vaikea, custom, leveys, korkeus, miinoja, aloita, ohjeet, tulokset);
     }
 
     @Test

@@ -3,6 +3,7 @@ package miinaharava.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import miinaharava.sovelluslogiikka.Sovelluslogiikka;
@@ -10,38 +11,47 @@ import miinaharava.sovelluslogiikka.Sovelluslogiikka;
 /**
  * Alkukuuntelija on luokka, joka tarkastelee käyttäjän toimia AlkuIkkunassa.
  * Luokka käynnistää erikokoisia pelilautoja pelaajan toiveiden mukaisesti.
+ *
  * @author Antti
  */
 public class AlkuKuuntelija implements ActionListener {
 
     private Sovelluslogiikka sovelluslogiikka;
-    private JRadioButton helppo;
-    private JRadioButton medium;
-    private JRadioButton vaikea;
-    private JRadioButton custom;
+    private JRadioButton helppo, medium, vaikea, custom;
     private JTextField leveys, korkeus, miinoja;
-    private JButton aloita;
+    private JButton aloita, ohjeet, tulokset;
     private PeliIkkuna peliIkkuna;
 
-    
     /**
      * Konstruktori, joka saa parametreinään AlkuIkkunan komponenttien sisällön.
+     *
      * @param sovlog Pelin sovelluslogiikka.
      * @param helppo JRadioButton helpolle vaikeustasolle.
      * @param medium JRadioButton keskivaikealle vaikeustasolle.
      * @param vaikea JRadioButton vaikealle vaikeustasolle.
      * @param custom JRadioButton vapaavalintaiselle pelille.
-     * @param leveys AlkuIkkunan tekstikenttä vapaavalintaisen peliruudukon leveydelle.
-     * @param korkeus AlkuIkkunan tekstikenttä vapaavalintaisen peliruudukon korkeudelle.
-     * @param miinoja AlkuIkkunan tekstikenttä vapaavalintaisen peliruudukon miinojen määrälle.
+     * @param leveys AlkuIkkunan tekstikenttä vapaavalintaisen peliruudukon
+     * leveydelle.
+     * @param korkeus AlkuIkkunan tekstikenttä vapaavalintaisen peliruudukon
+     * korkeudelle.
+     * @param miinoja AlkuIkkunan tekstikenttä vapaavalintaisen peliruudukon
+     * miinojen määrälle.
      * @param aloita AlkuIkkunan Aloita-nappi.
+     * @param ohjeet AlkuIkkunan Ohjeet-nappi.
+     * @param tulokset AlkuIkkunan Huipputulokset-nappi.
+     * 
      */
-    public AlkuKuuntelija(Sovelluslogiikka sovlog, JRadioButton helppo, JRadioButton medium, JRadioButton vaikea, JRadioButton custom, JTextField leveys, JTextField korkeus, JTextField miinoja, JButton aloita) {
+    public AlkuKuuntelija(Sovelluslogiikka sovlog, JRadioButton helppo, 
+            JRadioButton medium, JRadioButton vaikea, JRadioButton custom,
+            JTextField leveys, JTextField korkeus, JTextField miinoja,
+            JButton aloita, JButton ohjeet, JButton tulokset) {
         this.sovelluslogiikka = sovlog;
         this.helppo = helppo;
         this.medium = medium;
         this.vaikea = vaikea;
         this.aloita = aloita;
+        this.ohjeet = ohjeet;
+        this.tulokset = tulokset;
         this.custom = custom;
         this.leveys = leveys;
         this.korkeus = korkeus;
@@ -49,26 +59,39 @@ public class AlkuKuuntelija implements ActionListener {
     }
 
     /**
-     * Kun Aloita-nappia painetaan, kutsutaan tätä metodia. Metodi tarkastaa,
-     * mikä vaikeustaso on valittu, ja sen perusteella käskee sovelluslogiikkaa
+     * Kun AlkuIkkunan nappia painetaan, kutsutaan tätä metodia. AlkuKuuntelija
+     * kuuntelee kaikkia AlkuIkkunan kolmea nappia, Ohjeet-napista tulostetaan
+     * käyttäjälle ohjeet, Huipputulokset-napista näytetään pelin parhaat
+     * tulokset tähän asti. Jos painetaan Aloita-nappia, metodi tarkastaa, mikä
+     * vaikeustaso on valittu, ja sen perusteella käskee sovelluslogiikkaa
      * luomaan valitun vaikeustason mukaisen pelilaudan.
+     *
      * @param ae ActionEvent, mikä pitää sisällään tiedon napin painamisesta.
      */
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if (vaikea.isSelected()) {
-            this.sovelluslogiikka.luoRuudukko(20, 20, 80);
-        } else if (medium.isSelected()) {
-            this.sovelluslogiikka.luoRuudukko(15, 15, 35);
-        } else if (custom.isSelected()) {
-            this.sovelluslogiikka.luoRuudukko(Integer.parseInt(leveys.getText()), Integer.parseInt(korkeus.getText()), Integer.parseInt(miinoja.getText()));
-        } else {
-            this.sovelluslogiikka.luoRuudukko();
+        if (ae.getSource() == ohjeet) {
+            System.out.println("Ohjeita kaivataan.");
+            JOptionPane.showMessageDialog(null, "Paina nappuloita.", "Miinaharava", JOptionPane.INFORMATION_MESSAGE);
         }
-        peliIkkuna = new PeliIkkuna(sovelluslogiikka);
-        System.out.println(sovelluslogiikka.getRuudukko());
-        peliIkkuna.run();
-
+        if (ae.getSource() == tulokset) {
+            System.out.println("Tulokset?");
+            JOptionPane.showMessageDialog(null, "Paras tulos: helppo: 11 sec.", "Miinaharava", JOptionPane.INFORMATION_MESSAGE);
+        }
+        if (ae.getSource() == aloita) {
+            if (vaikea.isSelected()) {
+                this.sovelluslogiikka.luoRuudukko(20, 20, 80);
+            } else if (medium.isSelected()) {
+                this.sovelluslogiikka.luoRuudukko(15, 15, 35);
+            } else if (custom.isSelected()) {
+                this.sovelluslogiikka.luoRuudukko(Integer.parseInt(leveys.getText()), Integer.parseInt(korkeus.getText()), Integer.parseInt(miinoja.getText()));
+            } else {
+                this.sovelluslogiikka.luoRuudukko();
+            }
+            peliIkkuna = new PeliIkkuna(sovelluslogiikka);
+            System.out.println(sovelluslogiikka.getRuudukko());
+            peliIkkuna.run();
+        }
     }
 
 }

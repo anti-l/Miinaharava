@@ -58,6 +58,7 @@ public class Sovelluslogiikka {
         this.ruudukko = new Ruudukko(leveys, korkeus, miinoja);
         this.lippuja = 0;
         this.miinoja = ruudukko.getMiinoja();
+        this.alkuAika = System.currentTimeMillis();
         this.peliLoppui = false;
     }
 

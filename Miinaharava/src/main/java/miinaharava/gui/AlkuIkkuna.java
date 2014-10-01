@@ -100,7 +100,7 @@ public class AlkuIkkuna implements Runnable {
         napit.add(aloita);
 
         // ActionListener napeille
-        AlkuKuuntelija alkuKuuntelija = new AlkuKuuntelija(sovelluslogiikka, helppoPeli, mediumPeli, vaikeaPeli, customPeli, leveysInput, korkeusInput, miinatInput, aloita);
+        AlkuKuuntelija alkuKuuntelija = new AlkuKuuntelija(sovelluslogiikka, helppoPeli, mediumPeli, vaikeaPeli, customPeli, leveysInput, korkeusInput, miinatInput, aloita, ohjeet, tulokset);
         aloita.addActionListener(alkuKuuntelija);
         
         container.add(radionapit, BorderLayout.LINE_START);

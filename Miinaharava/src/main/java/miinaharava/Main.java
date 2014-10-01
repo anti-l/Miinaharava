@@ -20,7 +20,7 @@ public class Main {
         
         Sovelluslogiikka peli = new Sovelluslogiikka();
         AlkuIkkuna aloitus = new AlkuIkkuna(peli);
-//        HuippuTulokset huipputulokset = new HuippuTulokset();
+        HuippuTulokset huipputulokset = new HuippuTulokset();
         SwingUtilities.invokeLater(aloitus);
     }
     
