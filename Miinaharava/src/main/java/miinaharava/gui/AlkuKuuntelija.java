@@ -108,7 +108,7 @@ public class AlkuKuuntelija implements ActionListener {
                 this.sovelluslogiikka.luoRuudukko();
             }
             peliIkkuna = new PeliIkkuna(sovelluslogiikka);
-            System.out.println(sovelluslogiikka.getRuudukko());     // Debuggausta ja testejä varten
+//            System.out.println(sovelluslogiikka.getRuudukko());     // Debuggausta ja testejä varten
             peliIkkuna.run();
         }
     }

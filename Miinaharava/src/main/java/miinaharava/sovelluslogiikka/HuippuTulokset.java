@@ -62,7 +62,7 @@ public class HuippuTulokset {
         
         // Siirretään tilasto parempaan tietorakenteeseen.
         /**/
-        for (int i = 0; i < helppoHuiput.length; i += 2) {
+        for (int i = 0; i < 20; i += 2) {
             Tulos tulos = new Tulos(Integer.parseInt(helppoHuiput[i]), helppoHuiput[i+1]);
             helppoTilasto.add(tulos);
             mediumTilasto.add(new Tulos(Integer.parseInt(mediumHuiput[i]), mediumHuiput[i+1]));
