@@ -119,12 +119,6 @@ public class Ruutu {
      */
     @Override
     public String toString() {
-        /*
-        if (miina) {
-            return "X";
-        }
-        return ".";
-        */
         if (miina && liputettu) {
             return "x";
         } else if (miina && liputettu == false) {

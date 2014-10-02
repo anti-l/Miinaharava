@@ -104,4 +104,33 @@ public class RuutuTest {
         assertEquals(true, tyhjaRuutu.onkoTyhja());
     }
     
+    @Test
+    public void onkoTyhjaJosMiinaTest() {
+        Ruutu miinaRuutu = new Ruutu();
+        miinaRuutu.setMiina();
+        assertEquals(false, miinaRuutu.onkoTyhja());
+    }
+    
+    @Test
+    public void merkkijonoTesti1() {
+        Ruutu ruutu = new Ruutu();
+        ruutu.setMiina();
+        ruutu.setLiputettu();
+        assertEquals("x", ruutu.toString());
+    }
+    
+    @Test
+    public void merkkijonoTesti2() {
+        Ruutu ruutu = new Ruutu();
+        ruutu.katsoRuutu();
+        assertEquals("#", ruutu.toString());
+    }
+    
+    @Test
+    public void merkkijonoTesti3() {
+        Ruutu ruutu = new Ruutu();
+        ruutu.setMiina();
+        assertEquals("X", ruutu.toString());
+    }
+    
 }
