@@ -85,9 +85,6 @@ public class Sovelluslogiikka {
      * @param y Ruudun y-koordinaatti
      */
     public void tarkistaRuutu(int x, int y) {
-        if (alkuAika == 0) {
-            this.alkuAika = System.currentTimeMillis();
-        }
         Ruutu ruutu = this.ruudukko.getRuutu(x, y);
         if (ruutu.onkoMiinaa()) {
             System.out.println("Osuit miinaan!");

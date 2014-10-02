@@ -19,9 +19,9 @@ public class Main {
     public static void main(String[] args) {
         
         Sovelluslogiikka peli = new Sovelluslogiikka();
-        AlkuIkkuna aloitus = new AlkuIkkuna(peli);
+        AlkuIkkuna aloitusIkkuna = new AlkuIkkuna(peli);
         HuippuTulokset huipputulokset = new HuippuTulokset();
-        SwingUtilities.invokeLater(aloitus);
+        SwingUtilities.invokeLater(aloitusIkkuna);
     }
     
 }

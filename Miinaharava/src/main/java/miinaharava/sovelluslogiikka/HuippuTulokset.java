@@ -125,7 +125,7 @@ public class HuippuTulokset {
      */
     public boolean tarkastaHelppoTulos(int aika) {
         // Jos tilastossa on jo 10 nopeampaa aikaa, palautetaan false
-        if (helppoTilasto.get(10).getAika() < aika) {
+        if (helppoTilasto.get(9).getAika() < aika) {
             return false;
         } 
         return true;

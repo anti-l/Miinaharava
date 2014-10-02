@@ -34,11 +34,18 @@ public class Ruutu {
     }
     
     /**
+     * Poistaa miinan ruudusta. Tätä metodia käytetään lähinnä testeissä.
+     */
+    public void poistaMiina() {
+        this.miina = false;
+    }
+    
+    /**
      * Asettaa ruudulle sen viereisten ruutujen sisältämien miinojen määrän.
      * @param maara Viereisten ruutujen sisältämien miinojen määrä.
      */
     public void setViereisia(int maara) {
-        if (maara < 9 && maara >= 0) {
+        if (maara < 9 && maara > -1) {
             this.viereisia = maara;
         }
     }
@@ -125,10 +132,8 @@ public class Ruutu {
             return "X";
         } else if (katsottu) {
             return "#";
-        } else if (katsottu == false) {
-            return ".";
         } else {
-            return "*";
+            return ".";
         }
     }
     
