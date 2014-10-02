@@ -72,11 +72,11 @@ public class AlkuKuuntelija implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == ohjeet) {
             System.out.println("Ohjeita kaivataan.");
-            JOptionPane.showMessageDialog(null, "Paina nappuloita.", "Miinaharava", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Paina nappuloita.\n[PLACEHOLDER]", "Miinaharava", JOptionPane.INFORMATION_MESSAGE);
         }
         if (ae.getSource() == tulokset) {
             System.out.println("Tulokset?");
-            JOptionPane.showMessageDialog(null, "Paras tulos: helppo: 11 sec.", "Miinaharava", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Paras tulos: helppo: 11 sec.\n[PLACEHOLDER]", "Miinaharava", JOptionPane.INFORMATION_MESSAGE);
         }
         if (ae.getSource() == aloita) {
             if (vaikea.isSelected()) {
@@ -84,12 +84,31 @@ public class AlkuKuuntelija implements ActionListener {
             } else if (medium.isSelected()) {
                 this.sovelluslogiikka.luoRuudukko(15, 15, 35);
             } else if (custom.isSelected()) {
-                this.sovelluslogiikka.luoRuudukko(Integer.parseInt(leveys.getText()), Integer.parseInt(korkeus.getText()), Integer.parseInt(miinoja.getText()));
+                int customLeveys, customKorkeus, customMiinat;
+                try {
+                    customLeveys  = Integer.parseInt(leveys.getText());
+                } catch (NumberFormatException e) {
+                    customLeveys = 10;
+                    leveys.setText("10");
+                }
+                try {
+                    customKorkeus = Integer.parseInt(korkeus.getText());
+                } catch (NumberFormatException e) {
+                    customKorkeus = 10;
+                    korkeus.setText("10");
+                }
+                try {
+                    customMiinat  = Integer.parseInt(miinoja.getText());
+                } catch (NumberFormatException e) {
+                    customMiinat = 10;
+                    miinoja.setText("10");
+                }
+                this.sovelluslogiikka.luoRuudukko(customKorkeus, customLeveys, customMiinat);
             } else {
                 this.sovelluslogiikka.luoRuudukko();
             }
             peliIkkuna = new PeliIkkuna(sovelluslogiikka);
-            System.out.println(sovelluslogiikka.getRuudukko());
+            System.out.println(sovelluslogiikka.getRuudukko());     // Debuggausta ja testejä varten
             peliIkkuna.run();
         }
     }

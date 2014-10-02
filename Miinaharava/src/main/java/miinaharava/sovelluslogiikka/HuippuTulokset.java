@@ -1,11 +1,11 @@
 package miinaharava.sovelluslogiikka;
 
+import miinaharava.domain.Tulos;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -17,23 +17,20 @@ import java.util.Scanner;
  */
 public class HuippuTulokset {
     
-    private HashMap<Integer, String> helppoTilasto;
-    private HashMap<Integer, String> mediumTilasto;
-    private HashMap<Integer, String> vaikeaTilasto;
+    private ArrayList<Tulos> helppoTilasto, mediumTilasto, vaikeaTilasto;
     private File tiedosto;
     private FileWriter kirjoittaja;
     private Scanner lukija;
     
     /**
-     * Konstruktori, joka lukee huipputulosten tiedoston, ja jos sellaista ei
-     * ole, käskee luoUusiTiedosto()-metodia luomaan sellaisen.
-     * IO-poikkeukset ja -virheet käsitellään tässä luokassa myös.
-     */
-    /**
-     * Konstruktori, joka 
+     * Konstruktori, joka luo tietorakenteet tuloksille, lukee tiedostosta
+     * aiemmat huipputulokset, ja jos ei löydä niitä, luo uuden tiedoston.
      */
     public HuippuTulokset() {
         this.tiedosto = new File("miinaharavatulokset.txt");
+        helppoTilasto = new ArrayList<Tulos>();
+        mediumTilasto = new ArrayList<Tulos>();
+        vaikeaTilasto = new ArrayList<Tulos>();
         lueTiedosto();
     }
     
@@ -46,7 +43,6 @@ public class HuippuTulokset {
         String[] helppoHuiput = new String[20];
         String[] mediumHuiput = new String[20];
         String[] vaikeaHuiput = new String[20];
-//        tiedosto = new File("miinaharavatulokset.txt");
         
         try {
             lukija = new Scanner(tiedosto);
@@ -63,14 +59,17 @@ public class HuippuTulokset {
             System.out.println("Tiedoston rakenne on virheellinen.");
             luoUusiTiedosto();
         }
+        
         // Siirretään tilasto parempaan tietorakenteeseen.
-        /*
-        for (int i = 0; i < helppoHuiput.length; i+=2) {
-            helppoTilasto.put(Integer.parseInt(helppoHuiput[i]), helppoHuiput[i+1]);
-            mediumTilasto.put(Integer.parseInt(mediumHuiput[i]), mediumHuiput[i+1]);
-            vaikeaTilasto.put(Integer.parseInt(vaikeaHuiput[i]), vaikeaHuiput[i+1]);
+        /**/
+        for (int i = 0; i < helppoHuiput.length; i += 2) {
+            Tulos tulos = new Tulos(Integer.parseInt(helppoHuiput[i]), helppoHuiput[i+1]);
+            helppoTilasto.add(tulos);
+            mediumTilasto.add(new Tulos(Integer.parseInt(mediumHuiput[i]), mediumHuiput[i+1]));
+            vaikeaTilasto.add(new Tulos(Integer.parseInt(vaikeaHuiput[i]), vaikeaHuiput[i+1]));
         }
         /**/
+//        tulostaHelpot();
         
     }
     
@@ -106,10 +105,33 @@ public class HuippuTulokset {
         }
     }
     
+    /**
+     * Testimetodi.
+     * Tulostaa helpon vaikeustason tulokset.
+     */
     public void tulostaHelpot() {
-        ArrayList<Integer> ajat = new ArrayList<>();
-//        ajat = helppoTilasto.keySet();
+        for (int i = 0; i < 10; i++) {
+            Tulos t = helppoTilasto.get(i);
+            System.out.println((i+1) + ". " + t.getNimi() + ": " + t.getAika());
+        }
     }
-    /**/
     
+    public boolean tarkastaHelppoTulos(int aika) {
+        // Jos tilastossa on jo 10 nopeampaa aikaa, palautetaan false
+        if (helppoTilasto.get(10).getAika() < aika) {
+            return false;
+        } 
+        return true;
+    }
+    
+    public void sijoitaHelppoTulos(int aika, String nimi) {
+        Tulos uusiTulos = new Tulos(aika, nimi);
+        int sija = 11;
+        for (int i = 0; i < 10; i++) {
+            if (aika < helppoTilasto.get(i).getAika()) {
+                sija = i;
+                break;
+            }
+        }
+    }
 }

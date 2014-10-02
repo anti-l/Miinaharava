@@ -118,6 +118,13 @@ public class PeliIkkuna implements Runnable {
         napisto[x][y].setEnabled(false);
     }
     
+    /**
+     * Metodi asettaa peliruudukolle tarkastettuihin ruutuihin tekstin, joka
+     * kertoo, kuinka monta miinaa viereisissä ruuduissa yhteensä on.
+     * @param x Napin x-koordinaatti
+     * @param y Napin y-koordinaatti
+     * @param teksti Nappiin asetettava teksti
+     */
     public void asetaNapinTeksti(int x, int y, String teksti) {
         napisto[x][y].setText(teksti);
     }

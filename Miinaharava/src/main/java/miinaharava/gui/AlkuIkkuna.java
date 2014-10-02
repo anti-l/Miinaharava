@@ -102,6 +102,8 @@ public class AlkuIkkuna implements Runnable {
         // ActionListener napeille
         AlkuKuuntelija alkuKuuntelija = new AlkuKuuntelija(sovelluslogiikka, helppoPeli, mediumPeli, vaikeaPeli, customPeli, leveysInput, korkeusInput, miinatInput, aloita, ohjeet, tulokset);
         aloita.addActionListener(alkuKuuntelija);
+        ohjeet.addActionListener(alkuKuuntelija);
+        tulokset.addActionListener(alkuKuuntelija);
         
         container.add(radionapit, BorderLayout.LINE_START);
         container.add(customValinnat, BorderLayout.CENTER);
@@ -116,7 +118,7 @@ public class AlkuIkkuna implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Miinaharava");
-        frame.setPreferredSize(new Dimension(400, 200));
+        frame.setPreferredSize(new Dimension(450, 225));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         luoKomponentit(frame.getContentPane());

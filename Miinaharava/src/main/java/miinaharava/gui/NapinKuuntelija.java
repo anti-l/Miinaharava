@@ -23,8 +23,8 @@ public class NapinKuuntelija implements MouseListener {
     /**
      * Konstruktori, joka kuuntelee pelilaudan yhtä nappia.
      *
-     * @param sovlog Pelin sovelluslogiikka
-     * @param nappi Pelilaudan ruudukon nappi
+     * @param sovelluslogiikka Pelin sovelluslogiikka
+     * @param peliIkkuna PeliIkkuna, jossa pelaaminen tapahtuu
      * @param x Pelilaudan napin x-koordinaatti
      * @param y Pelilaudan napin y-koordinaatti
      */

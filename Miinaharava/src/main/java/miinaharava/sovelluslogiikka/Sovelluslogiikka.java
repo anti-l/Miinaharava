@@ -7,9 +7,9 @@ import miinaharava.gui.RuutuNappi;
 import miinaharava.gui.PeliIkkuna;
 
 /**
- * Sovelluslogiikka on koko miinaharava-projektin selkÃ¤ranka ja aivot. Koko
- * pelin sisÃ¤ltÃ¶ ja sen tapahtumat kulkevat tÃ¤mÃ¤n luokan kautta, se on
- * ensimmÃ¤inen asia mikÃ¤ kÃ¤ynnistetÃ¤Ã¤n peliÃ¤ avatessa.
+ * Sovelluslogiikka on koko miinaharava-projektin selkäranka ja aivot. Koko
+ * pelin sisältÃƒÂ¶ ja sen tapahtumat kulkevat tämän luokan kautta, se on
+ * ensimmäinen asia mikä käynnistetään peliä avatessa.
  *
  * @author Antti
  */
@@ -23,14 +23,14 @@ public class Sovelluslogiikka {
     private boolean peliLoppui;
 
     /**
-     * Konstruktori, muu toiminnallisuus viety muihin metodeihin. TÃ¤tÃ¤ tuskin
-     * enÃ¤Ã¤ edes tarvitaan.
+     * Konstruktori, muu toiminnallisuus viety muihin metodeihin. Tätä tuskin
+     * enää edes tarvitaan.
      */
     public Sovelluslogiikka() {
     }
 
     /**
-     * Metodi, jota kutsutaan Sovelluslogiikan kÃ¤ynnistyessÃ¤ tai uutta peliÃ¤
+     * Metodi, jota kutsutaan Sovelluslogiikan käynnistyessä tai uutta peliä
      * aloittaessa.
      *
      * Metodi luo uuden ruudukon pelille standardimitoissa (LxK:10x10, 10
@@ -45,14 +45,14 @@ public class Sovelluslogiikka {
     }
 
     /**
-     * Metodi, jota kutsutaan Sovelluslogiikan kÃ¤ynnistyessÃ¤ tai uutta peliÃ¤
+     * Metodi, jota kutsutaan Sovelluslogiikan käynnistyessä tai uutta peliä
      * aloittaessa.
      *
-     * Metodi luo uuden ruudukon parametreinÃ¤ annettujen arvojen mukaisesti.
+     * Metodi luo uuden ruudukon parametreinä annettujen arvojen mukaisesti.
      *
      * @param leveys Uuden ruudukon leveys
      * @param korkeus Uuden ruudukon korkeus
-     * @param miinoja Uuden ruudukon miinojen mÃ¤Ã¤rÃ¤
+     * @param miinoja Uuden ruudukon miinojen määrä
      */
     public void luoRuudukko(int leveys, int korkeus, int miinoja) {
         this.ruudukko = new Ruudukko(leveys, korkeus, miinoja);
@@ -63,22 +63,22 @@ public class Sovelluslogiikka {
     }
 
     /**
-     * Palauttaa tällä hetkellä käytössä olevan Ruudukon.
+     * Palauttaa tÃ¤llÃ¤ hetkellÃ¤ kÃ¤ytÃ¶ssÃ¤ olevan Ruudukon.
      *
-     * @return Käytössä oleva Ruudukko.
+     * @return KÃ¤ytÃ¶ssÃ¤ oleva Ruudukko.
      */
     public Ruudukko getRuudukko() {
         return this.ruudukko;
     }
 
     /**
-     * TÃ¤tÃ¤ metodia kutsutaan, kun pelaaja valitsee pelikentÃ¤n ruudun. Metodi
-     * tarkastaa ruudun sisÃ¤llÃ¶n, onko siinÃ¤ miinaa, sekÃ¤ montako miinaa
-     * lÃ¶ytyy viereisistÃ¤ ruuduista. Pelin ensimmÃ¤isellÃ¤ ruudun
-     * tarkistuskerralla laitetaan pelikello kÃ¤yntiin.
+     * Tätä metodia kutsutaan, kun pelaaja valitsee pelikentän ruudun. Metodi
+     * tarkastaa ruudun sisällÃƒÂ¶n, onko siinä miinaa, sekä montako miinaa
+     * lÃƒÂ¶ytyy viereisistä ruuduista. Pelin ensimmäisellä ruudun
+     * tarkistuskerralla laitetaan pelikello käyntiin.
      *
-     * Jos osutaan miinaan, peli loppuu. Jos osutaan tyhjÃ¤Ã¤n ruutuun,
-     * paljastetaan sen ympÃ¤riltÃ¤ muutkin tyhjÃ¤t ruudut
+     * Jos osutaan miinaan, peli loppuu. Jos osutaan tyhjään ruutuun,
+     * paljastetaan sen ympäriltä muutkin tyhjät ruudut
      * paljastaTyhjat()-metodilla.
      *
      * @param x Ruudun x-koordinaatti
@@ -99,10 +99,10 @@ public class Sovelluslogiikka {
     }
 
     /**
-     * TÃ¤tÃ¤ metodia kutsutaan, kun UI:ssa painetaan nappia ja katsotaan, mitÃ¤
-     * napin alta lÃ¶ytyy. Jos kyseessÃ¤ ei ole miina, tÃ¤mÃ¤ metodi palauttaa
-     * joko tyhjÃ¤n merkkijonon tyhjille ruuduille tai viereisten miinojen
-     * mÃ¤Ã¤rÃ¤n miinojen vieressÃ¤ oleville ruuduille.
+     * Tätä metodia kutsutaan, kun UI:ssa painetaan nappia ja katsotaan, mitä
+     * napin alta lÃƒÂ¶ytyy. Jos kyseessä ei ole miina, tämä metodi palauttaa
+     * joko tyhjän merkkijonon tyhjille ruuduille tai viereisten miinojen
+     * määrän miinojen vieressä oleville ruuduille.
      *
      * @param x Ruudun x-koordinaatti
      * @param y Ruudun y-koordinaatti
@@ -120,14 +120,14 @@ public class Sovelluslogiikka {
     }
 
     /**
-     * Kun pelaaja on valinnut ruudun tarkastettavaksi ja siitÃ¤ ei ole
-     * lÃ¶ytynyt miinaa tai tietoa miinan paikasta viereisessÃ¤ ruudussa, tuo
-     * ruutu on tyhjÃ¤. TyhjÃ¤Ã¤ ruutua klikatessa peli paljastaa muutkin
-     * tyhjÃ¤t ruudut tuon valitun ruudun lÃ¤heisyydessÃ¤.
+     * Kun pelaaja on valinnut ruudun tarkastettavaksi ja siitä ei ole
+     * lÃƒÂ¶ytynyt miinaa tai tietoa miinan paikasta viereisessä ruudussa, tuo
+     * ruutu on tyhjä. Tyhjää ruutua klikatessa peli paljastaa muutkin
+     * tyhjät ruudut tuon valitun ruudun läheisyydessä.
      *
-     * Metodi tarkastaa annetut koordinaatit ja kÃ¤y lÃ¤pi viereiset ruudut,
-     * jonka jÃ¤lkeen se kutsuu itseÃ¤Ã¤n uudelleen viereisille ruuduille.
-     * Vastaan tulleet tyhjÃ¤t ruudut paljastetaan ja otetaan pois kÃ¤ytÃ¶stÃ¤.
+     * Metodi tarkastaa annetut koordinaatit ja käy läpi viereiset ruudut,
+     * jonka jälkeen se kutsuu itseään uudelleen viereisille ruuduille.
+     * Vastaan tulleet tyhjät ruudut paljastetaan ja otetaan pois käytÃƒÂ¶stä.
      *
      * @param x tarkastettavan ruudun x-koordinaatti
      * @param y tarkastettavan ruudun y-koordinaatti
@@ -135,17 +135,17 @@ public class Sovelluslogiikka {
     public void paljastaTyhjat(int x, int y) {
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
-                if (i == x && j == y) {                                             // Ruutu, mitÃ¤ pelaaja itse painoi -> jatketaan
+                if (i == x && j == y) {                                             // Ruutu, mitä pelaaja itse painoi -> jatketaan
                     continue;
                 } else if (x + i < 0 || x + i >= ruudukko.getLeveys()) {            // Ruutu, joka menee vaakasuunnassa ruudukon ulkopuolelle -> jatketaan
                     continue;
                 } else if (y + j < 0 || y + j >= ruudukko.getKorkeus()) {           // Ruutu, joka menee pystysuunnassa ruudukon ulkopuolelle -> jatketaan
                     continue;
                     // Katsotun ruudun kaikki 8 naapuria +/- 1 pysty- ja vaakasuuntaan:
-                    // Jos ruutu on tyhjÃ¤ eikÃ¤ sitÃ¤ ole tarkistettu vielÃ¤
+                    // Jos ruutu on tyhjä eikä sitä ole tarkistettu vielä
                 } else if (ruudukko.getRuutu((x + i), (y + j)).onkoTyhja() && ruudukko.getRuutu((x + i), (y + j)).getKatsottu() == false) {
-                    ruudukko.getRuutu((x + i), (y + j)).katsoRuutu();               // MÃ¤Ã¤ritetÃ¤Ã¤n Ruutu katsotuksi
-                    paljastaTyhjat(x + i, y + j);                                   // Kutsutaan rekursiivisesti viereisiÃ¤ ruutuja
+                    ruudukko.getRuutu((x + i), (y + j)).katsoRuutu();               // Määritetään Ruutu katsotuksi
+                    paljastaTyhjat(x + i, y + j);                                   // Kutsutaan rekursiivisesti viereisiä ruutuja
                 } else if (ruudukko.getRuutu((x + i), (y + j)).getKatsottu() == false) {
                     ruudukko.getRuutu((x + i), (y + j)).katsoRuutu();
                 }
@@ -154,11 +154,11 @@ public class Sovelluslogiikka {
     }
 
     /**
-     * Metodi kertoo Ruudukon yksittÃ¤iselle ruudulle, ettÃ¤ se on liputettu
-     * pelaajan toimesta. Jos ruudussa on jo lippu, se poistetaan, jos sitÃ¤ ei
+     * Metodi kertoo Ruudukon yksittäiselle ruudulle, että se on liputettu
+     * pelaajan toimesta. Jos ruudussa on jo lippu, se poistetaan, jos sitä ei
      * ole, ruutuun asetetaan lippu.
      *
-     * Samalla pidetÃ¤Ã¤n kirjaa siitÃ¤, montako lippua pelaaja on asettanut.
+     * Samalla pidetään kirjaa siitä, montako lippua pelaaja on asettanut.
      *
      * @param x Ruudun x-koordinaatti
      * @param y Ruudun y-koordinaatti
@@ -176,12 +176,13 @@ public class Sovelluslogiikka {
     }
 
     /**
-     * TÃ¤mÃ¤ metodi tarkastaa, onko pelin loppumiseen tarvittavat kriteerit
-     * tÃ¤yttyneet. Jos pelaaja on liputtanut ruutuja yhtÃ¤ monta kun pelissÃ¤
+     * Tämä metodi tarkastaa, onko pelin loppumiseen tarvittavat kriteerit
+     * täyttyneet. Jos pelaaja on liputtanut ruutuja yhtä monta kun pelissä
      * on miinoja, tarkistetaan, ovatko ne oikeissa paikoissa.
      *
-     * Jos nÃ¤in kÃ¤y, pysÃ¤ytetÃ¤Ã¤n pelikello ja ilmoitetaan pelaajalle pelin
+     * Jos näin käy, pysäytetään pelikello ja ilmoitetaan pelaajalle pelin
      * voittamisesta.
+     * @return true, jos pelin loppumiseen edellytettävät kriteerit täyttyvät.
      */
     public boolean loppuukoPeli() {
             if (miinoja == lippuja) {
@@ -196,16 +197,24 @@ public class Sovelluslogiikka {
     
     /**
      * Metodi, jolla tarkistetaan, onko peli jo ohi.
-     * @return true, jos peli on ohi, false, jos se on vielä käynnissä.
+     * @return true, jos peli on ohi, false, jos se on vielÃ¤ kÃ¤ynnissÃ¤.
      */
     public boolean onkoPeliOhi() {
         return peliLoppui;
     }
     
+    /**
+     * Metodi, jolta voidaan kysyä, onko tämä peli jo asetettu loppunneeksi.
+     */
     public void setPeliOhi() {
         this.peliLoppui = true;
     }
 
+    /**
+     * Metodi, joka kertoo pelin pelaamiseen kuluneen ajan. Aika lasketaan
+     * peliruudukon luomisesta viimeisen oikean lipun asettamiseen.
+     * @return Pelin voittamiseen kulunut aika sekunneissa.
+     */
     public long getPelinKesto() {
         long kulunutAikaSekunneissa = (loppuAika - alkuAika) / 1000;
         return kulunutAikaSekunneissa;
