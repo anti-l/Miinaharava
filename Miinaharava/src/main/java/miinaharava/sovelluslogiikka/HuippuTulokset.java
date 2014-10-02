@@ -116,6 +116,13 @@ public class HuippuTulokset {
         }
     }
     
+    /**
+     * Metodi tarkastaa, onko pelin suorittamiseen kulunut aika niin hyvä, että
+     * se mahtuu parhaiden tulosten listalle.
+     * 
+     * @param aika Pelin voittamiseen kulunut aika
+     * @return true, jos aika ansaitsee paikan parhaiden tulosten listalla
+     */
     public boolean tarkastaHelppoTulos(int aika) {
         // Jos tilastossa on jo 10 nopeampaa aikaa, palautetaan false
         if (helppoTilasto.get(10).getAika() < aika) {
@@ -124,6 +131,13 @@ public class HuippuTulokset {
         return true;
     }
     
+    /**
+     * Metodi sijoittaa ajan listalle ja siirtää huonompia aikoja listalla
+     * alaspäin.
+     * 
+     * @param aika Pelin voittamiseen kulunut aika
+     * @param nimi Pelaajan nimi
+     */
     public void sijoitaHelppoTulos(int aika, String nimi) {
         Tulos uusiTulos = new Tulos(aika, nimi);
         int sija = 11;

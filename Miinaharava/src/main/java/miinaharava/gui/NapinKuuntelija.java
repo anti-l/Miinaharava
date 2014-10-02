@@ -77,7 +77,7 @@ public class NapinKuuntelija implements MouseListener {
     /**
      * Ei käytössä.
      *
-     * @param me
+     * @param me MouseEvent. Ei käytössä.
      */
     @Override
     public void mousePressed(MouseEvent me) {
@@ -86,7 +86,7 @@ public class NapinKuuntelija implements MouseListener {
     /**
      * Ei käytössä.
      *
-     * @param me
+     * @param me MouseEvent. Ei käytössä.
      */
     @Override
     public void mouseClicked(MouseEvent me) {
@@ -95,7 +95,7 @@ public class NapinKuuntelija implements MouseListener {
     /**
      * Ei käytössä.
      *
-     * @param me
+     * @param me MouseEvent. Ei käytössä.
      */
     @Override
     public void mouseEntered(MouseEvent me) {
@@ -104,7 +104,7 @@ public class NapinKuuntelija implements MouseListener {
     /**
      * Ei käytössä.
      *
-     * @param me
+     * @param me MouseEvent. Ei käytössä.
      */
     @Override
     public void mouseExited(MouseEvent me) {

@@ -120,7 +120,7 @@ public class RuudukkoTest {
     public void testaaMiinojenLiputus() {
         Ruudukko ruudukko = new Ruudukko();
         boolean onkoLiputettu = ruudukko.onkoMiinatLiputettu();
-        assertEquals(true, onkoLiputettu);
+        assertEquals(false, onkoLiputettu);
     }
     
     @Test

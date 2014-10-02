@@ -32,7 +32,7 @@ public class PeliIkkuna implements Runnable {
     /**
      * Konstruktori, joka luo uuden pelilaudan. Konstruktori saa parametrinään
      * pelin sovelluslogiikan, jonka kautta peli toimii.
-     * @param sovelluslogiikka 
+     * @param sovelluslogiikka Käytettävä sovelluslogiikka
      */
     public PeliIkkuna(Sovelluslogiikka sovelluslogiikka) {
         this.sovelluslogiikka = sovelluslogiikka;
@@ -57,7 +57,7 @@ public class PeliIkkuna implements Runnable {
     /**
      * Metodi, joka luo PeliIkkunan komponentit eli pelilaudan napit ja muut
      * ikkunan osat.
-     * @param container 
+     * @param container framen contentpane.
      */
     public void luoKomponentit(Container container) {
         BorderLayout leiska = new BorderLayout();
@@ -86,7 +86,7 @@ public class PeliIkkuna implements Runnable {
      * ja asettaa niille kuuntelijat.
      * @param x Nappiruudukon koko leveyssuunnassa
      * @param y Nappiruudukon koko pystysuunnassa
-     * @return 
+     * @return Valmis nappiruudukko.
      */
     public JPanel luoNapit(int x, int y) {
         JPanel miinanapit = new JPanel(new GridLayout(x, y));

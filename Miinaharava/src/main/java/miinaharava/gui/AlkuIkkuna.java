@@ -36,7 +36,7 @@ public class AlkuIkkuna implements Runnable {
     
     /**
      * Metodi, joka luo aloitusikkunan komponentit - tekstikentät, napit ja radionapit.
-     * @param container 
+     * @param container framen contentpane()
      */
     public void luoKomponentit(Container container) {
         // Luodaan radiobuttonit

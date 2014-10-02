@@ -14,7 +14,7 @@ public class Main {
     
     /**
      * Pääluokka Miinaharava-pelille. Käynnistää sovelluslogiikan, aloitusikkunan ja pisteiden kirjaamisen.
-     * @param args 
+     * @param args Ajoaikaiset parametrit (ei käytössä).
      */
     public static void main(String[] args) {
         
