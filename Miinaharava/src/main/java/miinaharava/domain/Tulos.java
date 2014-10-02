@@ -44,6 +44,7 @@ public class Tulos implements Comparable {
      * Jos verrattava tulos on pienempi kuin tämä tulos, palautetaan -1.
      * Jos verrattava tulos on suurempi kuin tämä tulos, palautetaan  1.
      * Jos verrattavat tulokset ovat yhtä suuret, palautetaan 0.
+     * 
      * @param toinen Toinen vertailtava tulos.
      * @return Kokonaisluku -1, 0 tai 1.
      */

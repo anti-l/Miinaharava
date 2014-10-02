@@ -1,0 +1,56 @@
+Sekvenssikaaviot
+
+Luokkia ja instansseja on
+	Sovelluslogiikka peli
+	AlkuIkkuna aloitus
+	Ruudukko ruudukko
+	Ruutu ruutu
+	PeliIkkuna peliIkkuna
+	RuutuNappi nappi
+	AlkuKuuntelija alkuKuuntelija
+	NapinKuuntelija napinKuuntelija
+	
+Käyttötapaus 1: Aloitetaan uusi peli
+
+Olemassa on 
+	Sovelluslogiikka peli
+	AlkuIkkuna aloitus
+	AlkuKuuntelija alkuKuuntelija
+
+Käyttäjä painaa alkuIkkunasta "Aloita" nappia "Helpon pelin" ollessa valittuna
+alkuKuuntelija huomaa napin painalluksen
+alkuKuuntelija luo uuden Ruudukon oletusparametreilla [sovelluslogiikka.luoRuudukko()]
+alkuKuuntelija luo uuden PeliIkkunan [peliIkkuna = new PeliIkkuna(sovelluslogiikka)]
+peliIkkuna luodaan, ottaa sovelluslogiikalta ruudukon tiedot (ruudukko = sovelluslogiikka.getRuudukko()]
+alkuKuuntelija ajaa peliIkkunan [peliIkkuna.run()]
+
+
+	
+Käyttötapaus 2: Käyttäjä painaa nappia peliIkkunassa
+
+Olemassa on 
+	Sovelluslogiikka peli
+	Ruudukko ruudukko
+	Ruutu ruutu
+	PeliIkkuna peliIkkuna
+	RuutuNappi nappi
+	NapinKuuntelija napinKuuntelija
+
+Käyttäjä painaa nappia laudalla.
+NapinKuuntelija huomaa painalluksen, hakee sovelluslogiikalta ruudukon 
+ruudukosta haetaan ruutu x,y -koordinaateista [sovlog.getRuudukko().getRuutu(x,y)]
+Pelaaja painoi vasempaa hiiren nappia, joten tarkastetaan onko ruutu liputettu [ruutu.getLiputettu() == false]
+sovelluslogiikka tarkastaa ruudun [sovelluslogiikka.tarkistaRuutu(x,y)]
+sovelluslogiikka hakee Ruudun Ruudukosta [Ruutu ruutu = this.ruudukko.getRuutu(x,y)]
+SovLog tarkistaa, onko ruudussa miinaa ruudulta [ruutu.onkoMiinaa()]
+SovLog säätää ruudun katsotuksi [ruudukko.getRuutu(x,y).katsoRuutu()]
+Sovlog tarkistaa, loppuuko peli voittoon
+NapinKuuntelija tarkistaa, onko ruudussa miinaa [sovlog.getRuudukko().getRuutu(x,y).onkoMiinaa()]
+NapinKuuntelija kertoo SovLogille pelin olevan ohi [sovlog.setPeliOhi()]
+NapinKuuntelija käskee peliIkkunan miinoittamaan ruudun [peliIkkuna.miinoita(x,y)]
+PeliIkkuna asettaa napin taustan punaiseksi [napisto[x][y].setBackground(Color.RED)]
+PeliIkkuna asettaa napin kuvaksi miinan kuvan [napisto[x][y].setIcon(miinaKuva)]
+NapinKuuntelija käskee peliIkkunaa näyttämään muutkin miinat [peliIkkuna.naytaMiinat()]
+peliIkkuna käy napiston läpi ja asettaa miinankuvat kaikkiin liputtamattomiin miinoihin
+Napinkuuntelija käskee peliIkkunaa lopettamaan pelin [peliIkkuna.gameOver()]
+peliIkkuna ilmoittaa pelin loppumisesta JOptionPanella
