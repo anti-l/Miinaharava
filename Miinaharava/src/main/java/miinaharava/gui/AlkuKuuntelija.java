@@ -21,6 +21,8 @@ public class AlkuKuuntelija implements ActionListener {
     private JTextField leveys, korkeus, miinoja;
     private JButton aloita, ohjeet, tulokset;
     private PeliIkkuna peliIkkuna;
+    private OhjeIkkuna ohjeIkkuna;
+    private TulosIkkuna tulosIkkuna;
 
     /**
      * Konstruktori, joka saa parametreinään AlkuIkkunan komponenttien sisällön.
@@ -71,12 +73,12 @@ public class AlkuKuuntelija implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == ohjeet) {
-            System.out.println("Ohjeita kaivataan.");
-            JOptionPane.showMessageDialog(null, "Paina nappuloita.\n[PLACEHOLDER]", "Miinaharava", JOptionPane.INFORMATION_MESSAGE);
+            ohjeIkkuna = new OhjeIkkuna();
+            ohjeIkkuna.run();
         }
         if (ae.getSource() == tulokset) {
-            System.out.println("Tulokset?");
-            JOptionPane.showMessageDialog(null, "Paras tulos: helppo: 11 sec.\n[PLACEHOLDER]", "Miinaharava", JOptionPane.INFORMATION_MESSAGE);
+            tulosIkkuna = new TulosIkkuna(sovelluslogiikka);
+            tulosIkkuna.run();
         }
         if (ae.getSource() == aloita) {
             if (vaikea.isSelected()) {
@@ -108,7 +110,7 @@ public class AlkuKuuntelija implements ActionListener {
                 this.sovelluslogiikka.luoRuudukko();
             }
             peliIkkuna = new PeliIkkuna(sovelluslogiikka);
-//            System.out.println(sovelluslogiikka.getRuudukko());     // Debuggausta ja testejä varten
+            //System.out.println(sovelluslogiikka.getRuudukko());     // Debuggausta ja testejä varten
             peliIkkuna.run();
         }
     }

@@ -162,7 +162,12 @@ public class PeliIkkuna implements Runnable {
      * @param aika Pelin voittamiseen kulunut aika sekunneissa.
      */
     public void peliVoitettu(long aika) {
-        JOptionPane.showMessageDialog(null, "Onneksi olkoon, voitit pelin!\nAika: " + aika + " sekuntia.", "Miinaharava", JOptionPane.INFORMATION_MESSAGE, lippuKuva);
+        if (sovelluslogiikka.paaseekoListalle() == false) {
+            JOptionPane.showMessageDialog(null, "Onneksi olkoon, voitit pelin!\nAika: " + aika + " sekuntia.", "Miinaharava", JOptionPane.INFORMATION_MESSAGE, lippuKuva);
+        } else {
+            String nimi = JOptionPane.showInputDialog(null, "Onneksi olkoon, voitit pelin ja pääsit parhaiden tulosten listalle! \nAikasi oli " + aika + " sekuntia.\n\nAnna nimesi:", "Miinaharava", JOptionPane.INFORMATION_MESSAGE);
+            sovelluslogiikka.sijoitaTulos((int) aika, nimi);
+        }
     }
     
     /**

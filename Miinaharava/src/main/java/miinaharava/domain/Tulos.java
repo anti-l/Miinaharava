@@ -5,7 +5,7 @@ package miinaharava.domain;
  *
  * @author Antti
  */
-public class Tulos implements Comparable {
+public class Tulos implements Comparable<Tulos> {
 
     private int aika;
     private String nimi;
@@ -49,14 +49,21 @@ public class Tulos implements Comparable {
      * @return Kokonaisluku -1, 0 tai 1.
      */
     @Override
-    public int compareTo(Object toinen) {
+    public int compareTo(Tulos toinen) {
         Tulos tulos = (Tulos) toinen;
         if (tulos.getAika() < this.aika) {
-            return -1;
-        } else if (tulos.getAika() > this.aika) {
             return 1;
+        } else if (tulos.getAika() > this.aika) {
+            return -1;
         }
         return 0;
     }
 
+    /**
+     * Metodi palauttaa tämän tuloksen ajan sekä tekijän nimen.
+     * @return Palauttaa merkkijonon muotoa <aika>:<nimi>
+     */
+    public String toString() {
+        return "" + this.aika + ":" + this.nimi;
+    }
 }

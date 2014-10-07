@@ -21,12 +21,14 @@ public class Sovelluslogiikka {
     private long alkuAika = 0;
     private long loppuAika = 0;
     private boolean peliLoppui;
+    private HuippuTulokset huippuTulokset;
 
     /**
      * Konstruktori, muu toiminnallisuus viety muihin metodeihin. Tätä tuskin
      * enää edes tarvitaan.
      */
     public Sovelluslogiikka() {
+        huippuTulokset = new HuippuTulokset();
     }
 
     /**
@@ -217,4 +219,43 @@ public class Sovelluslogiikka {
         return kulunutAikaSekunneissa;
     }
 
+    /**
+     * Palauttaa tämän peli-instanssin huipputulokset-ilmentymän.
+     * @return käytössä oleva huipputulokset-olio.
+     */
+    public HuippuTulokset getHuippuTulokset() {
+        return this.huippuTulokset;
+    }
+    
+    /**
+     * Testataan, pääseekö tällä tuloksella huipputulosten listalle.
+     * @return true, jos pääsee, false, jos ei.
+     */
+    public boolean paaseekoListalle() {
+        if (ruudukko.getLeveys() == 10 && ruudukko.getKorkeus() == 10 && ruudukko.getMiinoja() == 10) {
+            // Helppo vaikeustaso
+            return huippuTulokset.tarkastaHelppoTulos((int) getPelinKesto());
+        } else if (ruudukko.getLeveys() == 15 && ruudukko.getKorkeus() == 15 && ruudukko.getMiinoja() == 35) {
+            // Keskivaikea vaikeustaso
+            return huippuTulokset.tarkastaMediumTulos((int) getPelinKesto());
+        } else if (ruudukko.getLeveys() == 20 && ruudukko.getKorkeus() == 20 && ruudukko.getMiinoja() == 80) {
+            // Vaikea vaikeustaso
+            return huippuTulokset.tarkastaVaikeaTulos((int) getPelinKesto());
+        }
+        return false;
+    }
+    
+    
+    public void sijoitaTulos(int aika, String nimi) {
+        if (ruudukko.getLeveys() == 10 && ruudukko.getKorkeus() == 10 && ruudukko.getMiinoja() == 10) {
+            // Helppo vaikeustaso
+            huippuTulokset.sijoitaHelppoTulos(aika, nimi);
+        } else if (ruudukko.getLeveys() == 15 && ruudukko.getKorkeus() == 15 && ruudukko.getMiinoja() == 35) {
+            // Keskivaikea vaikeustaso
+            huippuTulokset.sijoitaMediumTulos(aika, nimi);
+        } else if (ruudukko.getLeveys() == 20 && ruudukko.getKorkeus() == 20 && ruudukko.getMiinoja() == 80) {
+            // Vaikea vaikeustaso
+            huippuTulokset.sijoitaVaikeaTulos(aika, nimi);
+        }
+    }
 }
