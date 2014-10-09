@@ -1,5 +1,6 @@
 package miinaharava.sovelluslogiikka;
 
+import miinaharava.domain.Vaikeustaso;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,25 +25,20 @@ public class HuippuTuloksetTest {
     }
     
     @Test
-    public void tulostaHelpotTest() {
-        tulokset.tulostaHelpot();
-    }
-    
-    @Test
     public void tarkastaHelppoTulosPaaseeListalle() {
-        boolean tarkastus = tulokset.tarkastaHelppoTulos(99);
+        boolean tarkastus = tulokset.tarkastaTulos(99, Vaikeustaso.HELPPO);
         assertEquals(true, tarkastus);
     }
     
     @Test
     public void tarkastaHelppoTulosEiPaaseListalle() {
-        boolean tarkastus = tulokset.tarkastaHelppoTulos(1000);
+        boolean tarkastus = tulokset.tarkastaTulos(1000, Vaikeustaso.HELPPO);
         assertEquals(false, tarkastus);
     }
     
     @Test
     public void sijoitaHelppoTulosTest() {
-        tulokset.sijoitaHelppoTulos(10, "Peksi");
+        tulokset.sijoitaTulos(10, "Peksi", Vaikeustaso.HELPPO);
     }
     
 }

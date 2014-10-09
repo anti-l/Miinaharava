@@ -22,6 +22,7 @@ public class Sovelluslogiikka {
     private long loppuAika = 0;
     private boolean peliLoppui;
     private HuippuTulokset huippuTulokset;
+    private Vaikeustaso vaikeustaso;
 
     /**
      * Konstruktori, muu toiminnallisuus viety muihin metodeihin. Tätä tuskin
@@ -44,6 +45,7 @@ public class Sovelluslogiikka {
         this.miinoja = ruudukko.getMiinoja();
         this.alkuAika = System.currentTimeMillis();
         this.peliLoppui = false;
+        this.vaikeustaso = Vaikeustaso.HELPPO;
     }
 
     /**
@@ -62,6 +64,22 @@ public class Sovelluslogiikka {
         this.miinoja = ruudukko.getMiinoja();
         this.alkuAika = System.currentTimeMillis();
         this.peliLoppui = false;
+    }
+    
+    /**
+     * Metodilla voidaan asettaa käynnissä olevan pelin vaikeustaso.
+     * @param vaikeustaso Enum Vaikeustaso - HELPPO, MEDIUM, VAIKEA, CUSTOM
+     */
+    public void setVaikeustaso(Vaikeustaso vaikeustaso) {
+        this.vaikeustaso = vaikeustaso;
+    }
+    
+    /**
+     * Metodi kertoo, mikä on pelin nykyinen vaikeustaso.
+     * @return Enum Vaikeustaso - HELPPO, MEDIUM, VAIKEA, CUSTOM
+     */
+    public Vaikeustaso getVaikeustaso() {
+        return this.vaikeustaso;
     }
 
     /**
@@ -232,30 +250,19 @@ public class Sovelluslogiikka {
      * @return true, jos pääsee, false, jos ei.
      */
     public boolean paaseekoListalle() {
-        if (ruudukko.getLeveys() == 10 && ruudukko.getKorkeus() == 10 && ruudukko.getMiinoja() == 10) {
-            // Helppo vaikeustaso
-            return huippuTulokset.tarkastaHelppoTulos((int) getPelinKesto());
-        } else if (ruudukko.getLeveys() == 15 && ruudukko.getKorkeus() == 15 && ruudukko.getMiinoja() == 35) {
-            // Keskivaikea vaikeustaso
-            return huippuTulokset.tarkastaMediumTulos((int) getPelinKesto());
-        } else if (ruudukko.getLeveys() == 20 && ruudukko.getKorkeus() == 20 && ruudukko.getMiinoja() == 80) {
-            // Vaikea vaikeustaso
-            return huippuTulokset.tarkastaVaikeaTulos((int) getPelinKesto());
-        }
-        return false;
+        return huippuTulokset.tarkastaTulos((int) getPelinKesto(), vaikeustaso);
     }
     
-    
+    /**
+     * Kun paaseekoListalle() on ilmoittanut, että tulos on tarpeeksi hyvä
+     * huipputulosten listalle, tämä metodi käskee HuippuTuloksia kirjoittamaan
+     * nimen ja ajan oikealle listalle oikeaan paikkaan.
+     * @param aika Pelin voittamiseen kulunut aika.
+     * @param nimi Pelaajan nimi.
+     */
     public void sijoitaTulos(int aika, String nimi) {
-        if (ruudukko.getLeveys() == 10 && ruudukko.getKorkeus() == 10 && ruudukko.getMiinoja() == 10) {
-            // Helppo vaikeustaso
-            huippuTulokset.sijoitaHelppoTulos(aika, nimi);
-        } else if (ruudukko.getLeveys() == 15 && ruudukko.getKorkeus() == 15 && ruudukko.getMiinoja() == 35) {
-            // Keskivaikea vaikeustaso
-            huippuTulokset.sijoitaMediumTulos(aika, nimi);
-        } else if (ruudukko.getLeveys() == 20 && ruudukko.getKorkeus() == 20 && ruudukko.getMiinoja() == 80) {
-            // Vaikea vaikeustaso
-            huippuTulokset.sijoitaVaikeaTulos(aika, nimi);
-        }
+        huippuTulokset.sijoitaTulos(aika, nimi, this.vaikeustaso);
     }
+    
+    
 }

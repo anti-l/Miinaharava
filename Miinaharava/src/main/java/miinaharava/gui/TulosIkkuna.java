@@ -1,20 +1,19 @@
 package miinaharava.gui;
 
-import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import miinaharava.domain.Tulos;
 import miinaharava.sovelluslogiikka.Sovelluslogiikka;
 
 /**
- *
+ * TulosIkkunalla näytetään käyttäjälle pelin parhaat tulokset. Itse tulokset
+ * saadaan HuippuTulokset-luokasta, TulosIkkuna koostaa niistä käyttäjälle
+ * esitettävän version.
  * @author Antti
  */
 public class TulosIkkuna implements Runnable {
@@ -24,6 +23,13 @@ public class TulosIkkuna implements Runnable {
     private Sovelluslogiikka sovlog;
     private ArrayList<Tulos> helppoTilasto, mediumTilasto, vaikeaTilasto;
     
+    
+    /**
+     * Konstruktori, joka saa parametrinä pelin sovelluslogiikan. Tämä mahdollistaa
+     * ikkunan integroinnin muuhun projektiin. Konstruktori hakee pelin parhaat
+     * ajat ja tallettaa ne omaan attribuuttiinsa.
+     * @param sovelluslogiikka Käynnissä olevan pelin logiikka.
+     */
     public TulosIkkuna(Sovelluslogiikka sovelluslogiikka) {
         sovlog = sovelluslogiikka;
         helppoTilasto = sovlog.getHuippuTulokset().getHelpot();
@@ -31,84 +37,55 @@ public class TulosIkkuna implements Runnable {
         vaikeaTilasto = sovlog.getHuippuTulokset().getVaikeat();
     }
     
+    /**
+     * Metodi luo ikkunan komponentit.
+     * @param container Käytössä olevan ikkunan sisältö.
+     */
     public void luoKomponentit(Container container) {
-        container.setLayout(new BorderLayout());
-
-        JPanel otsikot = new JPanel();
-        otsikot.setLayout(new GridLayout(1,3));
-        JLabel otsikkoHelppo = new JLabel("HELPPO");
-        JLabel otsikkoMedium = new JLabel("KESKIVAIKEA");
-        JLabel otsikkoVaikea = new JLabel("VAIKEA");
-        otsikkoHelppo.setHorizontalAlignment(SwingConstants.CENTER);
-        otsikkoMedium.setHorizontalAlignment(SwingConstants.CENTER);
-        otsikkoVaikea.setHorizontalAlignment(SwingConstants.CENTER);
-        otsikot.add(otsikkoHelppo);
-        otsikot.add(otsikkoMedium);
-        otsikot.add(otsikkoVaikea);
-        container.add(otsikot, BorderLayout.PAGE_START);
-        
-        helppo = new JPanel();
-        medium = new JPanel();
-        vaikea = new JPanel();
-        
-        helppo.setLayout(new GridLayout(11, 3));
-        medium.setLayout(new GridLayout(11, 3));
-        vaikea.setLayout(new GridLayout(11, 3));
-        
-
-        helppo.add(new JLabel("Sija"));
-        helppo.add(new JLabel("Nimi"));
-        helppo.add(new JLabel("Aika"));
-        int jarjestysLuku = 1;
-        for (Tulos tulos : helppoTilasto) {
-            helppo.add(new JLabel(jarjestysLuku + "."));
-            helppo.add(new JLabel(tulos.getNimi()));
-            helppo.add(new JLabel("" + tulos.getAika()));
-            jarjestysLuku++;
-        }
-        
-        medium.add(new JLabel("Sija"));
-        medium.add(new JLabel("Nimi"));
-        medium.add(new JLabel("Aika"));
-        jarjestysLuku = 1;
-        for (Tulos tulos : mediumTilasto) {
-            medium.add(new JLabel(jarjestysLuku + "."));
-            medium.add(new JLabel(tulos.getNimi()));
-            medium.add(new JLabel("" + tulos.getAika()));
-            jarjestysLuku++;
-        }
-        
-        vaikea.add(new JLabel("Sija"));
-        vaikea.add(new JLabel("Nimi"));
-        vaikea.add(new JLabel("Aika"));
-        jarjestysLuku = 1;
-        for (Tulos tulos : vaikeaTilasto) {
-            vaikea.add(new JLabel(jarjestysLuku + "."));
-            vaikea.add(new JLabel(tulos.getNimi()));
-            vaikea.add(new JLabel("" + tulos.getAika()));
-            jarjestysLuku++;
-        }
-        
-        JPanel tulokset = new JPanel();
-        tulokset.setLayout(new GridLayout(1,3));
-        tulokset.add(helppo);
-        tulokset.add(medium);
-        tulokset.add(vaikea);
-        
+        JLabel tulokset = new JLabel(luoTulosTaulukko());
         container.add(tulokset);
-        
     }
     
+    /**
+     * Metodi, joka luo TulosIkkunan esitettävän osan ja näyttää sen käyttäjälle.
+     */
     @Override
     public void run() {
         frame = new JFrame("Miinaharavan huipputulokset");
-        frame.setPreferredSize(new Dimension(600, 500));
+        frame.setPreferredSize(new Dimension(570, 300));
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         
         luoKomponentit(frame.getContentPane());
         
         frame.pack();
         frame.setVisible(true);
+    }
+    
+    /**
+     * Metodi, jonka vastuulla on luoda tulostaulukko (teksti) TulosIkkunaan.
+     * Metodi hakee parhaat tulokset kolmeen eri pelimoodiin HuippuTuloksista
+     * ja koostaa niistä selkeän merkkijonoesityksen, joka voidaan näyttää
+     * TulosIkkunassa.
+     * @return HTML-muodossa oleva tulostaulukko merkkijonona.
+     */
+    public String luoTulosTaulukko() {
+        String tulokset = "<html><body><div align=center><table border=1 cellspacing=0 cellpadding=2 width='550'><tr><th>HELPPO</th><th>KESKIVAIKEA</th><th>VAIKEA</th></tr>";
+        String tuloksetHelppo = "<table border=0 width=175><tr><th>Sija</th><th>Nimi</th><th>Aika</th></tr>";
+        String tuloksetMedium = "<table border=0 width=175><tr><th>Sija</th><th>Nimi</th><th>Aika</th></tr>";
+        String tuloksetVaikea = "<table border=0 width=175><tr><th>Sija</th><th>Nimi</th><th>Aika</th></tr>";
+
+        for (int i = 0; i < 10; i++) {
+            tuloksetHelppo += "<tr><td align=center>" + (i+1) + ".</td><td>" + helppoTilasto.get(i).getNimi() + "</td><td align=center>" + helppoTilasto.get(i).getAika() + "</td></tr>";
+            tuloksetMedium += "<tr><td align=center>" + (i+1) + ".</td><td>" + mediumTilasto.get(i).getNimi() + "</td><td align=center>" + mediumTilasto.get(i).getAika() + "</td></tr>";
+            tuloksetVaikea += "<tr><td align=center>" + (i+1) + ".</td><td>" + vaikeaTilasto.get(i).getNimi() + "</td><td align=center>" + vaikeaTilasto.get(i).getAika() + "</td></tr>";
+        }
+        tuloksetHelppo += "</table>";
+        tuloksetMedium += "</table>";
+        tuloksetVaikea += "</table>";
+        
+        tulokset += "<tr><td>" + tuloksetHelppo + "</td><td>" + tuloksetMedium + "</td><td>" + tuloksetVaikea + "</td></tr></table></div></body></html>";
+        
+        return tulokset;
     }
     
 }

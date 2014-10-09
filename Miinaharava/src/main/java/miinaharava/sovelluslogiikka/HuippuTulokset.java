@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
+import miinaharava.domain.Vaikeustaso;
 
 /**
  * HuippuTulokset on luokka, joka pitää huolta pelin pistetilastosta. Luokka
@@ -93,16 +94,11 @@ public class HuippuTulokset {
         }
 
         // Siirretään tilasto parempaan tietorakenteeseen.
-        /**/
         for (int i = 0; i < 20; i += 2) {
-            Tulos tulos = new Tulos(Integer.parseInt(helppoHuiput[i]), helppoHuiput[i + 1]);
-            helppoTilasto.add(tulos);
+            helppoTilasto.add(new Tulos(Integer.parseInt(helppoHuiput[i]), helppoHuiput[i + 1]));
             mediumTilasto.add(new Tulos(Integer.parseInt(mediumHuiput[i]), mediumHuiput[i + 1]));
             vaikeaTilasto.add(new Tulos(Integer.parseInt(vaikeaHuiput[i]), vaikeaHuiput[i + 1]));
         }
-        /**/
-//        tulostaHelpot();
-
     }
 
     /**
@@ -139,60 +135,33 @@ public class HuippuTulokset {
     }
 
     /**
-     * Testimetodi. Tulostaa helpon vaikeustason tulokset.
+     * Metodi tarkastaa, pääseekö peliin käytetyllä ajalla tietyllä vaikeustasolla
+     * pelin tuloslistalle.
+     * @param aika Pelin voittamiseen kulunut aika.
+     * @param vaikeustaso Enum Vaikeustaso
+     * @return true, jos pääsee top 10:een; false, jos ei.
      */
-    public void tulostaHelpot() {
-        for (int i = 0; i < 10; i++) {
-            Tulos t = helppoTilasto.get(i);
-            System.out.println((i + 1) + ". " + t.getNimi() + ": " + t.getAika());
+    public boolean tarkastaTulos(int aika, Vaikeustaso vaikeustaso) {
+        if (vaikeustaso == Vaikeustaso.HELPPO) {
+            if (helppoTilasto.get(9).getAika() < aika) {
+                return false;
+            }
+            return true;
+        } else if (vaikeustaso == Vaikeustaso.KESKIVAIKEA) {
+            if (mediumTilasto.get(9).getAika() < aika) {
+                return false;
+            }
+            return true;
+        } else if (vaikeustaso == Vaikeustaso.VAIKEA) {
+            if (vaikeaTilasto.get(9).getAika() < aika) {
+                return false;
+            }
+            return true;
         }
+        return false;
     }
 
-    /**
-     * Metodi tarkastaa, onko pelin suorittamiseen kulunut aika niin hyvä, että
-     * se mahtuu parhaiden tulosten listalle helpolla vaikeustasolla.
-     *
-     * @param aika Pelin voittamiseen kulunut aika
-     * @return true, jos aika ansaitsee paikan parhaiden tulosten listalla
-     */
-    public boolean tarkastaHelppoTulos(int aika) {
-        // Jos tilastossa on jo 10 nopeampaa aikaa, palautetaan false
-        if (helppoTilasto.get(9).getAika() < aika) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Metodi tarkastaa, onko pelin suorittamiseen kulunut aika niin hyvä, että
-     * se mahtuu parhaiden tulosten listalle keskivaikealla vaikeustasolla.
-     *
-     * @param aika Pelin voittamiseen kulunut aika
-     * @return true, jos aika ansaitsee paikan parhaiden tulosten listalla
-     */
-    public boolean tarkastaMediumTulos(int aika) {
-        // Jos tilastossa on jo 10 nopeampaa aikaa, palautetaan false
-        if (mediumTilasto.get(9).getAika() < aika) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Metodi tarkastaa, onko pelin suorittamiseen kulunut aika niin hyvä, että
-     * se mahtuu parhaiden tulosten listalle vaikealla vaikeustasolla.
-     *
-     * @param aika Pelin voittamiseen kulunut aika
-     * @return true, jos aika ansaitsee paikan parhaiden tulosten listalla
-     */
-    public boolean tarkastaVaikeaTulos(int aika) {
-        // Jos tilastossa on jo 10 nopeampaa aikaa, palautetaan false
-        if (vaikeaTilasto.get(9).getAika() < aika) {
-            return false;
-        }
-        return true;
-    }
-
+    
     /**
      * Metodi sijoittaa ajan listalle ja siirtää huonompia aikoja listalla
      * alaspäin. Lopuksi talletetaan tulokset tiedostoon kutsumalla
@@ -200,73 +169,45 @@ public class HuippuTulokset {
      *
      * @param aika Pelin voittamiseen kulunut aika
      * @param nimi Pelaajan nimi
+     * @param vaikeustaso Enum Vaikeustaso - HELPPO, KESKIVAIKEA, VAIKEA
      */
-    public void sijoitaHelppoTulos(int aika, String nimi) {
+    public void sijoitaTulos(int aika, String nimi, Vaikeustaso vaikeustaso) {
+        ArrayList<Tulos> tulosTilasto = new ArrayList();
+        if (vaikeustaso == Vaikeustaso.HELPPO) {
+            tulosTilasto = helppoTilasto;
+        } else if (vaikeustaso == Vaikeustaso.KESKIVAIKEA) {
+            tulosTilasto = mediumTilasto;
+        } else if (vaikeustaso == Vaikeustaso.VAIKEA) {
+            tulosTilasto = vaikeaTilasto;
+        } else {
+            return;
+        }
+        
         Tulos uusiTulos = new Tulos(aika, nimi);
         int sija = Integer.MAX_VALUE;
         for (int i = 0; i < 10; i++) {
-            if (aika < helppoTilasto.get(i).getAika()) {
+            if (aika < tulosTilasto.get(i).getAika()) {
                 sija = i;
                 break;
             }
         }
-        helppoTilasto.add(uusiTulos);
-        Collections.sort(helppoTilasto);
-        while (helppoTilasto.size() > 10) {
-            helppoTilasto.remove(10);
+        tulosTilasto.add(uusiTulos);
+        Collections.sort(tulosTilasto);
+        while (tulosTilasto.size() > 10) {
+            tulosTilasto.remove(10);
         }
+        
+        if (vaikeustaso == Vaikeustaso.HELPPO) {
+            helppoTilasto = tulosTilasto;
+        } else if (vaikeustaso == Vaikeustaso.KESKIVAIKEA) {
+            mediumTilasto = tulosTilasto;
+        } else if (vaikeustaso == Vaikeustaso.VAIKEA) {
+            vaikeaTilasto = tulosTilasto;
+        }
+        
         talleta();
     }
 
-    /**
-     * Metodi sijoittaa ajan listalle ja siirtää huonompia aikoja listalla
-     * alaspäin. Lopuksi talletetaan tulokset tiedostoon kutsumalla
-     * talleta()-metodia.
-     *
-     * @param aika Pelin voittamiseen kulunut aika
-     * @param nimi Pelaajan nimi
-     */
-    public void sijoitaMediumTulos(int aika, String nimi) {
-        Tulos uusiTulos = new Tulos(aika, nimi);
-        int sija = Integer.MAX_VALUE;
-        for (int i = 0; i < 10; i++) {
-            if (aika < mediumTilasto.get(i).getAika()) {
-                sija = i;
-                break;
-            }
-        }
-        mediumTilasto.add(uusiTulos);
-        Collections.sort(mediumTilasto);
-        while (mediumTilasto.size() > 10) {
-            mediumTilasto.remove(10);
-        }
-        talleta();
-    }
-
-    /**
-     * Metodi sijoittaa ajan listalle ja siirtää huonompia aikoja listalla
-     * alaspäin. Lopuksi talletetaan tulokset tiedostoon kutsumalla
-     * talleta()-metodia.
-     *
-     * @param aika Pelin voittamiseen kulunut aika
-     * @param nimi Pelaajan nimi
-     */
-    public void sijoitaVaikeaTulos(int aika, String nimi) {
-        Tulos uusiTulos = new Tulos(aika, nimi);
-        int sija = Integer.MAX_VALUE;
-        for (int i = 0; i < 10; i++) {
-            if (aika < vaikeaTilasto.get(i).getAika()) {
-                sija = i;
-                break;
-            }
-        }
-        vaikeaTilasto.add(uusiTulos);
-        Collections.sort(vaikeaTilasto);
-        while (vaikeaTilasto.size() > 10) {
-            vaikeaTilasto.remove(10);
-        }
-        talleta();
-    }
 
     /**
      * Metodi, joka kirjoittaa päivitetyt tulokset kaikista vaikeustasoista
@@ -285,9 +226,9 @@ public class HuippuTulokset {
         for (Tulos t : vaikeaTilasto) {
             vaikeat += t + ":";
         }
-        helpot.subSequence(0, helpot.length() - 1);
-        mediumit.subSequence(0, mediumit.length() - 1);
-        vaikeat.subSequence(0, vaikeat.length() - 1);
+        helpot = (String) helpot.subSequence(0, helpot.length() - 1);
+        mediumit = (String) mediumit.subSequence(0, mediumit.length() - 1);
+        vaikeat = (String) vaikeat.subSequence(0, vaikeat.length() - 1);
 
         try {
             kirjoittaja = new FileWriter(tiedosto);

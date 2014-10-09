@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import miinaharava.domain.Vaikeustaso;
 import miinaharava.sovelluslogiikka.Sovelluslogiikka;
 
 /**
@@ -82,10 +83,13 @@ public class AlkuKuuntelija implements ActionListener {
         }
         if (ae.getSource() == aloita) {
             if (vaikea.isSelected()) {
+                this.sovelluslogiikka.setVaikeustaso(Vaikeustaso.VAIKEA);
                 this.sovelluslogiikka.luoRuudukko(20, 20, 80);
             } else if (medium.isSelected()) {
+                this.sovelluslogiikka.setVaikeustaso(Vaikeustaso.KESKIVAIKEA);
                 this.sovelluslogiikka.luoRuudukko(15, 15, 35);
             } else if (custom.isSelected()) {
+                this.sovelluslogiikka.setVaikeustaso(Vaikeustaso.CUSTOM);
                 int customLeveys, customKorkeus, customMiinat;
                 try {
                     customLeveys  = Integer.parseInt(leveys.getText());
@@ -107,6 +111,7 @@ public class AlkuKuuntelija implements ActionListener {
                 }
                 this.sovelluslogiikka.luoRuudukko(customKorkeus, customLeveys, customMiinat);
             } else {
+                this.sovelluslogiikka.setVaikeustaso(Vaikeustaso.HELPPO);
                 this.sovelluslogiikka.luoRuudukko();
             }
             peliIkkuna = new PeliIkkuna(sovelluslogiikka);
