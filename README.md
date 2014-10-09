@@ -15,13 +15,13 @@ Kun pelaaja osuu miinaan, peli loppuu, ja miinojen paikat näytetään.
 Jos aikaa ja tarmoa riittää, seuraavia toiminnallisuuksia on myös tarkoitus
 toteuttaa:
 
-* Kello - Pelin pelaamiseen kulutettu aika mitataan
+* Kello - Pelin pelaamiseen kulutettu aika mitataan [Edit: toteutettu]
 
-* Tuloslista - parhaiden tulosten lista (tekstitiedostoon tallennettuna?)
+* Tuloslista - parhaiden tulosten lista [Edit: toteutettu]
 
-* Eri kokoisia pelikenttiä - muutama vaihtoehto 10x10-ruudukolle
+* Eri kokoisia pelikenttiä - muutama vaihtoehto 10x10-ruudukolle [Edit: toteutettu]
 
-* Custom-pelikentät
+* Custom-pelikentät [Edit: toteutettu]
 
 
 
