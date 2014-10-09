@@ -34,12 +34,12 @@ public class TulosTest {
     
     @Test
     public void vertaaHuonompaanTest() {
-        assertEquals(1, tulos.compareTo(huonompi));
+        assertEquals(-1, tulos.compareTo(huonompi));
     }
     
     @Test
     public void vertaaParempaanTest() {
-        assertEquals(-1, tulos.compareTo(parempi));
+        assertEquals(1, tulos.compareTo(parempi));
     }
     
     @Test

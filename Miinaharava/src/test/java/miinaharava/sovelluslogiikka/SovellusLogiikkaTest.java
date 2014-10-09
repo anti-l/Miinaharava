@@ -71,8 +71,9 @@ public class SovellusLogiikkaTest {
         sovlog.getRuudukko().getRuutu(0,1).setMiina();
         sovlog.getRuudukko().getRuutu(1,0).setMiina();
         sovlog.getRuudukko().getRuutu(1,1).setMiina();
+        sovlog.getRuudukko().asetaViereistenMiinojenMaarat();
         String teksti = sovlog.ruudunTeksti(0, 0);
-        assertEquals("", teksti);
+        assertEquals("3", teksti);
     }
     
     @Test
@@ -83,6 +84,7 @@ public class SovellusLogiikkaTest {
         sovlog.getRuudukko().getRuutu(0,1).poistaMiina();
         sovlog.getRuudukko().getRuutu(1,0).poistaMiina();
         sovlog.getRuudukko().getRuutu(1,1).poistaMiina();
+        sovlog.getRuudukko().asetaViereistenMiinojenMaarat();
         String teksti = sovlog.ruudunTeksti(0, 0);
         assertEquals("", teksti);
     }
@@ -110,4 +112,25 @@ public class SovellusLogiikkaTest {
         sovlog.paljastaTyhjat(0,0);
     }
     
+    @Test
+    public void setVaikeusTasoTest() {
+        sovlog = new Sovelluslogiikka();
+        sovlog.luoRuudukko();
+        sovlog.setVaikeustaso(Vaikeustaso.HELPPO);
+        assertEquals(Vaikeustaso.HELPPO, sovlog.getVaikeustaso());
+    }
+    
+    @Test
+    public void getPelinKestoTest() {
+        sovlog = new Sovelluslogiikka();
+        long aika = sovlog.getPelinKesto();
+        assertEquals(0, aika);
+    }
+    
+    @Test
+    public void getTuloksetTest() {
+        sovlog = new Sovelluslogiikka();
+        HuippuTulokset tulokset = sovlog.getHuippuTulokset();
+        
+    }
 }

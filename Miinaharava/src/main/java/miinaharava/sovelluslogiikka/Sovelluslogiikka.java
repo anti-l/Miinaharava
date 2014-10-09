@@ -129,7 +129,7 @@ public class Sovelluslogiikka {
         String ruudunTeksti = "";
         Ruutu tamaRuutu = ruudukko.getRuutu(x, y);
         if (tamaRuutu.onkoTyhja()) {
-            return ruudunTeksti;
+            return "";
         } else if (tamaRuutu.getViereiset() > 0) {
             ruudunTeksti = "" + tamaRuutu.getViereiset();
         }
