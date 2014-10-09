@@ -1,13 +1,14 @@
 package miinaharava.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import miinaharava.domain.Tulos;
 import miinaharava.sovelluslogiikka.Sovelluslogiikka;
@@ -21,28 +22,40 @@ public class TulosIkkuna implements Runnable {
     private JFrame frame;
     private JPanel helppo, medium, vaikea;
     private Sovelluslogiikka sovlog;
+    private ArrayList<Tulos> helppoTilasto, mediumTilasto, vaikeaTilasto;
     
     public TulosIkkuna(Sovelluslogiikka sovelluslogiikka) {
-        this.sovlog = sovelluslogiikka;
+        sovlog = sovelluslogiikka;
+        helppoTilasto = sovlog.getHuippuTulokset().getHelpot();
+        mediumTilasto = sovlog.getHuippuTulokset().getMediumit();
+        vaikeaTilasto = sovlog.getHuippuTulokset().getVaikeat();
     }
     
     public void luoKomponentit(Container container) {
-        container.setLayout(new GridLayout(1,3));
+        container.setLayout(new BorderLayout());
+
+        JPanel otsikot = new JPanel();
+        otsikot.setLayout(new GridLayout(1,3));
+        JLabel otsikkoHelppo = new JLabel("HELPPO");
+        JLabel otsikkoMedium = new JLabel("KESKIVAIKEA");
+        JLabel otsikkoVaikea = new JLabel("VAIKEA");
+        otsikkoHelppo.setHorizontalAlignment(SwingConstants.CENTER);
+        otsikkoMedium.setHorizontalAlignment(SwingConstants.CENTER);
+        otsikkoVaikea.setHorizontalAlignment(SwingConstants.CENTER);
+        otsikot.add(otsikkoHelppo);
+        otsikot.add(otsikkoMedium);
+        otsikot.add(otsikkoVaikea);
+        container.add(otsikot, BorderLayout.PAGE_START);
         
         helppo = new JPanel();
         medium = new JPanel();
         vaikea = new JPanel();
         
-        helppo.setLayout(new GridLayout(12,3));
-        medium.setLayout(new GridLayout(12,3));
-        vaikea.setLayout(new GridLayout(12,3));
-        ArrayList<Tulos> helppoTilasto = sovlog.getHuippuTulokset().getHelpot();
-        ArrayList<Tulos> mediumTilasto = sovlog.getHuippuTulokset().getMediumit();
-        ArrayList<Tulos> vaikeaTilasto = sovlog.getHuippuTulokset().getVaikeat();
+        helppo.setLayout(new GridLayout(11, 3));
+        medium.setLayout(new GridLayout(11, 3));
+        vaikea.setLayout(new GridLayout(11, 3));
         
-        helppo.add(new JLabel(""));
-        helppo.add(new JLabel("HELPPO"));
-        helppo.add(new JLabel(""));
+
         helppo.add(new JLabel("Sija"));
         helppo.add(new JLabel("Nimi"));
         helppo.add(new JLabel("Aika"));
@@ -54,9 +67,6 @@ public class TulosIkkuna implements Runnable {
             jarjestysLuku++;
         }
         
-        medium.add(new JLabel(""));
-        medium.add(new JLabel("KESKIVAIKEA"));
-        medium.add(new JLabel(""));
         medium.add(new JLabel("Sija"));
         medium.add(new JLabel("Nimi"));
         medium.add(new JLabel("Aika"));
@@ -68,9 +78,6 @@ public class TulosIkkuna implements Runnable {
             jarjestysLuku++;
         }
         
-        vaikea.add(new JLabel(""));
-        vaikea.add(new JLabel("VAIKEA"));
-        vaikea.add(new JLabel(""));
         vaikea.add(new JLabel("Sija"));
         vaikea.add(new JLabel("Nimi"));
         vaikea.add(new JLabel("Aika"));
@@ -82,9 +89,13 @@ public class TulosIkkuna implements Runnable {
             jarjestysLuku++;
         }
         
-        container.add(helppo);
-        container.add(medium);
-        container.add(vaikea);
+        JPanel tulokset = new JPanel();
+        tulokset.setLayout(new GridLayout(1,3));
+        tulokset.add(helppo);
+        tulokset.add(medium);
+        tulokset.add(vaikea);
+        
+        container.add(tulokset);
         
     }
     
