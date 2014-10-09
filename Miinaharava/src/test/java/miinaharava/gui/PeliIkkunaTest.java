@@ -29,6 +29,7 @@ public class PeliIkkunaTest {
         peli.run();
     }
     
+    /*
     @Test
     public void lopetaPeli() {
         sovlog = new Sovelluslogiikka();
@@ -42,4 +43,5 @@ public class PeliIkkunaTest {
         peli = new PeliIkkuna(sovlog);
         peli.peliVoitettu(5000);
     }
+    */
 }

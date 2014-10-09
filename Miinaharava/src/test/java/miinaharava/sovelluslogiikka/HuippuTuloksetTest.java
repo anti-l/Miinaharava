@@ -13,12 +13,13 @@ import org.junit.Test;
  */
 public class HuippuTuloksetTest {
     
-    HuippuTulokset tulokset;
+    HuippuTulokset tulokset = new HuippuTulokset();
 
     
     @Before
     public void setUp() {
         tulokset = new HuippuTulokset();
+        tulokset.luoUusiTiedosto();
     }
     
     @Test
@@ -73,4 +74,8 @@ public class HuippuTuloksetTest {
         assertEquals(999, vaikeat.get(9).getAika());
     }
     
+    @Test
+    public void talletaTest() {
+        tulokset.talleta();
+    }
 }
