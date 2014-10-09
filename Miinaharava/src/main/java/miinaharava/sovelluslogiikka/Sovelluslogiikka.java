@@ -8,7 +8,7 @@ import miinaharava.gui.PeliIkkuna;
 
 /**
  * Sovelluslogiikka on koko miinaharava-projektin selkäranka ja aivot. Koko
- * pelin sisältÃƒÂ¶ ja sen tapahtumat kulkevat tämän luokan kautta, se on
+ * pelin sisältö ja sen tapahtumat kulkevat tämän luokan kautta, se on
  * ensimmäinen asia mikä käynnistetään peliä avatessa.
  *
  * @author Antti
@@ -83,9 +83,9 @@ public class Sovelluslogiikka {
     }
 
     /**
-     * Palauttaa tÃ¤llÃ¤ hetkellÃ¤ kÃ¤ytÃ¶ssÃ¤ olevan Ruudukon.
+     * Palauttaa tällä hetkellä käytössä olevan Ruudukon.
      *
-     * @return KÃ¤ytÃ¶ssÃ¤ oleva Ruudukko.
+     * @return Käytössä oleva Ruudukko.
      */
     public Ruudukko getRuudukko() {
         return this.ruudukko;
@@ -93,8 +93,8 @@ public class Sovelluslogiikka {
 
     /**
      * Tätä metodia kutsutaan, kun pelaaja valitsee pelikentän ruudun. Metodi
-     * tarkastaa ruudun sisällÃƒÂ¶n, onko siinä miinaa, sekä montako miinaa
-     * lÃƒÂ¶ytyy viereisistä ruuduista. Pelin ensimmäisellä ruudun
+     * tarkastaa ruudun sisällön, onko siinä miinaa, sekä montako miinaa
+     * löytyy viereisistä ruuduista. Pelin ensimmäisellä ruudun
      * tarkistuskerralla laitetaan pelikello käyntiin.
      *
      * Jos osutaan miinaan, peli loppuu. Jos osutaan tyhjään ruutuun,
@@ -117,7 +117,7 @@ public class Sovelluslogiikka {
 
     /**
      * Tätä metodia kutsutaan, kun UI:ssa painetaan nappia ja katsotaan, mitä
-     * napin alta lÃƒÂ¶ytyy. Jos kyseessä ei ole miina, tämä metodi palauttaa
+     * napin alta löytyy. Jos kyseessä ei ole miina, tämä metodi palauttaa
      * joko tyhjän merkkijonon tyhjille ruuduille tai viereisten miinojen
      * määrän miinojen vieressä oleville ruuduille.
      *
@@ -144,7 +144,7 @@ public class Sovelluslogiikka {
      *
      * Metodi tarkastaa annetut koordinaatit ja käy läpi viereiset ruudut,
      * jonka jälkeen se kutsuu itseään uudelleen viereisille ruuduille.
-     * Vastaan tulleet tyhjät ruudut paljastetaan ja otetaan pois käytÃƒÂ¶stä.
+     * Vastaan tulleet tyhjät ruudut paljastetaan ja otetaan pois käytöstä.
      *
      * @param x tarkastettavan ruudun x-koordinaatti
      * @param y tarkastettavan ruudun y-koordinaatti

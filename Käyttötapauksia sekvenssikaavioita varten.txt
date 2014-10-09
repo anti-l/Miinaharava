@@ -41,10 +41,12 @@ NapinKuuntelija huomaa painalluksen, hakee sovelluslogiikalta ruudukon
 ruudukosta haetaan ruutu x,y -koordinaateista [sovlog.getRuudukko().getRuutu(x,y)]
 Pelaaja painoi vasempaa hiiren nappia, joten tarkastetaan onko ruutu liputettu [ruutu.getLiputettu() == false]
 sovelluslogiikka tarkastaa ruudun [sovelluslogiikka.tarkistaRuutu(x,y)]
+
 sovelluslogiikka hakee Ruudun Ruudukosta [Ruutu ruutu = this.ruudukko.getRuutu(x,y)]
 SovLog tarkistaa, onko ruudussa miinaa ruudulta [ruutu.onkoMiinaa()]
 SovLog säätää ruudun katsotuksi [ruudukko.getRuutu(x,y).katsoRuutu()]
 Sovlog tarkistaa, loppuuko peli voittoon
+
 NapinKuuntelija tarkistaa, onko ruudussa miinaa [sovlog.getRuudukko().getRuutu(x,y).onkoMiinaa()]
 NapinKuuntelija kertoo SovLogille pelin olevan ohi [sovlog.setPeliOhi()]
 NapinKuuntelija käskee peliIkkunan miinoittamaan ruudun [peliIkkuna.miinoita(x,y)]

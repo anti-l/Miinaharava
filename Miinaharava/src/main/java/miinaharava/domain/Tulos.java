@@ -61,7 +61,7 @@ public class Tulos implements Comparable<Tulos> {
 
     /**
      * Metodi palauttaa tämän tuloksen ajan sekä tekijän nimen.
-     * @return Palauttaa merkkijonon muotoa <aika>:<nimi>
+     * @return Palauttaa merkkijonon muotoa [aika]:[nimi]
      */
     public String toString() {
         return "" + this.aika + ":" + this.nimi;

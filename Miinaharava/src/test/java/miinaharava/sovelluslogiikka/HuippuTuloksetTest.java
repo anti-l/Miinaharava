@@ -1,11 +1,10 @@
 package miinaharava.sovelluslogiikka;
 
-import java.util.ArrayList;
-import miinaharava.domain.Tulos;
-import miinaharava.domain.Vaikeustaso;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
+import java.util.ArrayList;
+import miinaharava.domain.*;
 
 /**
  *
@@ -13,17 +12,11 @@ import org.junit.Test;
  */
 public class HuippuTuloksetTest {
     
-    HuippuTulokset tulokset = new HuippuTulokset();
+    private HuippuTulokset tulokset;
 
-    
     @Before
     public void setUp() {
         tulokset = new HuippuTulokset();
-        tulokset.luoUusiTiedosto();
-    }
-    
-    @Test
-    public void luoTiedostoTest() {
         tulokset.luoUusiTiedosto();
     }
     
@@ -53,7 +46,7 @@ public class HuippuTuloksetTest {
     
     @Test
     public void sijoitaHelppoTulosTest() {
-        tulokset.sijoitaTulos(10, "Peksi", Vaikeustaso.HELPPO);
+        tulokset.sijoitaTulos(90, "Peksi", Vaikeustaso.HELPPO);
     }
     
     @Test
@@ -64,13 +57,13 @@ public class HuippuTuloksetTest {
     
     @Test
     public void getMediumitTest() {
-        ArrayList<Tulos> mediumit = tulokset.getHelpot();
+        ArrayList<Tulos> mediumit = tulokset.getMediumit();
         assertEquals(999, mediumit.get(9).getAika());
     }
     
     @Test
     public void getVaikeatTest() {
-        ArrayList<Tulos> vaikeat = tulokset.getHelpot();
+        ArrayList<Tulos> vaikeat = tulokset.getVaikeat();
         assertEquals(999, vaikeat.get(9).getAika());
     }
     
@@ -78,4 +71,12 @@ public class HuippuTuloksetTest {
     public void talletaTest() {
         tulokset.talleta();
     }
+
+    @Test
+    public void luoTiedostoTest() {
+        tulokset.luoUusiTiedosto();
+        ArrayList<Tulos> vaikeat = tulokset.getVaikeat();
+        assertEquals("Anonymous", vaikeat.get(0).getNimi());
+    }
+    
 }

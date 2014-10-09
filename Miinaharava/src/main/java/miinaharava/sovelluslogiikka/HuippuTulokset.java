@@ -39,16 +39,16 @@ public class HuippuTulokset {
     /**
      * Metodi, joka palauttaa helpon vaikeustason pelitulokset.
      *
-     * @return ArrayList<Tulos> sisältäen helpon vaikeustason tulokset.
+     * @return ArrayList sisältäen helpon vaikeustason tulokset.
      */
     public ArrayList<Tulos> getHelpot() {
-        return helppoTilasto;
+        return this.helppoTilasto;
     }
 
     /**
      * Metodi, joka palauttaa keskivaikean vaikeustason pelitulokset.
      *
-     * @return ArrayList<Tulos> sisältäen keskivaikean vaikeustason tulokset.
+     * @return ArrayList sisältäen keskivaikean vaikeustason tulokset.
      */
     public ArrayList<Tulos> getMediumit() {
         return mediumTilasto;
@@ -57,7 +57,7 @@ public class HuippuTulokset {
     /**
      * Metodi, joka palauttaa vaikean vaikeustason pelitulokset.
      *
-     * @return ArrayList<Tulos> sisältäen vaikean vaikeustason tulokset.
+     * @return ArrayList sisältäen vaikean vaikeustason tulokset.
      */
     public ArrayList<Tulos> getVaikeat() {
         return vaikeaTilasto;
@@ -143,7 +143,7 @@ public class HuippuTulokset {
      */
     public boolean tarkastaTulos(int aika, Vaikeustaso vaikeustaso) {
         if (vaikeustaso == Vaikeustaso.HELPPO) {
-            if (helppoTilasto.get(9).getAika() < aika) {
+            if (aika > helppoTilasto.get(9).getAika()) {
                 return false;
             }
             return true;
