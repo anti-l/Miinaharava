@@ -93,11 +93,16 @@ public class HuippuTulokset {
             luoUusiTiedosto();
         }
 
-        // Siirretään tilasto parempaan tietorakenteeseen.
-        for (int i = 0; i < 20; i += 2) {
-            helppoTilasto.add(new Tulos(Integer.parseInt(helppoHuiput[i]), helppoHuiput[i + 1]));
-            mediumTilasto.add(new Tulos(Integer.parseInt(mediumHuiput[i]), mediumHuiput[i + 1]));
-            vaikeaTilasto.add(new Tulos(Integer.parseInt(vaikeaHuiput[i]), vaikeaHuiput[i + 1]));
+        // Siirretään tilasto parempaan tietorakenteeseen. Jos tiedoston sisältö
+        // on virheellinen, luodaan uusi.
+        try {
+            for (int i = 0; i < 20; i += 2) {
+                helppoTilasto.add(new Tulos(Integer.parseInt(helppoHuiput[i]), helppoHuiput[i + 1]));
+                mediumTilasto.add(new Tulos(Integer.parseInt(mediumHuiput[i]), mediumHuiput[i + 1]));
+                vaikeaTilasto.add(new Tulos(Integer.parseInt(vaikeaHuiput[i]), vaikeaHuiput[i + 1]));
+            }
+        } catch (NumberFormatException e) {
+            luoUusiTiedosto();
         }
     }
 
@@ -135,8 +140,9 @@ public class HuippuTulokset {
     }
 
     /**
-     * Metodi tarkastaa, pääseekö peliin käytetyllä ajalla tietyllä vaikeustasolla
-     * pelin tuloslistalle.
+     * Metodi tarkastaa, pääseekö peliin käytetyllä ajalla tietyllä
+     * vaikeustasolla pelin tuloslistalle.
+     *
      * @param aika Pelin voittamiseen kulunut aika.
      * @param vaikeustaso Enum Vaikeustaso
      * @return true, jos pääsee top 10:een; false, jos ei.
@@ -161,7 +167,6 @@ public class HuippuTulokset {
         return false;
     }
 
-    
     /**
      * Metodi sijoittaa ajan listalle ja siirtää huonompia aikoja listalla
      * alaspäin. Lopuksi talletetaan tulokset tiedostoon kutsumalla
@@ -182,7 +187,7 @@ public class HuippuTulokset {
         } else {
             return;
         }
-        
+
         Tulos uusiTulos = new Tulos(aika, nimi);
         int sija = Integer.MAX_VALUE;
         for (int i = 0; i < 10; i++) {
@@ -196,7 +201,7 @@ public class HuippuTulokset {
         while (tulosTilasto.size() > 10) {
             tulosTilasto.remove(10);
         }
-        
+
         if (vaikeustaso == Vaikeustaso.HELPPO) {
             helppoTilasto = tulosTilasto;
         } else if (vaikeustaso == Vaikeustaso.KESKIVAIKEA) {
@@ -204,10 +209,9 @@ public class HuippuTulokset {
         } else if (vaikeustaso == Vaikeustaso.VAIKEA) {
             vaikeaTilasto = tulosTilasto;
         }
-        
+
         talleta();
     }
-
 
     /**
      * Metodi, joka kirjoittaa päivitetyt tulokset kaikista vaikeustasoista
