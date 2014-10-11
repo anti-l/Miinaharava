@@ -113,6 +113,8 @@ public class HuippuTulokset {
      * sekuntia.
      */
     public void luoUusiTiedosto() {
+        /*
+        // Kirjoitetaan kolmelle riville 10 kertaa '999:Anonymous:'
         String helppo = "";
         String medium = "";
         String vaikea = "";
@@ -129,7 +131,9 @@ public class HuippuTulokset {
         }
         vaikea = vaikea.substring(0, vaikea.length() - 1);
         String kirjoitettava = helppo + "\n" + medium + "\n" + vaikea + "\n";
-
+        /**/
+        
+        String kirjoitettava = "999:Anonymous:999:Anonymous:999:Anonymous:999:Anonymous:999:Anonymous:999:Anonymous:999:Anonymous:999:Anonymous:999:Anonymous:999:Anonymous\n999:Anonymous:999:Anonymous:999:Anonymous:999:Anonymous:999:Anonymous:999:Anonymous:999:Anonymous:999:Anonymous:999:Anonymous:999:Anonymous\n999:Anonymous:999:Anonymous:999:Anonymous:999:Anonymous:999:Anonymous:999:Anonymous:999:Anonymous:999:Anonymous:999:Anonymous:999:Anonymous\n";
         try {
             kirjoittaja = new FileWriter(tiedosto);
             kirjoittaja.write(kirjoitettava);

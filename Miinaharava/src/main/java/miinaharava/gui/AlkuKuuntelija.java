@@ -109,6 +109,9 @@ public class AlkuKuuntelija implements ActionListener {
                     customMiinat = 10;
                     miinoja.setText("10");
                 }
+                if (customMiinat > customLeveys * customKorkeus) {
+                    customMiinat = customLeveys * customKorkeus;
+                }
                 this.sovelluslogiikka.luoRuudukko(customKorkeus, customLeveys, customMiinat);
             } else {
                 this.sovelluslogiikka.setVaikeustaso(Vaikeustaso.HELPPO);
