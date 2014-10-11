@@ -1,5 +1,6 @@
 package miinaharava.gui;
 
+import java.awt.event.MouseEvent;
 import miinaharava.sovelluslogiikka.Sovelluslogiikka;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,6 +35,7 @@ public class NapinKuuntelijaTest {
         sovlog = new Sovelluslogiikka();
         peli = new PeliIkkuna(sovlog);
         napinkuuntelija = new NapinKuuntelija(sovlog, peli, 0, 0);
+//        MouseEvent me = new MouseEvent(xxx);
 //        napinkuuntelija.mouseReleased(null);
     }
     

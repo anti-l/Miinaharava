@@ -44,11 +44,11 @@ public class Ruudukko {
         this.leveys = leveys;
         this.korkeus = korkeus;
         this.miinoja = miinoja;
-        if (leveys < 1) {
+        if (leveys <= 0) {
             this.leveys = 10;
-        } if (korkeus < 1) {
+        } if (korkeus <= 0) {
             this.korkeus = 10;
-        } if (miinoja < 1) {
+        } if (miinoja <= 0) {
             this.miinoja = 10;
         }
         ruudukko = new Ruutu[this.leveys][this.korkeus];

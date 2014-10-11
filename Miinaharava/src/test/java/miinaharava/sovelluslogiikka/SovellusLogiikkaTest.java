@@ -56,6 +56,7 @@ public class SovellusLogiikkaTest {
         sovlog.luoRuudukko();
         sovlog.getRuudukko().getRuutu(0,0).setMiina();
         sovlog.tarkistaRuutu(0, 0);
+        assertEquals(true, sovlog.getRuudukko().getRuutu(0,0).onkoMiinaa());
     }
     
     @Test
@@ -104,7 +105,14 @@ public class SovellusLogiikkaTest {
     public void paljastaTyhjatTest() {
         sovlog = new Sovelluslogiikka();
         sovlog.luoRuudukko(10, 10, 1);
+        sovlog.getRuudukko().getRuutu(0,0).poistaMiina();
+        sovlog.getRuudukko().getRuutu(0,1).poistaMiina();
+        sovlog.getRuudukko().getRuutu(1,0).poistaMiina();
+        sovlog.getRuudukko().getRuutu(1,1).poistaMiina();
+        sovlog.getRuudukko().asetaViereistenMiinojenMaarat();
         sovlog.paljastaTyhjat(0,0);
+        assertEquals(true, sovlog.getRuudukko().getRuutu(1, 1).getKatsottu());
+        
     }
     
     @Test
