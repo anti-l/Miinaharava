@@ -23,5 +23,5 @@ toteuttaa:
 
 * Custom-pelikentät [Edit: toteutettu]
 
-
+* Vihje-näppäin, joka näyttää yhden miinan paikan [Edit: toteutettu]
 
