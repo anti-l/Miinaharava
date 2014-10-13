@@ -227,7 +227,7 @@ public class Sovelluslogiikka {
     }
 
     /**
-     * Metodi, jolta voidaan kysyÃ¤, onko tÃ¤mÃ¤ peli jo asetettu loppunneeksi.
+     * Metodi, jolta voidaan kysyÃ¤, onko tämä peli jo asetettu loppunneeksi.
      */
     public void setPeliOhi() {
         loppuAika = System.currentTimeMillis();
@@ -246,7 +246,7 @@ public class Sovelluslogiikka {
     }
 
     /**
-     * Palauttaa tÃ¤mÃ¤n peli-instanssin huipputulokset-ilmentymÃ¤n.
+     * Palauttaa tämän peli-instanssin huipputulokset-ilmentymän.
      *
      * @return kÃ¤ytÃ¶ssÃ¤ oleva huipputulokset-olio.
      */
