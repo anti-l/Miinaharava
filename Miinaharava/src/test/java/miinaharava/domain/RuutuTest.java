@@ -27,12 +27,12 @@ public class RuutuTest {
     
     @Before
     public void setUp() {
-        ruutu = new Ruutu();
+        ruutu = new Ruutu(0,0);
     }
     
     @Test
     public void luoRuutu() {
-        Ruutu uusiRuutu = new Ruutu();
+        Ruutu uusiRuutu = new Ruutu(0,0);
         assertEquals(".", uusiRuutu.toString());
     }
     
@@ -100,20 +100,20 @@ public class RuutuTest {
     
     @Test
     public void onkoTyhjaTest() {
-        Ruutu tyhjaRuutu = new Ruutu();
+        Ruutu tyhjaRuutu = new Ruutu(0,0);
         assertEquals(true, tyhjaRuutu.onkoTyhja());
     }
     
     @Test
     public void onkoTyhjaJosMiinaTest() {
-        Ruutu miinaRuutu = new Ruutu();
+        Ruutu miinaRuutu = new Ruutu(0,0);
         miinaRuutu.setMiina();
         assertEquals(false, miinaRuutu.onkoTyhja());
     }
     
     @Test
     public void merkkijonoTesti1() {
-        Ruutu ruutu = new Ruutu();
+        Ruutu ruutu = new Ruutu(0,0);
         ruutu.setMiina();
         ruutu.setLiputettu();
         assertEquals("x", ruutu.toString());
@@ -121,14 +121,14 @@ public class RuutuTest {
     
     @Test
     public void merkkijonoTesti2() {
-        Ruutu ruutu = new Ruutu();
+        Ruutu ruutu = new Ruutu(0,0);
         ruutu.katsoRuutu();
         assertEquals("#", ruutu.toString());
     }
     
     @Test
     public void merkkijonoTesti3() {
-        Ruutu ruutu = new Ruutu();
+        Ruutu ruutu = new Ruutu(0,0);
         ruutu.setMiina();
         assertEquals("X", ruutu.toString());
     }

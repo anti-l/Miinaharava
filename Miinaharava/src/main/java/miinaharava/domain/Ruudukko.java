@@ -1,5 +1,6 @@
 package miinaharava.domain;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -55,7 +56,7 @@ public class Ruudukko {
 
         for (int i = 0; i < this.leveys; i++) {
             for (int j = 0; j < this.korkeus; j++) {
-                ruudukko[i][j] = new Ruutu();
+                ruudukko[i][j] = new Ruutu(i, j);
             }
         }
         asetaMiinat(miinoja);
@@ -203,26 +204,57 @@ public class Ruudukko {
      * @return true, jos miinojen ja lippujen paikat täsmäävät, false, jos ei.
      */
     public boolean onkoMiinatLiputettu() {
-        boolean tasmaakoMiinojenJaLippujenPaikat = false;
-        boolean onnistuukoSilmukka = true;
+        int oikeinLiputetutMiinat = 0;
         for (int i = 0; i < this.leveys; i++) {
             for (int j = 0; j < this.korkeus; j++) {
-                if (ruudukko[i][j].getLiputettu()) {
-                    if (ruudukko[i][j].onkoMiinaa() == false) {
-                       onnistuukoSilmukka = false;
-                    }
-                }
-                if (ruudukko[i][j].onkoMiinaa() == true) {
-                    if (ruudukko[i][j].getLiputettu() == false) {
-                        onnistuukoSilmukka = false;
-                    }
+                if (ruudukko[i][j].getLiputettu() && ruudukko[i][j].onkoMiinaa()) {
+                    oikeinLiputetutMiinat++;
                 }
             }
         }
-        if (onnistuukoSilmukka) {
-            tasmaakoMiinojenJaLippujenPaikat = true;
+        if (oikeinLiputetutMiinat == miinoja) {
+            return true;
         }
-        return tasmaakoMiinojenJaLippujenPaikat;
+        return false;
+    }
+    
+    
+    /**
+     * Metodi palauttaa listan ruudukon ruuduista, joissa on miina, mutta joita
+     * ei ole vielä katsottu.
+     * @return ArrayList(Ruutu) jossa mukana miinan sisältävät katsomattomat ruudut.
+     */
+    public ArrayList<Ruutu> etsiMiinojenKoordinaatit() {
+        ArrayList<Ruutu> miinaRuudut = new ArrayList<>();
+        
+        for (int i = 0; i < leveys; i++) {
+            for (int j = 0; j < korkeus; j++) {
+                if (ruudukko[i][j].onkoMiinaa() && !ruudukko[i][j].getKatsottu() && !ruudukko[i][j].getLiputettu()) {
+                    miinaRuudut.add(ruudukko[i][j]);
+                }
+            }
+        }
+        return miinaRuudut;
+    }
+    
+    /**
+     * Metori, joka tarkistaa, ovatko kaikki ruudukon miinat liputettu.
+     * @return true, jos on, false, jos ei ole.
+     */
+    public boolean onkoKaikkiLiputettu() {
+        int liputettujaMiinoja = 0;
+        for (int i = 0; i < leveys; i++) {
+            for (int j = 0; j < korkeus; j++) {
+                if (ruudukko[i][j].onkoMiinaa() && ruudukko[i][j].getLiputettu()) {
+                    liputettujaMiinoja++;
+                }
+            }
+        }
+        if (liputettujaMiinoja == miinoja) {
+            return true;
+        } else {
+            return false;
+        }
     }
     
 }

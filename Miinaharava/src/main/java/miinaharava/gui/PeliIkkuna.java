@@ -6,6 +6,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -72,7 +73,13 @@ public class PeliIkkuna implements Runnable {
             vaikeustaso = "(vaikea)";
         }
         
-        container.add(new JLabel("Miinaharava #JavaLabra2014 - " + vaikeustaso), BorderLayout.NORTH);
+        JPanel ylaPalkki = new JPanel();
+        ylaPalkki.add(new JLabel("Miinaharava #JavaLabra2014 - " + vaikeustaso));
+        JButton vihjeNappi = new JButton("Vihje");
+        vihjeNappi.addActionListener(new VihjeKuuntelija(vihjeNappi, sovelluslogiikka, this));
+        ylaPalkki.add(vihjeNappi);
+        container.add(ylaPalkki, BorderLayout.NORTH);
+        
         JPanel nappiruudukko = luoNapit(ruudukko.getLeveys(), ruudukko.getKorkeus());
         container.add(nappiruudukko);
     }
@@ -166,6 +173,9 @@ public class PeliIkkuna implements Runnable {
             JOptionPane.showMessageDialog(null, "Onneksi olkoon, voitit pelin!\nAika: " + aika + " sekuntia.", "Miinaharava", JOptionPane.INFORMATION_MESSAGE, lippuKuva);
         } else {
             String nimi = JOptionPane.showInputDialog(null, "Onneksi olkoon, voitit pelin ja pääsit parhaiden tulosten listalle! \nAikasi oli " + aika + " sekuntia.\n\nAnna nimesi:", "Miinaharava", JOptionPane.INFORMATION_MESSAGE);
+            if (nimi == null || nimi.isEmpty() ) {
+                nimi = "Anonymous";
+            }
             sovelluslogiikka.sijoitaTulos((int) aika, nimi);
         }
     }
@@ -210,4 +220,18 @@ public class PeliIkkuna implements Runnable {
         }
     }
     
+    /**
+     * Metodi näyttää peliruudukolta yhden miinan, jota ei ole vielä löydetty.
+     * Miinan paikka näytetään muuttamalla sen väri oranssiksi.
+     * @param x napin x-koordinaatti
+     * @param y napin y-koordinaatti
+     */
+    public void naytaVihje(int x, int y) {
+        if (x >= 0 && x <= napisto.length) {
+            if (y >= 0 && y <= napisto[0].length) {
+                napisto[x][y].setBackground(Color.ORANGE);
+                napisto[x][y].setIcon(lippuKuva);
+            }
+        }
+    }
 }

@@ -1,7 +1,9 @@
 package miinaharava.sovelluslogiikka;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import java.util.Random;
 import miinaharava.domain.*;
 import miinaharava.gui.RuutuNappi;
 import miinaharava.gui.PeliIkkuna;
@@ -23,6 +25,7 @@ public class Sovelluslogiikka {
     private boolean peliLoppui;
     private HuippuTulokset huippuTulokset;
     private Vaikeustaso vaikeustaso;
+    private Random rand;
 
     /**
      * Konstruktori, muu toiminnallisuus viety muihin metodeihin. Tätä tuskin
@@ -65,17 +68,19 @@ public class Sovelluslogiikka {
         this.alkuAika = System.currentTimeMillis();
         this.peliLoppui = false;
     }
-    
+
     /**
      * Metodilla voidaan asettaa käynnissä olevan pelin vaikeustaso.
+     *
      * @param vaikeustaso Enum Vaikeustaso - HELPPO, MEDIUM, VAIKEA, CUSTOM
      */
     public void setVaikeustaso(Vaikeustaso vaikeustaso) {
         this.vaikeustaso = vaikeustaso;
     }
-    
+
     /**
      * Metodi kertoo, mikä on pelin nykyinen vaikeustaso.
+     *
      * @return Enum Vaikeustaso - HELPPO, MEDIUM, VAIKEA, CUSTOM
      */
     public Vaikeustaso getVaikeustaso() {
@@ -93,9 +98,9 @@ public class Sovelluslogiikka {
 
     /**
      * Tätä metodia kutsutaan, kun pelaaja valitsee pelikentän ruudun. Metodi
-     * tarkastaa ruudun sisällön, onko siinä miinaa, sekä montako miinaa
-     * löytyy viereisistä ruuduista. Pelin ensimmäisellä ruudun
-     * tarkistuskerralla laitetaan pelikello käyntiin.
+     * tarkastaa ruudun sisällön, onko siinä miinaa, sekä montako miinaa löytyy
+     * viereisistä ruuduista. Pelin ensimmäisellä ruudun tarkistuskerralla
+     * laitetaan pelikello käyntiin.
      *
      * Jos osutaan miinaan, peli loppuu. Jos osutaan tyhjään ruutuun,
      * paljastetaan sen ympäriltä muutkin tyhjät ruudut
@@ -117,9 +122,9 @@ public class Sovelluslogiikka {
 
     /**
      * Tätä metodia kutsutaan, kun UI:ssa painetaan nappia ja katsotaan, mitä
-     * napin alta löytyy. Jos kyseessä ei ole miina, tämä metodi palauttaa
-     * joko tyhjän merkkijonon tyhjille ruuduille tai viereisten miinojen
-     * määrän miinojen vieressä oleville ruuduille.
+     * napin alta löytyy. Jos kyseessä ei ole miina, tämä metodi palauttaa joko
+     * tyhjän merkkijonon tyhjille ruuduille tai viereisten miinojen määrän
+     * miinojen vieressä oleville ruuduille.
      *
      * @param x Ruudun x-koordinaatti
      * @param y Ruudun y-koordinaatti
@@ -139,12 +144,12 @@ public class Sovelluslogiikka {
     /**
      * Kun pelaaja on valinnut ruudun tarkastettavaksi ja siitä ei ole
      * lÃƒÂ¶ytynyt miinaa tai tietoa miinan paikasta viereisessä ruudussa, tuo
-     * ruutu on tyhjä. Tyhjää ruutua klikatessa peli paljastaa muutkin
-     * tyhjät ruudut tuon valitun ruudun läheisyydessä.
+     * ruutu on tyhjä. Tyhjää ruutua klikatessa peli paljastaa muutkin tyhjät
+     * ruudut tuon valitun ruudun läheisyydessä.
      *
-     * Metodi tarkastaa annetut koordinaatit ja käy läpi viereiset ruudut,
-     * jonka jälkeen se kutsuu itseään uudelleen viereisille ruuduille.
-     * Vastaan tulleet tyhjät ruudut paljastetaan ja otetaan pois käytöstä.
+     * Metodi tarkastaa annetut koordinaatit ja käy läpi viereiset ruudut, jonka
+     * jälkeen se kutsuu itseään uudelleen viereisille ruuduille. Vastaan
+     * tulleet tyhjät ruudut paljastetaan ja otetaan pois käytöstä.
      *
      * @param x tarkastettavan ruudun x-koordinaatti
      * @param y tarkastettavan ruudun y-koordinaatti
@@ -189,37 +194,38 @@ public class Sovelluslogiikka {
             tamaRuutu.removeLiputettu();
             lippuja--;
         }
-        loppuukoPeli();
     }
 
     /**
      * Tämä metodi tarkastaa, onko pelin loppumiseen tarvittavat kriteerit
-     * täyttyneet. Jos pelaaja on liputtanut ruutuja yhtä monta kun pelissä
-     * on miinoja, tarkistetaan, ovatko ne oikeissa paikoissa.
+     * täyttyneet. Jos pelaaja on liputtanut ruutuja yhtä monta kun pelissä on
+     * miinoja, tarkistetaan, ovatko ne oikeissa paikoissa.
      *
      * Jos näin käy, pysäytetään pelikello ja ilmoitetaan pelaajalle pelin
      * voittamisesta.
+     *
      * @return true, jos pelin loppumiseen edellytettävät kriteerit täyttyvät.
      */
     public boolean loppuukoPeli() {
-            if (miinoja == lippuja) {
-                if (ruudukko.onkoMiinatLiputettu()) {
-                    loppuAika = System.currentTimeMillis();
-                    peliLoppui = true;
-                    return true;
-                }
+        if (miinoja == lippuja) {
+            if (ruudukko.onkoMiinatLiputettu()) {
+                loppuAika = System.currentTimeMillis();
+                peliLoppui = true;
+                return true;
             }
+        }
         return false;
     }
-    
+
     /**
      * Metodi, jolla tarkistetaan, onko peli jo ohi.
+     *
      * @return true, jos peli on ohi, false, jos se on vielÃ¤ kÃ¤ynnissÃ¤.
      */
     public boolean onkoPeliOhi() {
         return peliLoppui;
     }
-    
+
     /**
      * Metodi, jolta voidaan kysyä, onko tämä peli jo asetettu loppunneeksi.
      */
@@ -230,6 +236,7 @@ public class Sovelluslogiikka {
     /**
      * Metodi, joka kertoo pelin pelaamiseen kuluneen ajan. Aika lasketaan
      * peliruudukon luomisesta viimeisen oikean lipun asettamiseen.
+     *
      * @return Pelin voittamiseen kulunut aika sekunneissa.
      */
     public long getPelinKesto() {
@@ -239,30 +246,54 @@ public class Sovelluslogiikka {
 
     /**
      * Palauttaa tämän peli-instanssin huipputulokset-ilmentymän.
+     *
      * @return käytössä oleva huipputulokset-olio.
      */
     public HuippuTulokset getHuippuTulokset() {
         return this.huippuTulokset;
     }
-    
+
     /**
      * Testataan, pääseekö tällä tuloksella huipputulosten listalle.
+     *
      * @return true, jos pääsee, false, jos ei.
      */
     public boolean paaseekoListalle() {
         return huippuTulokset.tarkastaTulos((int) getPelinKesto(), vaikeustaso);
     }
-    
+
     /**
      * Kun paaseekoListalle() on ilmoittanut, että tulos on tarpeeksi hyvä
      * huipputulosten listalle, tämä metodi käskee HuippuTuloksia kirjoittamaan
      * nimen ja ajan oikealle listalle oikeaan paikkaan.
+     *
      * @param aika Pelin voittamiseen kulunut aika.
      * @param nimi Pelaajan nimi.
      */
     public void sijoitaTulos(int aika, String nimi) {
         huippuTulokset.sijoitaTulos(aika, nimi, this.vaikeustaso);
     }
-    
-    
+
+    /**
+     * Jos ja kun pelaaja jää jumiin, eikä keksi mistä seuraava miina voisi
+     * löytyä, peli voi antaa vihjeen. Vihjettä pyytäessä peliaikaa rokotetaan
+     * 5 sec.
+     *
+     * @return tuntemattoman miinan koordinaatit int-taulukossa
+     */
+    public int[] annaVihje() {
+        if (!ruudukko.onkoKaikkiLiputettu()) {
+            rand = new Random();
+            alkuAika = alkuAika - 5000;        // Rokotetaan 5 sec ajasta
+            int[] koordinaatit;
+
+            ArrayList<Ruutu> miinaRuudut = ruudukko.etsiMiinojenKoordinaatit();
+            int miinanNumero = rand.nextInt(miinaRuudut.size());
+            koordinaatit = miinaRuudut.get(miinanNumero).getKoordinaatit();
+
+            return koordinaatit;
+        }
+        return null;
+    }
+
 }

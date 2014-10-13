@@ -13,17 +13,21 @@ public class Ruutu {
     private boolean katsottu;
     private boolean liputettu;
     private int viereisia;
+    private int xKoordinaatti;
+    private int yKoordinaatti;
     
     /**
      * Konstruktori, joka asettaa kaikki attribuutit epätosiksi ja viereisten
      * miinojen määrän nollaksi. Myöhemmin attribuutit vaihdetaan tosiksi 
      * ruuduille, joissa on miinoja, tai joita pelaaja tarkastaa tai liputtaa.
      */
-    public Ruutu() {
+    public Ruutu(int x, int y) {
         this.miina = false;
         this.katsottu = false;
         this.liputettu = false;
         this.viereisia = 0;
+        this.xKoordinaatti = x;
+        this.yKoordinaatti = y;
     }
     
     /**
@@ -137,4 +141,12 @@ public class Ruutu {
         }
     }
     
+    /**
+     * Metodi palauttaa tämän ruudun x- ja y-koordinaatit.
+     * @return Integer-taulukko, jossa x- ja y-koordinaatit alkioissa 0 ja 1.
+     */
+    public int[] getKoordinaatit() {
+        int[] koordinaatit = {this.xKoordinaatti, this.yKoordinaatti};
+        return koordinaatit;
+    }
 }
