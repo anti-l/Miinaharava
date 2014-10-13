@@ -82,7 +82,6 @@ public class SovellusLogiikkaTest {
         sovlog.luoRuudukko(3, 3, 1);
         ArrayList<Ruutu> koord = sovlog.getRuudukko().etsiMiinojenKoordinaatit();
         sovlog.getRuudukko().getRuutu(koord.get(0).getKoordinaatit()[0], koord.get(0).getKoordinaatit()[1]).poistaMiina();
-        sovlog.getRuudukko().getRuutu(2, 2).setMiina();
         sovlog.tarkistaRuutu(0, 0);
         String teksti = sovlog.ruudunTeksti(0, 0);
         assertEquals("", teksti);
