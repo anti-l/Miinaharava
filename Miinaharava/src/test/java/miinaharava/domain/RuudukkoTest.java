@@ -5,6 +5,7 @@
  */
 package miinaharava.domain;
 
+import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -154,6 +155,25 @@ public class RuudukkoTest {
         Ruudukko ruudukko = new Ruudukko();
         String ruudukonMerkkijono = ruudukko.toString();
         assertEquals(110, ruudukonMerkkijono.length());
+    }
+    
+    @Test
+    public void etsiMiinojenKoordinaatitTest() {
+        ruudukko = new Ruudukko(5, 5, 1);
+        ArrayList<Ruutu> miinaRuudut = ruudukko.etsiMiinojenKoordinaatit();
+        assertEquals(miinaRuudut.size(), 1);
+    }
+    
+    @Test
+    public void onkoKaikkiLiputettuTest() {
+        ruudukko = new Ruudukko(2, 2 ,1);
+        ruudukko.getRuutu(0, 0).poistaMiina();
+        ruudukko.getRuutu(0, 1).poistaMiina();
+        ruudukko.getRuutu(1, 0).poistaMiina();
+        ruudukko.getRuutu(1, 1).poistaMiina();
+        ruudukko.getRuutu(0, 0).setMiina();
+        ruudukko.getRuutu(0, 0).setLiputettu();
+        assertEquals(true, ruudukko.onkoKaikkiLiputettu());
     }
     
 }

@@ -14,6 +14,7 @@ public class VihjeKuuntelija implements ActionListener {
     private JButton vihjeNappi;
     private Sovelluslogiikka sovlog;
     private PeliIkkuna peliIkkuna;
+    private PeliKello peliKello;
 
     /**
      * Konstruktori, joka luo uuden VihjeKuuntelijan PeliIkkunan Vihje-napille.
@@ -21,11 +22,13 @@ public class VihjeKuuntelija implements ActionListener {
      * @param vihje PeliIkkunan vihje-nappi
      * @param sovlog Käytössä oleva Sovelluslogiikka
      * @param peliIkkuna Käytössä oleva PeliIkkuna
+     * @param peliKello Käytössä oleva PeliKello
      */
-    public VihjeKuuntelija(JButton vihje, Sovelluslogiikka sovlog, PeliIkkuna peliIkkuna) {
+    public VihjeKuuntelija(JButton vihje, Sovelluslogiikka sovlog, PeliIkkuna peliIkkuna, PeliKello peliKello) {
         this.vihjeNappi = vihje;
         this.sovlog = sovlog;
         this.peliIkkuna = peliIkkuna;
+        this.peliKello = peliKello;
     }
 
     /**
@@ -43,6 +46,8 @@ public class VihjeKuuntelija implements ActionListener {
                 peliIkkuna.naytaVihje(koordinaatit[0], koordinaatit[1]);
                 sovlog.liputaRuutu(koordinaatit[0], koordinaatit[1]);
                 peliIkkuna.paivitaNapit();
+                peliIkkuna.miinojaVahenna();
+                peliKello.paivitaKello();
             }
             if (sovlog.loppuukoPeli()) {
                 peliIkkuna.peliVoitettu(sovlog.getPelinKesto());

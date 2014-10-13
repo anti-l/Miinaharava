@@ -20,6 +20,8 @@ public class Ruutu {
      * Konstruktori, joka asettaa kaikki attribuutit epätosiksi ja viereisten
      * miinojen määrän nollaksi. Myöhemmin attribuutit vaihdetaan tosiksi 
      * ruuduille, joissa on miinoja, tai joita pelaaja tarkastaa tai liputtaa.
+     * @param x Ruudun x-koordinaatti ruudukossa
+     * @param y Ruudun y-koordinaatti ruudukossa
      */
     public Ruutu(int x, int y) {
         this.miina = false;

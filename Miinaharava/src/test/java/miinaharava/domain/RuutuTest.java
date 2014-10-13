@@ -133,4 +133,13 @@ public class RuutuTest {
         assertEquals("X", ruutu.toString());
     }
     
+    @Test
+    public void getKoordinaatitTest() {
+        int[] koordinaatit = {0, 0};
+        Ruutu ruutu = new Ruutu(0,0);
+        int[] ruudunKoordinaatit = ruutu.getKoordinaatit();
+        assertEquals(koordinaatit[0], ruudunKoordinaatit[0]);
+        assertEquals(koordinaatit[1], ruudunKoordinaatit[1]);
+    }
+    
 }

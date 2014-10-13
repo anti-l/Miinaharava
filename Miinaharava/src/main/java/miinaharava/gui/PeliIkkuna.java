@@ -29,6 +29,8 @@ public class PeliIkkuna implements Runnable {
     private RuutuNappi[][] napisto;
     private ImageIcon lippuKuva = new ImageIcon("flag.gif");
     private ImageIcon miinaKuva = new ImageIcon("minesweeper.gif");
+    private PeliKello peliKello;
+    private JLabel miinaTeksti;
     
     /**
      * Konstruktori, joka luo uuden pelilaudan. Konstruktori saa parametrinään
@@ -53,6 +55,10 @@ public class PeliIkkuna implements Runnable {
         luoKomponentit(frame.getContentPane());
         frame.pack();
         frame.setVisible(true);
+        Thread kello = new Thread(peliKello);
+        kello.start();
+        peliKello.kelloKayntiin();
+        
     }
     
     /**
@@ -74,10 +80,18 @@ public class PeliIkkuna implements Runnable {
         }
         
         JPanel ylaPalkki = new JPanel();
-        ylaPalkki.add(new JLabel("Miinaharava #JavaLabra2014 - " + vaikeustaso));
         JButton vihjeNappi = new JButton("Vihje");
-        vihjeNappi.addActionListener(new VihjeKuuntelija(vihjeNappi, sovelluslogiikka, this));
+        JLabel aikaKentta = new JLabel("Aika: ");
+        JLabel kelloKentta = new JLabel("0:00");
+        peliKello = new PeliKello(kelloKentta, sovelluslogiikka);
+        vihjeNappi.addActionListener(new VihjeKuuntelija(vihjeNappi, sovelluslogiikka, this, peliKello));
+        JLabel miinaOtsikko = new JLabel("Miinoja:");
+        miinaTeksti = new JLabel("" + ruudukko.getMiinoja());
+        ylaPalkki.add(miinaOtsikko);
+        ylaPalkki.add(miinaTeksti);
         ylaPalkki.add(vihjeNappi);
+        ylaPalkki.add(aikaKentta);
+        ylaPalkki.add(kelloKentta);
         container.add(ylaPalkki, BorderLayout.NORTH);
         
         JPanel nappiruudukko = luoNapit(ruudukko.getLeveys(), ruudukko.getKorkeus());
@@ -112,6 +126,7 @@ public class PeliIkkuna implements Runnable {
      * Metodi, joka ilmoittaa pelaajalle häviöstä tämän osuttua miinaan.
      */
     public void gameOver() {
+        peliKello.pysaytaKello();
         JOptionPane.showMessageDialog(null, "Osuit miinaan ja hävisit!\nPeli on ohi.", "Miinaharava", JOptionPane.INFORMATION_MESSAGE, miinaKuva);
 }
     
@@ -145,8 +160,10 @@ public class PeliIkkuna implements Runnable {
     public void liputa(int x, int y) {
         if (ruudukko.getRuutu(x, y).getLiputettu() == false && ruudukko.getRuutu(x, y).getKatsottu() == false) {
             napisto[x][y].setIcon(lippuKuva);
+            miinojaVahenna();
         } else {
             napisto[x][y].setIcon(null);
+            miinojaLisaa();
         }
     }
     
@@ -169,6 +186,7 @@ public class PeliIkkuna implements Runnable {
      * @param aika Pelin voittamiseen kulunut aika sekunneissa.
      */
     public void peliVoitettu(long aika) {
+        peliKello.pysaytaKello();
         if (sovelluslogiikka.paaseekoListalle() == false) {
             JOptionPane.showMessageDialog(null, "Onneksi olkoon, voitit pelin!\nAika: " + aika + " sekuntia.", "Miinaharava", JOptionPane.INFORMATION_MESSAGE, lippuKuva);
         } else {
@@ -234,4 +252,23 @@ public class PeliIkkuna implements Runnable {
             }
         }
     }
+    
+    /**
+     * Vähentää PeliIkkunan miinatekstikentästä yhden miinan.
+     */
+    public void miinojaVahenna() {
+        int miinat = Integer.parseInt(miinaTeksti.getText());
+        miinat--;
+        miinaTeksti.setText("" + miinat);
+    }
+    
+    /**
+     * Lisää PeliIkkunan miinatekstikenttään yhden miinan.
+     */
+    public void miinojaLisaa() {
+        int miinat = Integer.parseInt(miinaTeksti.getText());
+        miinat++;
+        miinaTeksti.setText("" + miinat);
+    }
+    
 }
