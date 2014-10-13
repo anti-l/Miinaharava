@@ -25,3 +25,4 @@ toteuttaa:
 
 * Vihje-näppäin, joka näyttää yhden miinan paikan [Edit: toteutettu]
 
+* Pelissä näkyvä ja eteenpäin raksuttava pelikello [Edit: toteutettu]
