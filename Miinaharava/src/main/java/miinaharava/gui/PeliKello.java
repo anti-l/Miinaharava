@@ -14,8 +14,9 @@ public class PeliKello implements Runnable {
     private boolean kelloKay;
 
     /**
-     * Konstruktori, joka luo PeliKello-olion pitämään visuaalisesti kirjaa 
+     * Konstruktori, joka luo PeliKello-olion pitämään visuaalisesti kirjaa
      * peliin kuluneesta ajasta
+     *
      * @param kelloKentta PeliIkkunan tekstikenttä
      * @param sovlog Käytössä oleva sovelluslogiikka
      */
@@ -40,8 +41,8 @@ public class PeliKello implements Runnable {
     }
 
     /**
-     * Metodi, jota kutsutaan, kun peli käynnistyy ja kello säikeistetään
-     * omaan säikeeseensä.
+     * Metodi, jota kutsutaan, kun peli käynnistyy ja kello säikeistetään omaan
+     * säikeeseensä.
      */
     @Override
     public void run() {
@@ -50,24 +51,24 @@ public class PeliKello implements Runnable {
                 Thread.sleep(1000);
             } catch (Exception e) {
             }
-            
+
             paivitaKello();
         }
     }
-    
+
     public void paivitaKello() {
-            int kelloNyt = (int) sovlog.getAika();
-            int minuutit = kelloNyt / 60;
-            int sekunnit = kelloNyt % 60;
-            String aikaTeksti = "" + minuutit + ":";
-            if (sekunnit < 10) {
-                aikaTeksti += "0" + sekunnit;
-            } else {
-                aikaTeksti += "" + sekunnit;
-            }
-            
-            kelloKentta.setText(aikaTeksti);
-        
+        int kelloNyt = (int) sovlog.getAika();
+        int minuutit = kelloNyt / 60;
+        int sekunnit = kelloNyt % 60;
+        String aikaTeksti = "" + minuutit + ":";
+        if (sekunnit < 10) {
+            aikaTeksti += "0" + sekunnit;
+        } else {
+            aikaTeksti += "" + sekunnit;
+        }
+
+        kelloKentta.setText(aikaTeksti);
+
     }
 
 }

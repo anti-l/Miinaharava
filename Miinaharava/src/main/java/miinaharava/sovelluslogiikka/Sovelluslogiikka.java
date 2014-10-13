@@ -230,6 +230,7 @@ public class Sovelluslogiikka {
      * Metodi, jolta voidaan kysyÃ¤, onko tÃ¤mÃ¤ peli jo asetettu loppunneeksi.
      */
     public void setPeliOhi() {
+        loppuAika = System.currentTimeMillis();
         this.peliLoppui = true;
     }
 
