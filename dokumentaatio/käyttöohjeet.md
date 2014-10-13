@@ -34,6 +34,8 @@ Peliä pelatessa miinojen paikat merkitään hiiren oikealla näppäimellä pain
 
 Peli voitetaan siten, että kaikkien miinojen paikat liputetaan. Kun lippuja on pelilaudalla sama määrä kuin miinoja, peli tarkastaa, onko liput oikeassa paikassa. Jos on, peli loppuu ja pelaajalle kerrotaan pelin ratkaisemiseen kulunut aika. Jos lipuista yksikin on väärässä paikassa tai niitä on liikaa, peli odottaa, että pelin loppumiseen vaaditut kriteerit täyttyy.
 
+Jos pelissä jää jumiin, peli-ikkunan vihje-nappi auttaa. Se näyttää peliruudukossa yhden liputtamattoman miinan paikan sekä liputtaa sen, muuttaen samalla ruudun taustan oranssiksi. Tästä toiminnosta rokotetaan pelaajaa viiden sekunnin aikasakolla.
+
 ## Taktiikoita
 
 Pelin ensimmäinen ruutu voidaan valita umpimähkään, koska alussa ei kuitenkaan tiedetä missä miinat sijaitsevat. Jotkut aloittavat aina keskeltä, jotkut valitsevat nurkkaruudut ensimmäisenä. Tähän tuskin on yhtään oikeaa tapaa.
