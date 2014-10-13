@@ -14,7 +14,7 @@ import javax.swing.WindowConstants;
  */
 public class OhjeIkkuna implements Runnable {
     
-    JFrame frame;
+    private JFrame frame;
     
     public OhjeIkkuna() {
     }
