@@ -20,3 +20,7 @@ Alla summittainen lista ajankäytöstä Miinaharavan kanssa.
 |2014.10.02| Alkuaskeleita pelin tuloksien tilastointia varten. Uusi luokka tuloksille, HuippuTulokset-luokan uudelleen kirjoittamista. Sekvenssikaaviot kahdelle käyttötapaukselle (<3 Paint). Testien kirjoittamista, uusi käyttöopas, päivitetty tuntikirjanpito.|  6h |
 |2014.10.07| Pelin tuloksien tilastointi on valmis.| 4h |
 |2014.10.08| Turhaa työtä tulosikkunan asettelun kanssa. GridLayout ei välttämättä olekaan paras työkalu tässä. | 2h |
+|2014.10.09| Koodin siistimistä, copypastesta eroon monessa kohdassa. Käyttöön uusi Enum, vaikeustaso. | 4h |
+|2014.10.10| Pieniä päivityksiä edellisiin. | 1h |
+|2014.10.11| Bugikorjauksia ja päivityksiä. | 1h |
+|2014.10.13| Viimeiset uudet ominaisuudet - vihje-toiminnallisuus sekä näkyvä pelikello toteutettu, testejä, javadocia, yleistä päivitystä. | 6h |
