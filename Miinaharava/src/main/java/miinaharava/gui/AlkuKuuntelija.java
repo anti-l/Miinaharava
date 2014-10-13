@@ -111,6 +111,7 @@ public class AlkuKuuntelija implements ActionListener {
                 }
                 if (customMiinat > customLeveys * customKorkeus) {
                     customMiinat = customLeveys * customKorkeus;
+                    miinoja.setText("" + customLeveys * customKorkeus);
                 }
                 this.sovelluslogiikka.luoRuudukko(customKorkeus, customLeveys, customMiinat);
             } else {
