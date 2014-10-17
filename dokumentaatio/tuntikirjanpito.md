@@ -24,3 +24,4 @@ Alla summittainen lista ajankäytöstä Miinaharavan kanssa.
 |2014.10.10| Pieniä päivityksiä edellisiin. | 1h |
 |2014.10.11| Bugikorjauksia ja päivityksiä. | 1h |
 |2014.10.13| Viimeiset uudet ominaisuudet - vihje-toiminnallisuus sekä näkyvä pelikello toteutettu, testejä, javadocia, yleistä päivitystä. | 6h |
+|2014.10.17| Viimeiset muokkaukset, JAR-pakettiin sisälle pelin kuvat, testidokumentaatio. |1h|
