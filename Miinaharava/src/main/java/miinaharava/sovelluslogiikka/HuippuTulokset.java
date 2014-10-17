@@ -181,6 +181,17 @@ public class HuippuTulokset {
      * @param vaikeustaso Enum Vaikeustaso - HELPPO, KESKIVAIKEA, VAIKEA
      */
     public void sijoitaTulos(int aika, String nimi, Vaikeustaso vaikeustaso) {
+        
+        if (nimi.contains(":")) {
+            String uusinimi = "";
+            for (int i = 0; i < nimi.length(); i++) {
+                if (nimi.charAt(i) != ':') {
+                    uusinimi += nimi.charAt(i);
+                }
+            }
+            nimi = uusinimi;
+        }
+        
         ArrayList<Tulos> tulosTilasto = new ArrayList();
         if (vaikeustaso == Vaikeustaso.HELPPO) {
             tulosTilasto = helppoTilasto;
