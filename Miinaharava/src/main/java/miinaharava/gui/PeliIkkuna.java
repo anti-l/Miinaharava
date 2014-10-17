@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.io.InputStream;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -27,8 +29,8 @@ public class PeliIkkuna implements Runnable {
     private Ruudukko ruudukko;
     private Sovelluslogiikka sovelluslogiikka;
     private RuutuNappi[][] napisto;
-    private ImageIcon lippuKuva = new ImageIcon("flag.gif");
-    private ImageIcon miinaKuva = new ImageIcon("minesweeper.gif");
+    private ImageIcon lippuKuva = new ImageIcon(getClass().getResource("/flag.gif"));
+    private ImageIcon miinaKuva = new ImageIcon(getClass().getResource("/minesweeper.gif"));
     private PeliKello peliKello;
     private JLabel miinaTeksti;
     
